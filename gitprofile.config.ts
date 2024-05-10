@@ -59,7 +59,7 @@ const CONFIG = {
   social: {
     linkedin: 'ariful-alam',
     twitter: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
+    fediverse: '@arifszn@mastodon.social',
     researchGate: '',
     facebook: '',
     instagram: '',
@@ -83,6 +83,10 @@ const CONFIG = {
   resume: {
     fileUrl:
       'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
+  },
+  publicKey: {
+    fileUrl:
+      '', // Empty publickey will hide the `Download Public key` button.
   },
   skills: [
     'PHP',

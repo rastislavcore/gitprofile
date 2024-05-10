@@ -12,8 +12,9 @@ import {
   FaFacebook,
   FaGlobe,
   FaIdBadge,
+  FaKey,
   FaLinkedin,
-  FaMastodon,
+  FaAtom,
   FaReddit,
   FaSkype,
   FaStackOverflow,
@@ -47,16 +48,18 @@ const companyLink = (company: string): string => {
   return `https://github.com/${company.substring(1)}`;
 };
 
-const getFormattedMastodonValue = (
-  mastodonValue: string,
+const getFormattedFediverseValue = (
+  fediverseValue: string,
   isLink: boolean,
 ): string => {
-  const [username, server] = mastodonValue.split('@');
+  const indexOfAt = fediverseValue.lastIndexOf('@');
+  const username = fediverseValue.substring(1, indexOfAt);
+  const server = fediverseValue.substring(indexOfAt + 1);
 
   if (isLink) {
     return `https://${server}/@${username}`;
   } else {
-    return `${username}@${server}`;
+    return `@${username}@${server}`;
   }
 };
 
@@ -67,11 +70,12 @@ const ListItem: React.FC<{
   link?: string;
   skeleton?: boolean;
 }> = ({ icon, title, value, link, skeleton = false }) => {
+  const mailtoRegex = /^mailto:(.+)\?key=(.+)$/;
+  const isMailto = link && link.startsWith("mailto:");
+  const mailtoMatches = isMailto ? link.match(mailtoRegex) : [];
+  const decodedKeyLink = mailtoMatches ? decodeURIComponent(mailtoMatches[2]) : '';
   return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noreferrer"
+    <div
       className="flex justify-start py-2 px-1 items-center"
     >
       <div className="flex-grow font-medium gap-2 flex items-center my-1">
@@ -85,9 +89,79 @@ const ListItem: React.FC<{
           wordBreak: 'break-word',
         }}
       >
-        {value}
+        {isMailto ? (
+          <div className="inline-flex space-x-2">
+            <a href={`mailto:${mailtoMatches![1]}`} target="_blank" rel="noreferrer">
+              {value}
+            </a>
+            <a href={decodedKeyLink} target="_blank" rel="noreferrer" download>
+              <FaKey />
+            </a>
+          </div>
+        ) : (
+        <a
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+          className="flex justify-start py-2 px-1 items-center"
+        >
+          {value}
+        </a>
+        )}
       </div>
-    </a>
+    </div>
+  );
+};
+
+const OrganizationItem: React.FC<{
+  icon: React.ReactNode;
+  title: React.ReactNode;
+  value: React.ReactNode | string;
+  link?: string;
+  skeleton?: boolean;
+}> = ({ icon, title, value, link, skeleton = false }) => {
+  const renderValue = () => {
+    if (typeof value === 'string') {
+      return value.split(" ").map((company) => {
+        company = company.trim();
+        if (!company) return null;
+
+        if (isCompanyMention(company)) {
+          return (
+            <a href={companyLink(company)}
+               target="_blank"
+               rel="noreferrer"
+               key={company}
+            >
+              {company}
+            </a>
+          );
+        } else {
+          return (
+            <span key={company}>{company}</span>
+          );
+        }
+      });
+    }
+    return value;
+  };
+
+  return (
+    <div className="flex justify-start py-2 px-1 items-center">
+      <div className="flex-grow font-medium gap-2 flex items-center my-1">
+        {icon} {title}
+      </div>
+      <div
+        className={`${
+          skeleton ? 'flex-grow' : ''
+        } text-sm font-normal text-right mr-2 ml-3 space-x-2 ${link ? 'truncate' : ''}`}
+        style={{
+          wordBreak: 'break-word',
+        }}
+      >
+        {renderValue()}
+      </div>
+    </div>
   );
 };
 
@@ -129,14 +203,14 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {profile.location && (
                 <ListItem
                   icon={<MdLocationOn />}
-                  title="Based in:"
+                  title="Location:"
                   value={profile.location}
                 />
               )}
               {profile.company && (
-                <ListItem
+                <OrganizationItem
                   icon={<FaBuilding />}
-                  title="Company:"
+                  title="Organization:"
                   value={profile.company}
                   link={
                     isCompanyMention(profile.company.trim())
@@ -175,12 +249,12 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   link={`https://x.com/${social.twitter}`}
                 />
               )}
-              {social?.mastodon && (
+              {social?.fediverse && (
                 <ListItem
-                  icon={<FaMastodon />}
-                  title="Mastodon:"
-                  value={getFormattedMastodonValue(social.mastodon, false)}
-                  link={getFormattedMastodonValue(social.mastodon, true)}
+                  icon={<FaAtom />}
+                  title="Fediverse:"
+                  value={getFormattedFediverseValue(social.fediverse, false)}
+                  link={getFormattedFediverseValue(social.fediverse, true)}
                 />
               )}
               {social?.linkedin && (
@@ -321,7 +395,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                 <ListItem
                   icon={<RiMailFill />}
                   title="Email:"
-                  value={social.email}
+                  value={social.email.split("?")[0]}
                   link={`mailto:${social.email}`}
                 />
               )}

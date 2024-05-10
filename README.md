@@ -214,7 +214,7 @@ const CONFIG = {
   social: {
     linkedin: 'ariful-alam',
     twitter: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
+    fediverse: 'arifszn@mastodon.social',
     researchGate: '',
     facebook: '',
     instagram: '',
@@ -238,6 +238,9 @@ const CONFIG = {
   resume: {
     fileUrl:
       'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
+  },
+  publicKey: {
+    fileUrl: '', // Empty publickey will hide the `Download Public key` button.
   },
   skills: [
     'PHP',
@@ -513,7 +516,7 @@ Your avatar and bio will be fetched from GitHub automatically.
 
 ### Social Links
 
-You can link your social media services you're using, including LinkedIn, Twitter, Mastodon, ResearchGate, Facebook, Instagram, Reddit, Threads, YouTube, Udemy, Dribbble, Behance, Medium, dev, Stack Overflow, Skype, Telegram, personal website, phone and email.
+You can link your social media services you're using, including LinkedIn, Twitter, Fediverse, ResearchGate, Facebook, Instagram, Reddit, Threads, YouTube, Udemy, Dribbble, Behance, Medium, dev, Stack Overflow, Skype, Telegram, personal website, phone and email.
 
 ```ts
 // gitprofile.config.ts
@@ -522,7 +525,7 @@ const CONFIG = {
   social: {
     linkedin: 'ariful-alam',
     twitter: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
+    fediverse: '@arifszn@mastodon.social',
     researchGate: '',
     facebook: '',
     instagram: '',

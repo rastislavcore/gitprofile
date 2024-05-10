@@ -45,7 +45,7 @@ export interface SanitizedSEO {
 export interface SanitizedSocial {
   linkedin?: string;
   twitter?: string;
-  mastodon?: string;
+  fediverse?: string;
   researchGate?: string;
   facebook?: string;
   instagram?: string;
@@ -68,6 +68,10 @@ export interface SanitizedSocial {
 }
 
 export interface SanitizedResume {
+  fileUrl?: string;
+}
+
+export interface SanitizedPublicKey {
   fileUrl?: string;
 }
 
@@ -143,6 +147,7 @@ export interface SanitizedConfig {
   seo: SanitizedSEO;
   social: SanitizedSocial;
   resume: SanitizedResume;
+  publicKey: SanitizedPublicKey;
   skills: Array<string>;
   experiences: Array<SanitizedExperience>;
   educations: Array<SanitizedEducation>;
