@@ -11,6 +11,7 @@ import {
   FaDev,
   FaFacebook,
   FaGlobe,
+  FaIdBadge,
   FaLinkedin,
   FaMastodon,
   FaReddit,
@@ -18,6 +19,7 @@ import {
   FaStackOverflow,
   FaTelegram,
   FaYoutube,
+  FaWallet,
 } from 'react-icons/fa';
 import { FaSquareThreads } from 'react-icons/fa6';
 import { MdLocationOn } from 'react-icons/md';
@@ -157,12 +159,20 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   link={`https://www.researchgate.net/profile/${social.researchGate}`}
                 />
               )}
+              {social?.corepass && (
+                <ListItem
+                  icon={<FaIdBadge />}
+                  title="CorePass:"
+                  value={(social.corepass.substring(0,4)+'…'+social.corepass.substring(-4, 4)).toUpperCase()}
+                  link={`https://coreid.link/${social.corepass}`}
+                />
+              )}
               {social?.twitter && (
                 <ListItem
                   icon={<SiTwitter />}
-                  title="Twitter:"
-                  value={social.twitter}
-                  link={`https://twitter.com/${social.twitter}`}
+                  title="X:"
+                  value={`@${social.twitter}`}
+                  link={`https://x.com/${social.twitter}`}
                 />
               )}
               {social?.mastodon && (
@@ -313,6 +323,14 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   title="Email:"
                   value={social.email}
                   link={`mailto:${social.email}`}
+                />
+              )}
+              {social?.payto && (
+                <ListItem
+                  icon={<FaWallet />}
+                  title="Payto:"
+                  value={(social.payto.substring(0,8)+'…'+social.payto.substr(-4, 4)).toUpperCase()}
+                  link={`payto://${social.payto}`}
                 />
               )}
             </Fragment>

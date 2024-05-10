@@ -81,6 +81,8 @@ export const getSanitizedConfig = (
         skype: config?.social?.skype,
         telegram: config?.social?.telegram,
         researchGate: config?.social?.researchGate,
+        corepass: config?.social?.corepass,
+        payto: config?.social?.payto,
       },
       resume: {
         fileUrl: config?.resume?.fileUrl || '',
