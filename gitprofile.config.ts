@@ -77,6 +77,8 @@ const CONFIG = {
     website: 'https://www.arifszn.com',
     phone: '',
     email: 'arifulalamszn@gmail.com',
+    payto: '',
+    corepass: '',
   },
   resume: {
     fileUrl:

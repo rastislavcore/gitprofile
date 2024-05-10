@@ -206,6 +206,16 @@ interface Social {
    * Email
    */
   email?: string;
+
+  /**
+   * CorePass
+   */
+  corepass?: string;
+
+  /**
+   * PayTo
+   */
+  payto?: string;
 }
 
 interface Resume {
