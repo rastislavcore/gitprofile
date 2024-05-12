@@ -3,12 +3,14 @@ import { SanitizedExperience } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 
 const ListItem = ({
-  time,
+  timeFrom,
+  timeTo,
   position,
   company,
   companyLink,
 }: {
-  time: React.ReactNode;
+  timeFrom: React.ReactNode;
+  timeTo: React.ReactNode;
   position?: React.ReactNode;
   company?: React.ReactNode;
   companyLink?: string;
@@ -18,7 +20,12 @@ const ListItem = ({
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
-    <div className="my-0.5 text-xs">{time}</div>
+    {timeFrom && timeTo ?
+      <div className="my-0.5 text-xs">{timeFrom} — {timeTo}</div>
+    : (
+      timeFrom &&
+        <div className="my-0.5 text-xs">{timeFrom}</div>
+    )}
     <h3 className="font-semibold">{position}</h3>
     <div className="mb-4 font-normal">
       <a href={companyLink} target="_blank" rel="noreferrer">
@@ -41,7 +48,11 @@ const ExperienceCard = ({
       array.push(
         <ListItem
           key={index}
-          time={skeleton({
+          timeFrom={skeleton({
+            widthCls: 'w-5/12',
+            heightCls: 'h-4',
+          })}
+          timeTo={skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
           })}
@@ -78,7 +89,8 @@ const ExperienceCard = ({
                 {experiences.map((experience, index) => (
                   <ListItem
                     key={index}
-                    time={`${experience.from} - ${experience.to}`}
+                    timeFrom={experience.from}
+                    timeTo={experience.to}
                     position={experience.position}
                     company={experience.company}
                     companyLink={

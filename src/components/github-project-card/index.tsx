@@ -79,12 +79,11 @@ const GithubProjectCard = ({
 
   const renderProjects = () => {
     return githubProjects.map((item, index) => (
-      <div className="card shadow-lg compact bg-base-100">
+      <div className="card shadow-lg compact bg-base-100" key={index}>
         <div className="flex justify-between flex-col p-8 h-full w-full">
           <a
             className="cursor-pointer"
             href={item.html_url}
-            key={index}
             onClick={(e) => {
               e.preventDefault();
 
