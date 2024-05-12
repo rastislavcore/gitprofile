@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Readme
+    url: https://github.com/rastislavcore/gitprofile#readme
+    about: Read more about the GitProfile project.

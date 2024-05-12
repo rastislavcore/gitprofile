@@ -92,7 +92,7 @@ const ListItem: React.FC<{
         {isMailto ? (
           <div className="inline-flex space-x-2">
             <a
-              href={mailtoMatches && mailtoMatches[1] ? `mailto:${mailtoMatches[1]}` : `mailto:${value}`}
+              href={link}
               target="_blank"
               rel="noreferrer"
             >
@@ -409,7 +409,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                 <ListItem
                   icon={<FaWallet />}
                   title="Payto:"
-                  value={(social.payto.substring(0,8)+'…'+social.payto.substring(-4, 4)).toUpperCase()}
+                  value={(social.payto.substring(0,8)+'…'+social.payto.slice(-4)).toUpperCase()}
                   link={`payto://${social.payto}`}
                 />
               )}

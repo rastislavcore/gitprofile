@@ -94,26 +94,7 @@ const BlogCard = ({
   const renderArticles = () => {
     return articles && articles.length ? (
       articles.slice(0, blog.limit).map((article, index) => (
-        <a
-          className="card shadow-lg compact bg-base-100 cursor-pointer"
-          key={index}
-          href={article.link}
-          onClick={(e) => {
-            e.preventDefault();
-
-            try {
-              if (googleAnalyticsId) {
-                ga.event('Click Blog Post', {
-                  post: article.title,
-                });
-              }
-            } catch (error) {
-              console.error(error);
-            }
-
-            window?.open(article.link, '_blank');
-          }}
-        >
+        <div className="card shadow-lg compact bg-base-100" key={index}>
           <div className="p-8 h-full w-full">
             <div className="flex items-center flex-col md:flex-row">
               <div className="avatar mb-5 md:mb-0 opacity-90">
@@ -132,25 +113,47 @@ const BlogCard = ({
               <div className="w-full">
                 <div className="flex items-start px-4">
                   <div className="text-center md:text-left w-full">
-                    <h2 className="font-medium text-base-content opacity-60">
-                      {article.title}
-                    </h2>
-                    <p className="text-base-content opacity-50 text-xs">
-                      {formatDistance(article.publishedAt, new Date(), {
-                        addSuffix: true,
-                      })}
-                    </p>
-                    <p className="mt-3 text-base-content text-opacity-60 text-sm">
-                      {article.description}
-                    </p>
+                    <a
+                      href={article.link}
+                      onClick={(e) => {
+                        e.preventDefault();
+
+                        try {
+                          if (googleAnalyticsId) {
+                            ga.event('Click Blog Post', {
+                              post: article.title,
+                            });
+                          }
+                        } catch (error) {
+                          console.error(error);
+                        }
+
+                        window?.open(article.link, '_blank');
+                      }}
+                    >
+                      <h2 className="font-medium text-base-content opacity-60">
+                        {article.title}
+                      </h2>
+                      <p className="text-base-content opacity-50 text-xs">
+                        {formatDistance(article.publishedAt, new Date(), {
+                          addSuffix: true,
+                        })}
+                      </p>
+                      <p className="mt-3 text-base-content text-opacity-60 text-sm">
+                        {article.description}
+                      </p>
+                    </a>
                     <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
                       {article.categories.map((category, index2) => (
-                        <div
+                        <a
+                          href={blog.source === 'medium' ? `https://medium.com/tag/${category}` : `https://dev.to/t/${category}`}
                           className="py-2 px-4 text-xs leading-3 rounded-full bg-base-300 mr-1 mb-1 opacity-50 text-base-content"
+                          target="_blank"
+                          rel="noreferrer"
                           key={index2}
                         >
                           #{category}
-                        </div>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -158,7 +161,7 @@ const BlogCard = ({
               </div>
             </div>
           </div>
-        </a>
+        </div>
       ))
     ) : (
       <div className="text-center mb-6">
