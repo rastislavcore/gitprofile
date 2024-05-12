@@ -70,10 +70,10 @@ const ListItem: React.FC<{
   link?: string;
   skeleton?: boolean;
 }> = ({ icon, title, value, link, skeleton = false }) => {
-  const mailtoRegex = /^mailto:(.+)\?key=(.+)$/;
+  const mailtoRegex = /^mailto:([^?]+)\?(?:[^=]+=.*?&)*key=([^&]+)/;
   const isMailto = link && link.startsWith("mailto:");
   const mailtoMatches = isMailto ? link.match(mailtoRegex) : [];
-  const decodedKeyLink = mailtoMatches ? decodeURIComponent(mailtoMatches[2]) : '';
+  const keyLink = mailtoMatches ? decodeURIComponent(mailtoMatches[2]) : undefined;
   return (
     <div
       className="flex justify-start py-2 px-1 items-center"
@@ -91,12 +91,18 @@ const ListItem: React.FC<{
       >
         {isMailto ? (
           <div className="inline-flex space-x-2">
-            <a href={`mailto:${mailtoMatches![1]}`} target="_blank" rel="noreferrer">
+            <a
+              href={mailtoMatches && mailtoMatches[1] ? `mailto:${mailtoMatches[1]}` : `mailto:${value}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               {value}
             </a>
-            <a href={decodedKeyLink} target="_blank" rel="noreferrer" download>
-              <FaKey />
-            </a>
+            {keyLink &&
+              <a href={keyLink} target="_blank" rel="noreferrer" download>
+                <FaKey />
+              </a>
+            }
           </div>
         ) : (
         <a
@@ -395,7 +401,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                 <ListItem
                   icon={<RiMailFill />}
                   title="Email:"
-                  value={social.email.split("?")[0]}
+                  value={social.email && social.email.includes("?") ? social.email.split("?")[0] : social.email}
                   link={`mailto:${social.email}`}
                 />
               )}
@@ -403,7 +409,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                 <ListItem
                   icon={<FaWallet />}
                   title="Payto:"
-                  value={(social.payto.substring(0,8)+'…'+social.payto.substr(-4, 4)).toUpperCase()}
+                  value={(social.payto.substring(0,8)+'…'+social.payto.substring(-4, 4)).toUpperCase()}
                   link={`payto://${social.payto}`}
                 />
               )}
