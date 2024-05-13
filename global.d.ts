@@ -138,6 +138,11 @@ interface Social {
   facebook?: string;
 
   /**
+   * TikTok
+   */
+  tiktok?: string;
+
+  /**
    * Instagram
    */
   instagram?: string;
@@ -188,6 +193,11 @@ interface Social {
   stackoverflow?: string;
 
   /**
+   * Wiki Websites
+   */
+  wiki?: string;
+
+  /**
    * Website
    */
   website?: string;
@@ -213,9 +223,9 @@ interface Social {
   email?: string;
 
   /**
-   * CorePass
+   * CorePass - Core ID
    */
-  corepass?: string;
+  coreid?: string;
 
   /**
    * PayTo
