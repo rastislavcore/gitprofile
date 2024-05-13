@@ -13,19 +13,20 @@ import {
   FaGlobe,
   FaIdBadge,
   FaKey,
+  FaMapMarkerAlt,
   FaLinkedin,
-  FaAtom,
   FaReddit,
   FaSkype,
   FaStackOverflow,
   FaTelegram,
+  FaTiktok,
   FaYoutube,
   FaWallet,
 } from 'react-icons/fa';
 import { FaSquareThreads } from 'react-icons/fa6';
-import { MdLocationOn } from 'react-icons/md';
+import { PiFediverseLogoFill } from "react-icons/pi";
 import { RiMailFill, RiPhoneFill } from 'react-icons/ri';
-import { SiResearchgate, SiTwitter, SiUdemy } from 'react-icons/si';
+import { SiResearchgate, SiUdemy, SiWikipedia, SiX } from 'react-icons/si';
 import { Profile } from '../../interfaces/profile';
 import {
   SanitizedGithub,
@@ -208,7 +209,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
             <Fragment>
               {profile.location && (
                 <ListItem
-                  icon={<MdLocationOn />}
+                  icon={<FaMapMarkerAlt />}
                   title="Location:"
                   value={profile.location}
                 />
@@ -239,17 +240,17 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   link={`https://www.researchgate.net/profile/${social.researchGate}`}
                 />
               )}
-              {social?.corepass && (
+              {social?.coreid && (
                 <ListItem
                   icon={<FaIdBadge />}
-                  title="CorePass:"
-                  value={(social.corepass.substring(0,4)+'…'+social.corepass.substring(-4, 4)).toUpperCase()}
-                  link={`https://coreid.link/${social.corepass}`}
+                  title="Core ID:"
+                  value={(social.coreid.substring(0,4)+'…'+social.coreid.substring(-4, 4)).toUpperCase()}
+                  link={`https://coreid.link/${social.coreid}`}
                 />
               )}
               {social?.twitter && (
                 <ListItem
-                  icon={<SiTwitter />}
+                  icon={<SiX />}
                   title="X:"
                   value={`@${social.twitter}`}
                   link={`https://x.com/${social.twitter}`}
@@ -257,7 +258,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               )}
               {social?.fediverse && (
                 <ListItem
-                  icon={<FaAtom />}
+                  icon={<PiFediverseLogoFill />}
                   title="Fediverse:"
                   value={getFormattedFediverseValue(social.fediverse, false)}
                   link={getFormattedFediverseValue(social.fediverse, true)}
@@ -293,6 +294,14 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   title="Facebook:"
                   value={social.facebook}
                   link={`https://www.facebook.com/${social.facebook}`}
+                />
+              )}
+              {social?.tiktok && (
+                <ListItem
+                  icon={<FaTiktok />}
+                  title="TikTok:"
+                  value={social.facebook}
+                  link={`https://www.tiktok.com/@${social.tiktok}`}
                 />
               )}
               {social?.instagram && (
@@ -359,6 +368,14 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   link={`https://stackoverflow.com/users/${social.stackoverflow}`}
                 />
               )}
+              {social?.wiki && (
+                <ListItem
+                  icon={<SiWikipedia />}
+                  title="Wiki:"
+                  value={decodeURIComponent(social.wiki.split('/').slice(-1)[0]).replace("_", " ")}
+                  link={social.wiki}
+                />
+              )}
               {social?.website && (
                 <ListItem
                   icon={<FaGlobe />}
@@ -408,7 +425,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.payto && (
                 <ListItem
                   icon={<FaWallet />}
-                  title="Payto:"
+                  title="PayTo:"
                   value={(social.payto.substring(0,8)+'…'+social.payto.slice(-4)).toUpperCase()}
                   link={`payto://${social.payto}`}
                 />

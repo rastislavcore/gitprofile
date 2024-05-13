@@ -41,6 +41,11 @@ export interface SanitizedSEO {
   title?: string;
   description?: string;
   imageURL?: string;
+  githubId?: string;
+  payto?: {
+    property: string;
+    content: string;
+  };
 }
 
 export interface SanitizedSocial {
@@ -49,6 +54,7 @@ export interface SanitizedSocial {
   fediverse?: string;
   researchGate?: string;
   facebook?: string;
+  tiktok?: string;
   instagram?: string;
   reddit?: string;
   threads?: string;
@@ -59,12 +65,13 @@ export interface SanitizedSocial {
   medium?: string;
   dev?: string;
   stackoverflow?: string;
+  wiki?: string;
   website?: string;
   skype?: string;
   telegram?: string;
   phone?: string;
   email?: string;
-  corepass?: string;
+  coreid?: string;
   payto?: string;
 }
 

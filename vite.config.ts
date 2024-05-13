@@ -13,8 +13,10 @@ export default defineConfig({
       inject: {
         data: {
           metaTitle: CONFIG.seo.title,
-          metaDescription: CONFIG.seo.description,
-          metaImageURL: CONFIG.seo.imageURL,
+          metaDescription: CONFIG.social.coreid ? CONFIG.seo.description + ' / Core ID: ' + CONFIG.social.coreid : CONFIG.seo.description,
+          metaImageURL: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId : CONFIG.seo.imageURL,
+          metaPaytoProperty: CONFIG.seo.payto?.property ? CONFIG.seo.payto.property : '',
+          metaPaytoContent: CONFIG.seo.payto?.content ? CONFIG.seo.payto.content : '',
         },
       },
     }),
@@ -25,15 +27,34 @@ export default defineConfig({
             workbox: {
               navigateFallback: undefined,
             },
-            includeAssets: ['logo.png'],
             manifest: {
-              name: 'Portfolio',
+              name: CONFIG.seo.title,
               short_name: 'Portfolio',
-              description: 'Personal Portfolio',
+              description: CONFIG.seo.description,
               icons: [
                 {
-                  src: 'logo.png',
-                  sizes: '64x64 32x32 24x24 16x16 192x192 512x512',
+                  src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=16' : CONFIG.seo.imageURL,
+                  sizes: '16x16',
+                  type: 'image/png',
+                },
+                {
+                  src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=32' : CONFIG.seo.imageURL,
+                  sizes: '32x32',
+                  type: 'image/png',
+                },
+                {
+                  src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=64' : CONFIG.seo.imageURL,
+                  sizes: '64x64',
+                  type: 'image/png',
+                },
+                {
+                  src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=192' : CONFIG.seo.imageURL,
+                  sizes: '192x192',
+                  type: 'image/png',
+                },
+                {
+                  src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=460' : CONFIG.seo.imageURL,
+                  sizes: '460x460',
                   type: 'image/png',
                 },
               ],

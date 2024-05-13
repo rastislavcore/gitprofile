@@ -185,16 +185,30 @@ const BlogCard = ({
             }`}
           >
             <div className="card-body">
-              <div className="mx-3 mb-2">
+              <div className="mx-3 flex items-center justify-between mb-2">
                 <h5 className="card-title">
                   {loading ? (
                     skeleton({ widthCls: 'w-28', heightCls: 'h-8' })
                   ) : (
                     <span className="text-base-content opacity-70">
-                      My Articles
+                      Articles
                     </span>
                   )}
                 </h5>
+                {loading ? (
+                    skeleton({ widthCls: 'w-10', heightCls: 'h-5' })
+                  ) : (
+                    <a
+                      href={blog.source === 'medium' ?
+                        `https://medium.com/@${blog.username}` :
+                        `https://dev.to/${blog.username}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-base-content opacity-50 hover:underline"
+                    >
+                      All Articles
+                    </a>
+                  )}
               </div>
               <div className="col-span-2">
                 <div className="grid grid-cols-1 gap-6">
