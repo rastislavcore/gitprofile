@@ -22,6 +22,8 @@ GitProfile is a powerful portfolio builder that allows you to create a stunning 
 
 To view a live example, **[click here](https://vasicka.eu)**.
 
+Open GitProfile code in **IDX**: [![Open in IDX](https://cdn.idx.dev/btn/open_purple_20.svg)](https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2Frastislavcore%2Fgitprofile)
+
 ## 🛠 Installation & Setup
 
 There are three ways to use **GitProfile**. Use any.
