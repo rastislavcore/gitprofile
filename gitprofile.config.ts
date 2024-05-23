@@ -188,7 +188,12 @@ const CONFIG = {
   },
 
   // Optional Footer. Supports plain text or HTML.
-  footer: `Made with Magic & Tweaks 🪄`,
+  footer: `Made with <a
+    class="text-primary"
+    href="https://github.com/rastislavcore/gitprofile"
+    target="_blank"
+    rel="noreferrer"
+  >Magic & Tweaks 🪄</a>`,
 
   enablePWA: true,
 };

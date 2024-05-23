@@ -76,9 +76,7 @@ const ListItem: React.FC<{
   const mailtoMatches = isMailto ? link.match(mailtoRegex) : [];
   const keyLink = mailtoMatches ? decodeURIComponent(mailtoMatches[2]) : undefined;
   return (
-    <div
-      className="flex justify-start py-2 px-1 items-center"
-    >
+    <div className="flex justify-start py-2 px-1 items-center">
       <div className="flex-grow font-medium gap-2 flex items-center my-1">
         {icon} {title}
       </div>
@@ -129,24 +127,23 @@ const OrganizationItem: React.FC<{
 }> = ({ icon, title, value, link, skeleton = false }) => {
   const renderValue = () => {
     if (typeof value === 'string') {
-      return value.split(" ").map((company) => {
+      return value.split(' ').map((company) => {
         company = company.trim();
         if (!company) return null;
 
         if (isCompanyMention(company)) {
           return (
-            <a href={companyLink(company)}
-               target="_blank"
-               rel="noreferrer"
-               key={company}
+            <a
+              href={companyLink(company)}
+              target="_blank"
+              rel="noreferrer"
+              key={company}
             >
               {company}
             </a>
           );
         } else {
-          return (
-            <span key={company}>{company}</span>
-          );
+          return <span key={company}>{company}</span>;
         }
       });
     }
