@@ -112,7 +112,7 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'Github Projects',
+      header: 'GitHub Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
         type: 'projects', // 'commits' will display user's commit, 'projects' will display projects by user.
@@ -343,6 +343,9 @@ const CONFIG = {
   footer: `Made with Magic & Tweaks 🪄`,
 
   enablePWA: true,
+
+  // GitHub Graph
+  githubGraph: true,
 };
 
 export default CONFIG;
@@ -587,7 +590,7 @@ Empty array will hide the certifications section.
 
 ### Projects
 
-#### Github Projects
+#### GitHub Projects
 
 - **Automatic Mode:** Seamlessly showcase your top GitHub projects based on stars or last updated date.
 - **Manual Mode:** Choose specific repositories to highlight.
@@ -599,7 +602,7 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'Github Projects',
+      header: 'GitHub Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
         type: 'projects', // 'commits' will display user's commit, 'projects' will display projects by user.

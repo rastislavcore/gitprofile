@@ -475,6 +475,11 @@ interface Config {
    * Enable PWA
    */
   enablePWA?: boolean;
+
+  /**
+   * GitHub graph
+   */
+  githubGraph?: boolean;
 }
 
 declare const CONFIG: Config;

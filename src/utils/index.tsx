@@ -34,7 +34,7 @@ export const getSanitizedConfig = (
       projects: {
         github: {
           display: config?.projects?.github?.display ?? true,
-          header: config?.projects?.github?.header || (config?.projects?.github?.automatic?.type === 'commits' ? 'Github Commits' : 'Github Projects'),
+          header: config?.projects?.github?.header || (config?.projects?.github?.automatic?.type === 'commits' ? 'GitHub Commits' : 'GitHub Projects'),
           mode: config?.projects?.github?.mode || 'automatic',
           automatic: {
             type: config?.projects?.github?.automatic?.type || 'projects',
@@ -158,6 +158,7 @@ export const getSanitizedConfig = (
       },
       footer: config?.footer,
       enablePWA: config?.enablePWA ?? true,
+      githubGraph: config?.githubGraph ?? false,
     };
   } catch (error) {
     return {};
