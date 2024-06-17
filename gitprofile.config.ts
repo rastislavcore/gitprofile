@@ -13,7 +13,7 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'Github Commits',
+      header: 'GitHub Commits',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
         type: 'commits', // 'commits' will display user's commit, 'projects' will display projects by user.
@@ -196,6 +196,9 @@ const CONFIG = {
   >Magic & Tweaks 🪄</a>`,
 
   enablePWA: true,
+
+  // GitHub Graph
+  githubGraph: true,
 };
 
 export default CONFIG;

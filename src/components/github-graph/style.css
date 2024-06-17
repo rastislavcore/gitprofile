@@ -1,0 +1,9 @@
+table.ContributionCalendar-grid {
+  border-collapse: separate;
+  text-indent: initial;
+  border-spacing: 2px;
+}
+
+a.Link--muted {
+  display: none;
+}
