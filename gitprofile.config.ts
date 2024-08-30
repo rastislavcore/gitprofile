@@ -88,6 +88,8 @@ const CONFIG = {
     'Rust',
     'Golang',
     'TypeScript',
+    'goAML',
+    'FIU',
   ],
   experiences: [
     {
