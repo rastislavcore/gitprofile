@@ -42,7 +42,7 @@ const BlogCard = ({
           <div className="p-8 h-full w-full">
             <div className="flex items-center flex-col md:flex-row">
               <div className="avatar mb-5 md:mb-0">
-                <div className="w-24 h-24 mask mask-squircle">
+                <div className="w-64 h-24">
                   {skeleton({
                     widthCls: 'w-full',
                     heightCls: 'h-full',
@@ -97,17 +97,37 @@ const BlogCard = ({
         <div className="card shadow-lg compact bg-base-100" key={index}>
           <div className="p-8 h-full w-full">
             <div className="flex items-center flex-col md:flex-row">
-              <div className="avatar mb-5 md:mb-0 opacity-90">
-                <div className="w-24 h-24 mask mask-squircle">
-                  <LazyImage
-                    src={article.thumbnail}
-                    alt={'thumbnail'}
-                    placeholder={skeleton({
-                      widthCls: 'w-full',
-                      heightCls: 'h-full',
-                      shape: '',
-                    })}
-                  />
+              <div className="mb-5 md:mb-0">
+                <div className="w-64 h-auto">
+                  <a
+                    href={article.link}
+                    onClick={(e) => {
+                      e.preventDefault();
+
+                      try {
+                        if (googleAnalyticsId) {
+                          ga.event('Click Blog Post', {
+                            post: article.title,
+                          });
+                        }
+                      } catch (error) {
+                        console.error(error);
+                      }
+
+                      window?.open(article.link, '_blank');
+                    }}
+                  >
+                    <LazyImage
+                      src={article.thumbnail}
+                      alt={'thumbnail'}
+                      placeholder={skeleton({
+                        widthCls: 'w-full',
+                        heightCls: 'h-full',
+                        shape: '',
+                      })}
+                      className='rounded-lg'
+                    />
+                  </a>
                 </div>
               </div>
               <div className="w-full">
@@ -131,7 +151,7 @@ const BlogCard = ({
                         window?.open(article.link, '_blank');
                       }}
                     >
-                      <h2 className="font-medium text-base-content opacity-60">
+                      <h2 className="font-medium text-lg opacity-60">
                         {article.title}
                       </h2>
                       <p className="text-base-content opacity-50 text-xs">
