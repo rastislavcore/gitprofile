@@ -89,7 +89,7 @@ const CONFIG = {
     'Golang',
     'TypeScript',
     'goAML',
-    'FIU',
+    'Anti Money Laundering',
   ],
   experiences: [
     {
