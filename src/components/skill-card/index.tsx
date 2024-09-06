@@ -1,4 +1,5 @@
 import { skeleton } from '../../utils';
+import slugify from 'react-slugify';
 
 const SkillCard = ({
   loading,
@@ -37,7 +38,7 @@ const SkillCard = ({
             {loading
               ? renderSkeleton()
               : skills.map((skill, index) => (
-                  <a href={`https://github.com/topics/${skill}`} target="_blank" rel="noreferrer" key={index}>
+                  <a href={`https://github.com/topics/${slugify(skill)}`} target="_blank" rel="noreferrer" key={index}>
                     <div
                       className="m-1 text-xs inline-flex items-center font-bold leading-sm px-3 py-1 badge-primary bg-opacity-90 rounded-full"
                     >
