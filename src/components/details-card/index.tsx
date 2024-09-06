@@ -33,6 +33,9 @@ import {
   SanitizedSocial,
 } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
+import { flagToCountry } from 'emoji-flags-to-country';
+import { findByAlpha2 } from 'iso-3166-1-ts';
+import slugify from 'react-slugify';
 
 type Props = {
   profile: Profile | null;
@@ -44,6 +47,10 @@ type Props = {
 const isCompanyMention = (company: string): boolean => {
   return company.startsWith('@') && !company.includes(' ');
 };
+
+const isFlagEmoji = (emoji: string): boolean => {
+  return /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/.test(emoji);
+}
 
 const companyLink = (company: string): string => {
   return `https://github.com/${company.substring(1)}`;
@@ -77,7 +84,7 @@ const ListItem: React.FC<{
   const keyLink = mailtoMatches ? decodeURIComponent(mailtoMatches[2]) : undefined;
   return (
     <div className="flex justify-start py-2 px-1 items-center">
-      <div className="flex-grow font-medium gap-2 flex items-center my-1">
+      <div className="flex-grow font-medium gap-2 flex items-center my-1 opacity-60">
         {icon} {title}
       </div>
       <div
@@ -149,10 +156,72 @@ const OrganizationItem: React.FC<{
     }
     return value;
   };
-
   return (
     <div className="flex justify-start py-2 px-1 items-center">
-      <div className="flex-grow font-medium gap-2 flex items-center my-1">
+      <div className="flex-grow font-medium gap-2 flex items-center my-1 opacity-60">
+        {icon} {title}
+      </div>
+      <div
+        className={`${
+          skeleton ? 'flex-grow' : ''
+        } text-sm font-normal text-right mr-2 ml-3 space-x-2 ${link ? 'truncate' : ''}`}
+        style={{
+          wordBreak: 'break-word',
+        }}
+      >
+        {renderValue()}
+      </div>
+    </div>
+  );
+};
+
+const LocationItem: React.FC<{
+  icon: React.ReactNode;
+  title: React.ReactNode;
+  value: React.ReactNode | string;
+  link?: string;
+  skeleton?: boolean;
+}> = ({ icon, title, value, link, skeleton = false }) => {
+  const renderValue = () => {
+    if (typeof value === 'string') {
+      return value.split(' ').map((items) => {
+        let item = items.trim();
+        if (!item) return null;
+
+        if (isFlagEmoji(item)) {
+          const iso2 = flagToCountry(item);
+          const country = findByAlpha2(iso2)?.name;
+          const loc = iso2 ? (country ? country : iso2) : item;
+          return (
+            <a
+              href={`https://www.google.com/maps/place/${slugify(loc)}`}
+              target="_blank"
+              rel="noreferrer"
+              key={iso2}
+              title={iso2}
+            >
+              {item}
+            </a>
+          );
+        } else {
+          return (
+            <a
+              href={`https://www.google.com/maps/place/${slugify(item)}`}
+              target="_blank"
+              rel="noreferrer"
+              key={item}
+            >
+              {item}
+            </a>
+          );
+        }
+      });
+    }
+    return value;
+  };
+  return (
+    <div className="flex justify-start py-2 px-1 items-center">
+      <div className="flex-grow font-medium gap-2 flex items-center my-1 opacity-60">
         {icon} {title}
       </div>
       <div
@@ -199,22 +268,22 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="card-body">
-        <div className="text-base-content text-opacity-60">
+        <div className="text-base-content">
           {loading || !profile ? (
             renderSkeleton()
           ) : (
             <Fragment>
               {profile.location && (
-                <ListItem
+                <LocationItem
                   icon={<FaMapMarkerAlt />}
-                  title="Location:"
+                  title="Location"
                   value={profile.location}
                 />
               )}
               {profile.company && (
                 <OrganizationItem
                   icon={<FaBuilding />}
-                  title="Organization:"
+                  title="Organization"
                   value={profile.company}
                   link={
                     isCompanyMention(profile.company.trim())
@@ -225,14 +294,14 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               )}
               <ListItem
                 icon={<AiFillGithub />}
-                title="GitHub:"
+                title="GitHub"
                 value={github.username}
                 link={`https://github.com/${github.username}`}
               />
               {social?.researchGate && (
                 <ListItem
                   icon={<SiResearchgate />}
-                  title="ResearchGate:"
+                  title="ResearchGate"
                   value={social.researchGate}
                   link={`https://www.researchgate.net/profile/${social.researchGate}`}
                 />
@@ -240,7 +309,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.coreid && (
                 <ListItem
                   icon={<FaIdBadge />}
-                  title="Core ID:"
+                  title="Core ID"
                   value={(social.coreid.substring(0,4)+'…'+social.coreid.substring(-4, 4)).toUpperCase()}
                   link={`https://coreid.link/${social.coreid}`}
                 />
@@ -248,7 +317,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.twitter && (
                 <ListItem
                   icon={<SiX />}
-                  title="X:"
+                  title="X"
                   value={`@${social.twitter}`}
                   link={`https://x.com/${social.twitter}`}
                 />
@@ -256,7 +325,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.fediverse && (
                 <ListItem
                   icon={<PiFediverseLogoFill />}
-                  title="Fediverse:"
+                  title="Fediverse"
                   value={getFormattedFediverseValue(social.fediverse, false)}
                   link={getFormattedFediverseValue(social.fediverse, true)}
                 />
@@ -264,7 +333,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.linkedin && (
                 <ListItem
                   icon={<FaLinkedin />}
-                  title="LinkedIn:"
+                  title="LinkedIn"
                   value={social.linkedin}
                   link={`https://www.linkedin.com/in/${social.linkedin}`}
                 />
@@ -272,7 +341,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.dribbble && (
                 <ListItem
                   icon={<CgDribbble />}
-                  title="Dribbble:"
+                  title="Dribbble"
                   value={social.dribbble}
                   link={`https://dribbble.com/${social.dribbble}`}
                 />
@@ -280,7 +349,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.behance && (
                 <ListItem
                   icon={<FaBehanceSquare />}
-                  title="Behance:"
+                  title="Behance"
                   value={social.behance}
                   link={`https://www.behance.net/${social.behance}`}
                 />
@@ -288,7 +357,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.facebook && (
                 <ListItem
                   icon={<FaFacebook />}
-                  title="Facebook:"
+                  title="Facebook"
                   value={social.facebook}
                   link={`https://www.facebook.com/${social.facebook}`}
                 />
@@ -296,7 +365,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.tiktok && (
                 <ListItem
                   icon={<FaTiktok />}
-                  title="TikTok:"
+                  title="TikTok"
                   value={social.facebook}
                   link={`https://www.tiktok.com/@${social.tiktok}`}
                 />
@@ -304,7 +373,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.instagram && (
                 <ListItem
                   icon={<AiFillInstagram />}
-                  title="Instagram:"
+                  title="Instagram"
                   value={social.instagram}
                   link={`https://www.instagram.com/${social.instagram}`}
                 />
@@ -312,7 +381,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.reddit && (
                 <ListItem
                   icon={<FaReddit />}
-                  title="Reddit:"
+                  title="Reddit"
                   value={social.reddit}
                   link={`https://www.reddit.com/user/${social.reddit}`}
                 />
@@ -320,7 +389,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.threads && (
                 <ListItem
                   icon={<FaSquareThreads />}
-                  title="Threads:"
+                  title="Threads"
                   value={social.threads}
                   link={`https://www.threads.net/@${social.threads.replace('@', '')}`}
                 />
@@ -328,7 +397,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.youtube && (
                 <ListItem
                   icon={<FaYoutube />}
-                  title="YouTube:"
+                  title="YouTube"
                   value={`@${social.youtube}`}
                   link={`https://www.youtube.com/@${social.youtube}`}
                 />
@@ -336,7 +405,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.udemy && (
                 <ListItem
                   icon={<SiUdemy />}
-                  title="Udemy:"
+                  title="Udemy"
                   value={social.udemy}
                   link={`https://www.udemy.com/user/${social.udemy}`}
                 />
@@ -344,7 +413,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.medium && (
                 <ListItem
                   icon={<AiFillMediumSquare />}
-                  title="Medium:"
+                  title="Medium"
                   value={social.medium}
                   link={`https://medium.com/@${social.medium}`}
                 />
@@ -352,7 +421,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.dev && (
                 <ListItem
                   icon={<FaDev />}
-                  title="Dev:"
+                  title="Dev"
                   value={social.dev}
                   link={`https://dev.to/${social.dev}`}
                 />
@@ -360,7 +429,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.stackoverflow && (
                 <ListItem
                   icon={<FaStackOverflow />}
-                  title="Stack Overflow:"
+                  title="Stack Overflow"
                   value={social.stackoverflow.split('/').slice(-1)}
                   link={`https://stackoverflow.com/users/${social.stackoverflow}`}
                 />
@@ -368,7 +437,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.wiki && (
                 <ListItem
                   icon={<SiWikipedia />}
-                  title="Wiki:"
+                  title="Wiki"
                   value={decodeURIComponent(social.wiki.split('/').slice(-1)[0]).replace("_", " ")}
                   link={social.wiki}
                 />
@@ -376,7 +445,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.website && (
                 <ListItem
                   icon={<FaGlobe />}
-                  title="Website:"
+                  title="Website"
                   value={social.website
                     .replace('https://', '')
                     .replace('http://', '')}
@@ -406,7 +475,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.phone && (
                 <ListItem
                   icon={<RiPhoneFill />}
-                  title="Phone:"
+                  title="Phone"
                   value={social.phone}
                   link={`tel:${social.phone}`}
                 />
@@ -414,7 +483,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.email && (
                 <ListItem
                   icon={<RiMailFill />}
-                  title="Email:"
+                  title="Email"
                   value={social.email && social.email.includes("?") ? social.email.split("?")[0] : social.email}
                   link={`mailto:${social.email}`}
                 />
@@ -422,7 +491,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
               {social?.payto && (
                 <ListItem
                   icon={<FaWallet />}
-                  title="PayTo:"
+                  title="PayTo"
                   value={social.payto.substring(social.payto.indexOf('payto://') + 8, social.payto.indexOf('payto://') + 16) + '…' + social.payto.substring((social.payto.indexOf('?') > -1 ? social.payto.indexOf('?') : social.payto.length) - 4)}
                   link={`${social.payto}`}
                 />
