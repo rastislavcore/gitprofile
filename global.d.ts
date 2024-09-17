@@ -3,6 +3,7 @@ interface Github {
    * GitHub org/user name
    */
   username: string;
+  sponsorship?: boolean;
 }
 
 interface GitHubProjects {

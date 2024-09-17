@@ -1,5 +1,6 @@
 export interface SanitizedGithub {
   username: string;
+  sponsorship: boolean;
 }
 
 export interface SanitizedGitHubProjects {

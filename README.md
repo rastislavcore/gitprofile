@@ -102,6 +102,7 @@ You can leave most of the sections empty if you don't want to display them on yo
 const CONFIG = {
   github: {
     username: 'rastislavcore', // Your GitHub org/user name. (This is the only required config)
+    sponsorship: false, // Show GitHub Sponsorship tab?
   },
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/rastislavcore/arifszn.github.io, set base to '/'.

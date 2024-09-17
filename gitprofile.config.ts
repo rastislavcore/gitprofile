@@ -3,6 +3,7 @@
 const CONFIG = {
   github: {
     username: 'rastislavcore', // Your GitHub org/user name. (This is the only required config)
+    sponsorship: true, // Set to true to enable GitHub Sponsors link
   },
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/arifszn/arifszn.github.io, set base to '/'.
