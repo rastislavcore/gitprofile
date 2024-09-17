@@ -30,6 +30,7 @@ export const getSanitizedConfig = (
     return {
       github: {
         username: config.github.username,
+        sponsorship: config.github.sponsorship ?? false,
       },
       projects: {
         github: {

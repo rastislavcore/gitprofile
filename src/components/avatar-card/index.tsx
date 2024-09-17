@@ -89,7 +89,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               <a
                 href={resumeFileUrl}
                 target="_blank"
-                className="btn btn-outline btn-sm text-xs opacity-50"
+                className="btn btn-outline btn-sm text-xs opacity-50 rounded-lg"
                 download
                 rel="noreferrer"
               >
@@ -105,7 +105,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               <a
                 href={publicKey}
                 target="_blank"
-                className="btn btn-outline btn-sm text-xs opacity-50"
+                className="btn btn-outline btn-sm text-xs opacity-50 rounded-lg"
                 download
                 rel="noreferrer"
               >
