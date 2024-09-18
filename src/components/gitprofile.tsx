@@ -31,6 +31,7 @@ import BlogCard from './blog-card';
 import GithubGraphCard from './github-graph';
 import Footer from './footer';
 import PublicationCard from './publication-card';
+import DonateCard from './donate-card';
 
 /**
  * Renders the GitProfile component.
@@ -259,18 +260,11 @@ const GitProfile = ({ config }: { config: Config }) => {
                       />
                     )}
                     {sanitizedConfig.github.sponsorship && (
-                      <div className="card compact bg-base-100 shadow">
-                        <div className="p-4 bg-base-100 text-base-content">
-                          <div className="text-sm mb-2">Enjoy those green squares 🟩 on the GitHub graph? Help me fill in more by sponsorship.</div>
-                          <iframe
-                            src={`https://github.com/sponsors/${sanitizedConfig.github.username}/card`}
-                            title={`Sponsor ${sanitizedConfig.github.username}`}
-                            className="w-full md:h-40 lg:h-48"
-                            style={{ border: 0, backgroundColor: 'inherit', color: 'inherit' }}
-                            allowTransparency={true}
-                          ></iframe>
-                        </div>
-                      </div>
+                      <DonateCard
+                        loading={loading}
+                        username={sanitizedConfig.github.username}
+                        payto={sanitizedConfig.social.payto}
+                      />
                     )}
                   </div>
                 </div>
