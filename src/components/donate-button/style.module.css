@@ -1,0 +1,18 @@
+.ptDonate {
+  cursor: pointer;
+  color: #849dfc;
+  padding: 6px 12px;
+  background: #849dfc20;
+  font: 15px/20px BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  border: 1px solid #878fc5;
+  border-radius: 16px;
+  text-decoration: none;
+  height: fit-content;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.ptDonate:hover {
+  border-color: #b6c2f4 !important;
+  color: #b6c2f4 !important;
+}

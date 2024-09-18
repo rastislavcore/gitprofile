@@ -492,7 +492,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                 <ListItem
                   icon={<FaWallet />}
                   title="PayTo"
-                  value={social.payto.substring(social.payto.indexOf('payto://') + 8, social.payto.indexOf('payto://') + 16) + '…' + social.payto.substring((social.payto.indexOf('?') > -1 ? social.payto.indexOf('?') : social.payto.length) - 4)}
+                  value={social.payto.substring(social.payto.indexOf('payto://') + 8, social.payto.indexOf('payto://') + 16).toUpperCase() + '…' + social.payto.substring((social.payto.indexOf('?') > -1 ? social.payto.indexOf('?') : social.payto.length) - 4).toUpperCase()}
                   link={`${social.payto}`}
                 />
               )}
