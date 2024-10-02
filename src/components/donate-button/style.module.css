@@ -1,10 +1,10 @@
 .ptDonate {
   cursor: pointer;
-  color: #849dfc;
+  color: hsl(228, 95%, 75%);
   padding: 6px 12px;
   background: #849dfc20;
   font: 15px/20px BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  border: 1px solid #878fc5;
+  border: 1px solid hsl(232, 35%, 65%);
   border-radius: 16px;
   text-decoration: none;
   height: fit-content;
@@ -13,6 +13,6 @@
 }
 
 .ptDonate:hover {
-  border-color: #b6c2f4 !important;
-  color: #b6c2f4 !important;
+  border-color: hsl(232, 35%, 45%) !important;
+  color: hsl(228, 95%, 65%) !important;
 }
