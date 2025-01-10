@@ -26,13 +26,19 @@ const DonateCard = ({
               allowTransparency={true}
             ></iframe>
             {payto && (
-              <div className="text-sm mt-6">
+              <div className="text-sm mt-6 flex items-center justify-start gap-2">
+                <span>Sponsor monthly using PayTo and cancel anytime.</span>
                 <span>
                   <DonateButton address={payto} />
                 </span>
-                <span className="ml-2">Sponsor monthly using PayTo and cancel anytime.</span>
               </div>
             )}
+            <div className="text-sm mt-6 flex items-center justify-start gap-2">
+              <span>List of Sponsors:</span>
+              <a href={`https://github.com/sponsors/${username}`} target="_blank" rel="noopener noreferrer">
+                <img src={`https://img.shields.io/github/sponsors/${username}?label=Sponsors&logo=githubsponsors&color=EA4AAA`} alt={`Sponsors of ${username}`} />
+              </a>
+            </div>
           </>
         )}
       </div>
