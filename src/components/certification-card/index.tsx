@@ -2,12 +2,7 @@ import React from 'react';
 import { SanitizedCertification } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 
-const ListItem = ({
-  year,
-  name,
-  body,
-  link,
-}: {
+const ListItem = (props: {
   year?: React.ReactNode;
   name?: React.ReactNode;
   body?: React.ReactNode;
@@ -18,13 +13,13 @@ const ListItem = ({
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
-    <div className="my-0.5 text-xs">{year}</div>
+    <div className="my-0.5 text-xs">{props.year}</div>
     <div className="font-medium">
-      <a href={link} target="_blank" rel="noreferrer">
-        {name}
+      <a href={props.link} target="_blank" rel="noreferrer">
+        {props.name}
       </a>
     </div>
-    <h3 className="mb-4 font-normal">{body}</h3>
+    <h3 className="mb-4 font-normal">{props.body}</h3>
   </li>
 );
 

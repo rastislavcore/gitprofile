@@ -1,4 +1,5 @@
-import { Fragment } from 'react';
+import { Profile } from '../../interfaces/profile';
+import { skeleton } from '../../utils';
 import {
   AiFillGithub,
   AiFillInstagram,
@@ -27,57 +28,23 @@ import { FaSquareThreads } from 'react-icons/fa6';
 import { PiFediverseLogoFill } from "react-icons/pi";
 import { RiMailFill, RiPhoneFill } from 'react-icons/ri';
 import { SiResearchgate, SiUdemy, SiWikipedia, SiX } from 'react-icons/si';
-import { Profile } from '../../interfaces/profile';
-import {
-  SanitizedGithub,
-  SanitizedSocial,
-} from '../../interfaces/sanitized-config';
-import { skeleton } from '../../utils';
 import { flagToCountry } from 'emoji-flags-to-country';
 import { findByAlpha2 } from 'iso-3166-1-ts';
 import slugify from 'react-slugify';
 
-type Props = {
-  profile: Profile | null;
-  loading: boolean;
-  social: SanitizedSocial;
-  github: SanitizedGithub;
-};
-
-const isCompanyMention = (company: string): boolean => {
-  return company.startsWith('@') && !company.includes(' ');
-};
-
-const isFlagEmoji = (emoji: string): boolean => {
-  return /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/.test(emoji);
-}
-
-const companyLink = (company: string): string => {
-  return `https://github.com/${company.substring(1)}`;
-};
-
-const getFormattedFediverseValue = (
-  fediverseValue: string,
-  isLink: boolean,
-): string => {
-  const indexOfAt = fediverseValue.lastIndexOf('@');
-  const username = fediverseValue.substring(1, indexOfAt);
-  const server = fediverseValue.substring(indexOfAt + 1);
-
-  if (isLink) {
-    return `https://${server}/@${username}`;
-  } else {
-    return `@${username}@${server}`;
-  }
-};
-
-const ListItem: React.FC<{
+export const ListItem = ({
+  icon,
+  title,
+  value,
+  link,
+  skeleton = false
+}: {
   icon: React.ReactNode;
   title: React.ReactNode;
   value: React.ReactNode;
   link?: string;
   skeleton?: boolean;
-}> = ({ icon, title, value, link, skeleton = false }) => {
+}) => {
   const mailtoRegex = /^mailto:([^?]+)\?(?:[^=]+=.*?&)*key=([^&]+)/;
   const isMailto = link && link.startsWith("mailto:");
   const mailtoMatches = isMailto ? link.match(mailtoRegex) : [];
@@ -123,6 +90,40 @@ const ListItem: React.FC<{
       </div>
     </div>
   );
+};
+
+interface DetailsCardProps {
+  profile: Profile | null;
+  loading: boolean;
+  github: { username: string };
+  social: any;
+}
+
+const isCompanyMention = (company: string): boolean => {
+  return company.startsWith('@') && !company.includes(' ');
+};
+
+const isFlagEmoji = (emoji: string): boolean => {
+  return /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/.test(emoji);
+}
+
+const companyLink = (company: string): string => {
+  return `https://github.com/${company.substring(1)}`;
+};
+
+const getFormattedFediverseValue = (
+  fediverseValue: string,
+  isLink: boolean,
+): string => {
+  const indexOfAt = fediverseValue.lastIndexOf('@');
+  const username = fediverseValue.substring(1, indexOfAt);
+  const server = fediverseValue.substring(indexOfAt + 1);
+
+  if (isLink) {
+    return `https://${server}/@${username}`;
+  } else {
+    return `@${username}@${server}`;
+  }
 };
 
 const OrganizationItem: React.FC<{
@@ -238,16 +239,8 @@ const LocationItem: React.FC<{
   );
 };
 
-/**
- * Renders the details card component.
- *
- * @param {Object} profile - The profile object.
- * @param {boolean} loading - Indicates whether the data is loading.
- * @param {Object} social - The social object.
- * @param {Object} github - The GitHub object.
- * @return {JSX.Element} The details card component.
- */
-const DetailsCard = ({ profile, loading, social, github }: Props) => {
+
+const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => {
   const renderSkeleton = () => {
     const array = [];
     for (let index = 0; index < 4; index++) {
@@ -261,7 +254,6 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
         />,
       );
     }
-
     return array;
   };
 
@@ -272,7 +264,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
           {loading || !profile ? (
             renderSkeleton()
           ) : (
-            <Fragment>
+            <>
               {profile.location && (
                 <LocationItem
                   icon={<FaMapMarkerAlt />}
@@ -438,7 +430,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                 <ListItem
                   icon={<SiWikipedia />}
                   title="Wiki"
-                  value={decodeURIComponent(social.wiki.split('/').slice(-1)[0]).replace("_", " ")}
+                  value={decodeURIComponent(social.wiki.split('/').slice(-1)[0]).replace("_", " ")}
                   link={social.wiki}
                 />
               )}
@@ -496,7 +488,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   link={`${social.payto}`}
                 />
               )}
-            </Fragment>
+            </>
           )}
         </div>
       </div>

@@ -87,8 +87,8 @@ export interface SanitizedPublicKey {
 export interface SanitizedExperience {
   company?: string;
   position?: string;
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
   companyLink?: string;
 }
 
@@ -102,12 +102,12 @@ export interface SanitizedCertification {
 export interface SanitizedEducation {
   institution?: string;
   degree?: string;
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
 }
 
 export interface SanitizedPublication {
-  title: string;
+  title?: string;
   conferenceName?: string;
   journalName?: string;
   authors?: string;
@@ -117,11 +117,6 @@ export interface SanitizedPublication {
 
 export interface SanitizedGoogleAnalytics {
   id?: string;
-}
-
-export interface SanitizedHotjar {
-  id?: string;
-  snippetVersion: number;
 }
 
 export interface SanitizedBlog {
@@ -163,10 +158,29 @@ export interface SanitizedConfig {
   certifications: Array<SanitizedCertification>;
   publications: Array<SanitizedPublication>;
   googleAnalytics: SanitizedGoogleAnalytics;
-  hotjar: SanitizedHotjar;
   blog: SanitizedBlog;
   themeConfig: SanitizedThemeConfig;
   footer?: string;
   enablePWA: boolean;
   githubGraph: boolean;
+}
+
+export interface Config {
+  github?: Partial<SanitizedGithub>;
+  projects?: Partial<SanitizedProjects>;
+  seo?: Partial<SanitizedSEO>;
+  social?: Partial<SanitizedSocial>;
+  resume?: Partial<SanitizedResume>;
+  publicKey?: Partial<SanitizedPublicKey>;
+  skills?: Array<string>;
+  experiences?: Array<Partial<SanitizedExperience>>;
+  educations?: Array<Partial<SanitizedEducation>>;
+  certifications?: Array<Partial<SanitizedCertification>>;
+  publications?: Array<Partial<SanitizedPublication>>;
+  googleAnalytics?: Partial<SanitizedGoogleAnalytics>;
+  blog?: Partial<SanitizedBlog>;
+  themeConfig?: Partial<SanitizedThemeConfig>;
+  footer?: string;
+  enablePWA?: boolean;
+  githubGraph?: boolean;
 }

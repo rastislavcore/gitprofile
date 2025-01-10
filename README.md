@@ -7,7 +7,6 @@ GitProfile is a powerful portfolio builder that allows you to create a stunning 
 ✓ [Easy to Setup](#-installation--setup)
 ✓ [33 Themes](#themes)
 ✓ [Google Analytics](#google-analytics)
-✓ [Hotjar](#hotjar)
 ✓ [SEO](#seo)
 ✓ [PWA](#pwa)
 ✓ [Avatar and Bio](#avatar-and-bio)
@@ -284,11 +283,6 @@ const CONFIG = {
   googleAnalytics: {
     id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
   },
-  // Track visitor interaction and behavior. https://www.hotjar.com
-  hotjar: {
-    id: '',
-    snippetVersion: 6,
-  },
   themeConfig: {
     defaultTheme: 'nord',
 
@@ -426,21 +420,6 @@ const CONFIG = {
 ```
 
 Besides tracking visitors, it will track `click events` on projects and blog posts, and send them to Google Analytics.
-
-### Hotjar
-
-**GitProfile** supports [hotjar](https://www.hotjar.com) to track visitor interaction and behavior. If you do not want to use Hotjar, keep the `id` empty.
-
-```ts
-// gitprofile.config.ts
-const CONFIG = {
-  // ...
-  hotjar: {
-    id: '',
-    snippetVersion: 6,
-  },
-};
-```
 
 ### SEO
 

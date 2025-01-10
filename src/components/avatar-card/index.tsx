@@ -1,5 +1,3 @@
-// @ts-expect-error React is needed for JSX
-import React from 'react';
 import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';

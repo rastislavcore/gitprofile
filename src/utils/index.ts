@@ -1,12 +1,12 @@
-import { hotjar } from 'react-hotjar';
+import React from 'react';
 import { LOCAL_STORAGE_KEY_NAME } from '../constants';
 import { DEFAULT_CUSTOM_THEME } from '../constants/default-custom-theme';
 import { DEFAULT_THEMES } from '../constants/default-themes';
 import colors from '../data/colors.json';
 import {
   SanitizedConfig,
-  SanitizedHotjar,
   SanitizedThemeConfig,
+  Config,
 } from '../interfaces/sanitized-config';
 import { ReactElement } from 'react';
 
@@ -117,10 +117,6 @@ export const getSanitizedConfig = (
       googleAnalytics: {
         id: config?.googleAnalytics?.id,
       },
-      hotjar: {
-        id: config?.hotjar?.id,
-        snippetVersion: config?.hotjar?.snippetVersion || 6,
-      },
       blog: {
         username: config?.blog?.username || '',
         source: config?.blog?.source || 'dev',
@@ -205,26 +201,16 @@ export const skeleton = ({
   style?: React.CSSProperties;
   shape?: string;
   className?: string | null;
-}): ReactElement => {
+}): React.ReactElement => {
   const classNames = ['bg-base-300', 'animate-pulse', shape];
-  if (className) {
-    classNames.push(className);
-  }
-  if (widthCls) {
-    classNames.push(widthCls);
-  }
-  if (heightCls) {
-    classNames.push(heightCls);
-  }
+  if (className) classNames.push(className);
+  if (widthCls) classNames.push(widthCls);
+  if (heightCls) classNames.push(heightCls);
 
-  return <div className={classNames.join(' ')} style={style} />;
-};
-
-export const setupHotjar = (hotjarConfig: SanitizedHotjar): void => {
-  if (hotjarConfig?.id) {
-    const snippetVersion = hotjarConfig?.snippetVersion || 6;
-    hotjar.initialize({ id: parseInt(hotjarConfig.id), sv: snippetVersion });
-  }
+  return React.createElement('div', {
+    className: classNames.join(' '),
+    style
+  });
 };
 
 export const ga = {

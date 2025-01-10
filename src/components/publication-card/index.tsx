@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { SanitizedPublication } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 
@@ -118,7 +117,7 @@ const PublicationCard = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
@@ -145,7 +144,7 @@ const PublicationCard = ({
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

@@ -286,18 +286,6 @@ interface GoogleAnalytics {
   id?: string;
 }
 
-interface Hotjar {
-  /**
-   * Hotjar id
-   */
-  id?: string;
-
-  /**
-   * Snippet Version
-   */
-  snippetVersion?: number;
-}
-
 interface Blog {
   /**
    * medium | dev
@@ -451,11 +439,6 @@ interface Config {
    * Google Analytics config
    */
   googleAnalytics?: GoogleAnalytics;
-
-  /**
-   * Hotjar config
-   */
-  hotjar?: Hotjar;
 
   /**
    * Blog config

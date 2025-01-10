@@ -2,15 +2,13 @@ import React from 'react';
 import { SanitizedEducation } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 
-const ListItem = ({
-  time,
-  degree,
-  institution,
-}: {
+interface ListItemProps {
   time: React.ReactNode;
   degree?: React.ReactNode;
   institution?: React.ReactNode;
-}) => (
+}
+
+const ListItem = ({ time, degree, institution }: ListItemProps) => (
   <li className="mb-5 ml-4">
     <div
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"

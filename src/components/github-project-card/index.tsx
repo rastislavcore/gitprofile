@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { AiOutlineCode, AiOutlineComment, AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { MdInsertLink } from 'react-icons/md';
 import { ga, getLanguageColor, skeleton } from '../../utils';
@@ -179,7 +178,7 @@ const GithubProjectCard = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
@@ -220,7 +219,7 @@ const GithubProjectCard = ({
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

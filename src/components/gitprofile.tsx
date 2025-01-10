@@ -1,5 +1,3 @@
-// @ts-expect-error React is needed for JSX
-import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { formatDistance } from 'date-fns';
@@ -10,12 +8,10 @@ import {
   INVALID_GITHUB_USERNAME_ERROR,
   setTooManyRequestError,
 } from '../constants/errors';
-import { HelmetProvider } from 'react-helmet-async';
 import '../assets/index.css';
-import { getInitialTheme, getSanitizedConfig, setupHotjar } from '../utils';
-import { SanitizedConfig } from '../interfaces/sanitized-config';
+import { getInitialTheme, getSanitizedConfig, isDarkishTheme } from '../utils';
+import { SanitizedConfig, Config } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
-import HeadTagEditor from './head-tag-editor';
 import { DEFAULT_THEMES } from '../constants/default-themes';
 import ThemeChanger from './theme-changer';
 import { BG_COLOR } from '../constants';
@@ -148,13 +144,22 @@ const GitProfile = ({ config }: { config: Config }) => {
     } else {
       setError(null);
       setTheme(getInitialTheme(sanitizedConfig.themeConfig));
-      setupHotjar(sanitizedConfig.hotjar);
       loadData();
     }
   }, [sanitizedConfig, loadData]);
 
   useEffect(() => {
     theme && document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  useEffect(() => {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute(
+        'content',
+        isDarkishTheme(theme) ? '#000000' : '#ffffff'
+      );
+    }
   }, [theme]);
 
   const handleError = (error: AxiosError | Error): void => {
@@ -192,139 +197,133 @@ const GitProfile = ({ config }: { config: Config }) => {
   };
 
   return (
-    <HelmetProvider>
-      <div className="fade-in h-screen">
-        {error ? (
-          <ErrorPage
-            status={error.status}
-            title={error.title}
-            subTitle={error.subTitle}
-          />
-        ) : (
-          <>
-            <HeadTagEditor
-              googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
-              appliedTheme={theme}
-            />
-            <div className={`p-4 lg:p-10 min-h-full ${BG_COLOR}`}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 rounded-box">
-                <div className="col-span-1">
-                  <div className="grid grid-cols-1 gap-6">
-                    {!sanitizedConfig.themeConfig.disableSwitch && (
-                      <ThemeChanger
-                        theme={theme}
-                        setTheme={setTheme}
-                        loading={loading}
-                        themeConfig={sanitizedConfig.themeConfig}
-                      />
-                    )}
-                    <AvatarCard
-                      profile={profile}
+    <div className="fade-in h-screen">
+      {error ? (
+        <ErrorPage
+          status={error.status}
+          title={error.title}
+          subTitle={error.subTitle}
+        />
+      ) : (
+        <>
+          <div className={`p-4 lg:p-10 min-h-full ${BG_COLOR}`}>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 rounded-box">
+              <div className="col-span-1">
+                <div className="grid grid-cols-1 gap-6">
+                  {!sanitizedConfig.themeConfig.disableSwitch && (
+                    <ThemeChanger
+                      theme={theme}
+                      setTheme={setTheme}
                       loading={loading}
-                      avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
-                      resumeFileUrl={sanitizedConfig.resume.fileUrl}
-                      publicKey={sanitizedConfig.publicKey.fileUrl}
+                      themeConfig={sanitizedConfig.themeConfig}
                     />
-                    <DetailsCard
-                      profile={profile}
+                  )}
+                  <AvatarCard
+                    profile={profile}
+                    loading={loading}
+                    avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
+                    resumeFileUrl={sanitizedConfig.resume.fileUrl}
+                    publicKey={sanitizedConfig.publicKey.fileUrl}
+                  />
+                  <DetailsCard
+                    profile={profile}
+                    loading={loading}
+                    github={sanitizedConfig.github}
+                    social={sanitizedConfig.social}
+                  />
+                  {sanitizedConfig.skills.length !== 0 && (
+                    <SkillCard
                       loading={loading}
-                      github={sanitizedConfig.github}
-                      social={sanitizedConfig.social}
+                      skills={sanitizedConfig.skills}
                     />
-                    {sanitizedConfig.skills.length !== 0 && (
-                      <SkillCard
-                        loading={loading}
-                        skills={sanitizedConfig.skills}
-                      />
-                    )}
-                    {sanitizedConfig.experiences.length !== 0 && (
-                      <ExperienceCard
-                        loading={loading}
-                        experiences={sanitizedConfig.experiences}
-                      />
-                    )}
-                    {sanitizedConfig.certifications.length !== 0 && (
-                      <CertificationCard
-                        loading={loading}
-                        certifications={sanitizedConfig.certifications}
-                      />
-                    )}
-                    {sanitizedConfig.educations.length !== 0 && (
-                      <EducationCard
-                        loading={loading}
-                        educations={sanitizedConfig.educations}
-                      />
-                    )}
-                    {sanitizedConfig.githubGraph && (
-                      <GithubGraphCard
-                        loading={loading}
-                        username={sanitizedConfig.github.username}
-                      />
-                    )}
-                    {sanitizedConfig.github.sponsorship && (
-                      <DonateCard
-                        loading={loading}
-                        username={sanitizedConfig.github.username}
-                        payto={sanitizedConfig.social.payto}
-                      />
-                    )}
-                  </div>
+                  )}
+                  {sanitizedConfig.experiences.length !== 0 && (
+                    <ExperienceCard
+                      loading={loading}
+                      experiences={sanitizedConfig.experiences}
+                    />
+                  )}
+                  {sanitizedConfig.certifications.length !== 0 && (
+                    <CertificationCard
+                      loading={loading}
+                      certifications={sanitizedConfig.certifications}
+                    />
+                  )}
+                  {sanitizedConfig.educations.length !== 0 && (
+                    <EducationCard
+                      loading={loading}
+                      educations={sanitizedConfig.educations}
+                    />
+                  )}
+                  {sanitizedConfig.githubGraph && (
+                    <GithubGraphCard
+                      loading={loading}
+                      username={sanitizedConfig.github.username}
+                    />
+                  )}
+                  {sanitizedConfig.github.sponsorship && (
+                    <DonateCard
+                      loading={loading}
+                      username={sanitizedConfig.github.username}
+                      payto={sanitizedConfig.social.payto}
+                    />
+                  )}
                 </div>
-                <div className="lg:col-span-2 col-span-1">
-                  <div className="grid grid-cols-1 gap-6">
-                    {sanitizedConfig.publications.length !== 0 && (
-                      <PublicationCard
-                        loading={loading}
-                        publications={sanitizedConfig.publications}
-                      />
-                    )}
-                    {sanitizedConfig.projects.external.projects.length !==
-                      0 && (
-                      <ExternalProjectCard
-                        loading={loading}
-                        header={sanitizedConfig.projects.external.header}
-                        externalProjects={
-                          sanitizedConfig.projects.external.projects
-                        }
-                        googleAnalyticId={sanitizedConfig.googleAnalytics.id}
-                      />
-                    )}
-                    {sanitizedConfig.blog.display && (
-                      <BlogCard
-                        loading={loading}
-                        googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
-                        blog={sanitizedConfig.blog}
-                      />
-                    )}
-                    {sanitizedConfig.projects.github.display && (
-                      <GithubProjectCard
-                        header={sanitizedConfig.projects.github.header}
-                        limit={sanitizedConfig.projects.github.automatic.limit}
-                        githubProjects={githubProjects}
-                        loading={loading}
-                        username={sanitizedConfig.github.username}
-                        googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
-                        type={sanitizedConfig.projects.github.automatic.type}
-                        sortBy={sanitizedConfig.projects.github.automatic.sortBy}
-                      />
-                    )}
-                  </div>
+              </div>
+              <div className="lg:col-span-2 col-span-1">
+                <div className="grid grid-cols-1 gap-6">
+                  {sanitizedConfig.publications.length !== 0 && (
+                    <PublicationCard
+                      loading={loading}
+                      publications={sanitizedConfig.publications}
+                    />
+                  )}
+                  {sanitizedConfig.projects.external.projects.length !==
+                    0 && (
+                    <ExternalProjectCard
+                      loading={loading}
+                      header={sanitizedConfig.projects.external.header}
+                      externalProjects={
+                        sanitizedConfig.projects.external.projects
+                      }
+                      googleAnalyticId={sanitizedConfig.googleAnalytics.id}
+                    />
+                  )}
+                  {sanitizedConfig.blog.display && (
+                    <BlogCard
+                      loading={loading}
+                      googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
+                      blog={sanitizedConfig.blog}
+                    />
+                  )}
+                  {sanitizedConfig.projects.github.display && (
+                    <GithubProjectCard
+                      header={sanitizedConfig.projects.github.header}
+                      limit={sanitizedConfig.projects.github.automatic.limit}
+                      githubProjects={githubProjects}
+                      loading={loading}
+                      username={sanitizedConfig.github.username}
+                      googleAnalyticsId={sanitizedConfig.googleAnalytics.id}
+                      type={sanitizedConfig.projects.github.automatic.type}
+                      sortBy={sanitizedConfig.projects.github.automatic.sortBy}
+                    />
+                  )}
                 </div>
               </div>
             </div>
-            {sanitizedConfig.footer && (
-              <footer
-                className={`p-4 footer ${BG_COLOR} text-base-content footer-center`}
-              >
-                <div className="card compact bg-base-100 shadow">
-                  <Footer content={sanitizedConfig.footer} loading={loading} />
-                </div>
-              </footer>
-            )}
-          </>
-        )}
-      </div>
-    </HelmetProvider>
+          </div>
+          {sanitizedConfig.footer && (
+            <footer
+              className={`p-4 footer ${BG_COLOR} text-base-content footer-center`}
+            >
+              <div className="card compact bg-base-100 shadow">
+                <Footer content={sanitizedConfig.footer} loading={loading} />
+              </div>
+            </footer>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

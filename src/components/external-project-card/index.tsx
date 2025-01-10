@@ -1,5 +1,3 @@
-// @ts-expect-error React is needed for JSX
-import React, { Fragment } from 'react';
 import LazyImage from '../lazy-image';
 import { ga, skeleton } from '../../utils';
 import { SanitizedExternalProject } from '../../interfaces/sanitized-config';
@@ -125,7 +123,7 @@ const ExternalProjectCard = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
@@ -152,7 +150,7 @@ const ExternalProjectCard = ({
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
