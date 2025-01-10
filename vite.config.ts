@@ -58,6 +58,8 @@ export default defineConfig({
                   type: 'image/png',
                 },
               ],
+              theme_color: '#ffffff',
+              background_color: '#ffffff',
             },
           }),
         ]
@@ -65,5 +67,21 @@ export default defineConfig({
   ],
   define: {
     CONFIG: CONFIG,
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-router-dom') || id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+          }
+          if (id.includes('/src/utils/')) return 'utils';
+          if (id.includes('/src/components/')) return 'components';
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   },
 });

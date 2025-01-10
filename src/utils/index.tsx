@@ -8,6 +8,7 @@ import {
   SanitizedHotjar,
   SanitizedThemeConfig,
 } from '../interfaces/sanitized-config';
+import { ReactElement } from 'react';
 
 export const isDarkishTheme = (appliedTheme: string): boolean => {
   return ['dark', 'halloween', 'forest', 'black', 'luxury', 'dracula'].includes(
@@ -204,7 +205,7 @@ export const skeleton = ({
   style?: React.CSSProperties;
   shape?: string;
   className?: string | null;
-}): JSX.Element => {
+}): ReactElement => {
   const classNames = ['bg-base-300', 'animate-pulse', shape];
   if (className) {
     classNames.push(className);

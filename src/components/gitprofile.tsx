@@ -1,3 +1,5 @@
+// @ts-expect-error React is needed for JSX
+import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 import { formatDistance } from 'date-fns';

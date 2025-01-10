@@ -35,16 +35,16 @@ const EducationCard = ({
       array.push(
         <ListItem
           key={index}
-          time={skeleton({
+          time={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          degree={skeleton({
+          })}</>}
+          degree={<>{skeleton({
             widthCls: 'w-6/12',
             heightCls: 'h-4',
             className: 'my-1.5',
-          })}
-          institution={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+          })}</>}
+          institution={<>{skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}</>}
         />,
       );
     }
@@ -58,7 +58,7 @@ const EducationCard = ({
         <div className="mx-3">
           <h5 className="card-title">
             {loading ? (
-              skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
+              <>{skeleton({ widthCls: 'w-32', heightCls: 'h-8' })}</>
             ) : (
               <span className="text-base-content opacity-70">Education</span>
             )}

@@ -41,16 +41,16 @@ const CertificationCard = ({
       array.push(
         <ListItem
           key={index}
-          year={skeleton({
+          year={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          name={skeleton({
+          })}</>}
+          name={<>{skeleton({
             widthCls: 'w-6/12',
             heightCls: 'h-4',
             className: 'my-1.5',
-          })}
-          body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+          })}</>}
+          body={<>{skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}</>}
         />,
       );
     }
@@ -64,7 +64,7 @@ const CertificationCard = ({
         <div className="mx-3">
           <h5 className="card-title">
             {loading ? (
-              skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
+              <>{skeleton({ widthCls: 'w-32', heightCls: 'h-8' })}</>
             ) : (
               <span className="text-base-content opacity-70">
                 Certification

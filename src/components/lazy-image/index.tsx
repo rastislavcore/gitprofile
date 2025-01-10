@@ -3,12 +3,12 @@ import { useState, Fragment, useEffect } from 'react';
 /**
  * LazyImage component.
  *
- * @param {string} placeholder The placeholder image URL.
- * @param {string} src The image URL.
- * @param {string} alt The alt text for the image.
- * @param {object} rest Additional props for the image element.
- *
- * @returns {ReactElement} The LazyImage component.
+ * @param {Object} props - Component props
+ * @param {React.ReactElement} props.placeholder - The placeholder element
+ * @param {string} props.src - The image URL
+ * @param {string} props.alt - The alt text for the image
+ * @param {Object} props.rest - Additional props for the image element
+ * @returns {React.ReactElement} The LazyImage component
  */
 const LazyImage: React.FC<{
   placeholder: React.ReactElement;

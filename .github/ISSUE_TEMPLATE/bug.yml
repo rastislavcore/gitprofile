@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please, provide as much details as possible to make proper evaluation and in the end resolve the bug report faster.
+        Please provide as many details as possible to help us evaluate and resolve the bug report faster.
 
   - type: markdown
     attributes:

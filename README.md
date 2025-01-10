@@ -26,7 +26,7 @@ Open GitProfile code in **IDX**: [![Open in IDX](https://cdn.idx.dev/btn/open_pu
 
 ## 🛠 Installation & Setup
 
-There are three ways to use **GitProfile**. Use any.
+There are two ways to use **GitProfile**:
 
 - [Forking this repo _(recommended)_](#forking-this-repo)
 - [Setting up locally](#setting-up-locally)
@@ -89,6 +89,18 @@ As this is a Vite project, you can also host your website to Netlify, Vercel, He
 - Finally, visit `http://localhost:5173/` from your browser.
 
 > Alternatively, you can set up and run the project using Docker with **[Vail](https://github.com/rastislavcore/vail)**, a powerful tool for local development of JavaScript/TypeScript Apps.
+
+### Dependencies
+
+The project uses React 19 and requires Node.js 18 or higher. Key dependencies include:
+
+```json
+{
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0",
+  "vite": "^6.0.7"
+}
+```
 
 ## 🎨 Customization
 
@@ -465,7 +477,7 @@ Your avatar and bio will be fetched from GitHub automatically.
 
 ### Social Links
 
-You can link your social media services you're using, including LinkedIn, Twitter, Fediverse, ResearchGate, Facebook, Instagram, Reddit, Threads, YouTube, Udemy, Dribbble, Behance, Medium, dev, Stack Overflow, Skype, Telegram, personal website, phone and email.
+You can link to the social media services you're using, including LinkedIn, Twitter, Fediverse, ResearchGate, Facebook, Instagram, Reddit, Threads, YouTube, Udemy, Dribbble, Behance, Medium, Dev, Stack Overflow, Skype, Telegram, personal website, phone, and email.
 
 ```ts
 // gitprofile.config.ts

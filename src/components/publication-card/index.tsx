@@ -20,46 +20,46 @@ const PublicationCard = ({
                 <div className="px-4">
                   <div className="text-center w-full">
                     <h2 className="mb-2">
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-32',
                         heightCls: 'h-8',
                         className: 'mb-2 mx-auto',
-                      })}
+                      })}</>
                     </h2>
                     <div>
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-20',
                         heightCls: 'h-4',
                         className: 'mb-2 mx-auto',
-                      })}
+                      })}</>
                     </div>
                     <div>
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-20',
                         heightCls: 'h-4',
                         className: 'mb-2 mx-auto',
-                      })}
+                      })}</>
                     </div>
                     <div>
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-4',
                         className: 'mb-2 mx-auto',
-                      })}
+                      })}</>
                     </div>
                     <div>
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-4',
                         className: 'mb-2 mx-auto',
-                      })}
+                      })}</>
                     </div>
                     <div>
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-4',
                         className: 'mb-2 mx-auto',
-                      })}
+                      })}</>
                     </div>
                   </div>
                 </div>
@@ -127,7 +127,7 @@ const PublicationCard = ({
                 <div className="mx-3 flex items-center justify-between mb-2">
                   <h5 className="card-title">
                     {loading ? (
-                      skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
+                      <>{skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}</>
                     ) : (
                       <span className="text-base-content opacity-70">
                         Publications

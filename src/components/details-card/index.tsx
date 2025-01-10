@@ -255,9 +255,9 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
         <ListItem
           key={index}
           skeleton={true}
-          icon={skeleton({ widthCls: 'w-4', heightCls: 'h-4' })}
-          title={skeleton({ widthCls: 'w-24', heightCls: 'h-4' })}
-          value={skeleton({ widthCls: 'w-full', heightCls: 'h-4' })}
+          icon={<>{skeleton({ widthCls: 'w-4', heightCls: 'h-4' })}</>}
+          title={<>{skeleton({ widthCls: 'w-24', heightCls: 'h-4' })}</>}
+          value={<>{skeleton({ widthCls: 'w-full', heightCls: 'h-4' })}</>}
         />,
       );
     }

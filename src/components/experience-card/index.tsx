@@ -48,20 +48,20 @@ const ExperienceCard = ({
       array.push(
         <ListItem
           key={index}
-          timeFrom={skeleton({
+          timeFrom={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          timeTo={skeleton({
+          })}</>}
+          timeTo={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          position={skeleton({
+          })}</>}
+          position={<>{skeleton({
             widthCls: 'w-6/12',
             heightCls: 'h-4',
             className: 'my-1.5',
-          })}
-          company={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+          })}</>}
+          company={<>{skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}</>}
         />,
       );
     }
@@ -74,7 +74,7 @@ const ExperienceCard = ({
         <div className="mx-3">
           <h5 className="card-title">
             {loading ? (
-              skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
+              <>{skeleton({ widthCls: 'w-32', heightCls: 'h-8' })}</>
             ) : (
               <span className="text-base-content opacity-70">Career</span>
             )}
