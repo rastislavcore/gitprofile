@@ -9,18 +9,18 @@ import {
   Config,
 } from '../interfaces/sanitized-config';
 
-export const isDarkishTheme = (appliedTheme: string): boolean => {
-  return ['dark', 'halloween', 'forest', 'black', 'luxury', 'dracula'].includes(
-    appliedTheme,
-  );
-};
-
 type EventParams = {
   [key: string]: string;
 };
 
 type Colors = {
   [key: string]: { color: string | null; url: string };
+};
+
+export const isDarkishTheme = (appliedTheme: string): boolean => {
+  return ['dark', 'halloween', 'forest', 'black', 'luxury', 'dracula'].includes(
+    appliedTheme,
+  );
 };
 
 export const getSanitizedConfig = (
