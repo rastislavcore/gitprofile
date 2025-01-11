@@ -23,6 +23,7 @@ import {
   FaTiktok,
   FaYoutube,
   FaWallet,
+  FaCheckCircle,
 } from 'react-icons/fa';
 import { FaSquareThreads } from 'react-icons/fa6';
 import { PiFediverseLogoFill } from "react-icons/pi";
@@ -302,7 +303,14 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                 <ListItem
                   icon={<FaIdBadge />}
                   title="Core ID"
-                  value={(social.coreid.substring(0,4)+'…'+social.coreid.substring(-4, 4)).toUpperCase()}
+                  value={
+                    <>
+                      {profile?.bio?.toLowerCase().includes(`${social.coreid}@coreid`.toLowerCase()) && (
+                        <FaCheckCircle className="text-primary inline-block relative -top-[1px] mr-1" size={12} />
+                      )}
+                      {(social.coreid.substring(0,4)+'…'+social.coreid.slice(-4)).toUpperCase()}
+                    </>
+                  }
                   link={`https://coreid.link/${social.coreid}`}
                 />
               )}

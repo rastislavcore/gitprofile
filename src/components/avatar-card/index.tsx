@@ -2,6 +2,7 @@ import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
 import LazyImage from '../lazy-image';
+import { FaCheckCircle } from 'react-icons/fa';
 
 interface AvatarCardProps {
   profile: Profile | null;
@@ -10,6 +11,84 @@ interface AvatarCardProps {
   resumeFileUrl?: string;
   publicKey?: string;
 }
+
+const formatBio = (bio: string) => {
+  // CoreID regex (now with uppercase conversion)
+  const coreIDRegex = /(cb[0-9]{2}[a-fA-F0-9]{40})@coreid/;
+  const match = bio.match(coreIDRegex);
+
+  if (match) {
+    const fullCoreID = match[1];
+    const formattedCoreID = `${fullCoreID.substring(0,4)}…${fullCoreID.slice(-4)}@coreid`.toUpperCase();
+    const parts = bio.split(match[0]);
+
+    return (
+      <>
+        {formatBio(parts[0])}
+        <a
+          href={`https://coreid.link/${fullCoreID}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-primary hover:underline"
+        >
+          <FaCheckCircle className="text-primary inline-block relative -top-[1px]" size={12} />
+          {formattedCoreID}
+        </a>
+        {formatBio(parts[1])}
+      </>
+    );
+  }
+
+  // Handle @mentions, $stocks, and #hashtags
+  return bio.split(/(\s+)/).map((word, index) => {
+    if (word.startsWith('@')) {
+      const username = word.slice(1);
+      return (
+        <a
+          key={index}
+          href={`https://github.com/${username}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline"
+        >
+          {word}
+        </a>
+      );
+    }
+
+    if (word.startsWith('$')) {
+      const stock = encodeURIComponent(word);
+      return (
+        <a
+          key={index}
+          href={`https://x.com/search?q=${stock}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline"
+        >
+          {word}
+        </a>
+      );
+    }
+
+    if (word.startsWith('#')) {
+      const hashtag = encodeURIComponent(word.slice(1));
+      return (
+        <a
+          key={index}
+          href={`https://x.com/search?q=${hashtag}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary hover:underline"
+        >
+          {word}
+        </a>
+      );
+    }
+
+    return word;
+  });
+};
 
 /**
  * Renders an AvatarCard component.
@@ -73,11 +152,11 @@ const AvatarCard = ({
               </span>
             )}
           </h5>
-          <div className="mt-3 text-base-content text-opacity-60 font-mono">
+          <div className="mt-3 text-base-content text-opacity-60 font-mono whitespace-pre-wrap text-sm">
             {loading || !profile ? (
               <>{skeleton({ widthCls: 'w-48', heightCls: 'h-5' })}</>
             ) : (
-              profile.bio
+              formatBio(profile.bio)
             )}
           </div>
         </div>
