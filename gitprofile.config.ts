@@ -193,7 +193,7 @@ const CONFIG = {
     rel="noreferrer"
   >Magic & Tweaks 🪄</a>`,
 
-  enablePWA: false,
+  enablePWA: true,
 
   // GitHub Graph
   githubGraph: true,

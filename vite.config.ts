@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-//import { VitePWA } from 'vite-plugin-pwa';
+import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import CONFIG from './gitprofile.config';
 
@@ -29,8 +29,14 @@ export default defineConfig({
         },
       },
     }),
-
-    // Temporarily remove PWA plugin
+    VitePWA({
+      registerType: 'autoUpdate',
+      manifest: {
+        name: CONFIG.seo.title || 'Portfolio',
+        short_name: 'Portfolio',
+        description: CONFIG.seo.description || '',
+      },
+    }),
   ],
   define: {
     CONFIG: CONFIG,
