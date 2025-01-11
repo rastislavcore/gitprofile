@@ -37,13 +37,13 @@ const CONFIG = {
     },
   },
   seo: {
-    title: 'Rastislav₡ore — Contacts, Portfolio & Blog',
-    description: 'Portfolio of Rastislav₡ore. Blockchain Engineer, Software Developer, and Open Source Contributor.',
+    title: 'Rastislav ₡ore — Contacts, Portfolio & Blog',
+    description: 'Portfolio of Rastislav ₡ore. Blockchain Engineer, Software Developer, and Open Source Contributor.',
     imageURL: '',
     githubId: '537310', // GitHub user id. To get your id, visit https://api.github.com/users/<username>
     payto: {
       property: 'ican/xcb',
-      content: 'cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922',
+      content: 'cb098318229bae7bb08f3a31f90a8887342e2c47d0a1',
     },
   },
   social: {
@@ -193,7 +193,7 @@ const CONFIG = {
     rel="noreferrer"
   >Magic & Tweaks 🪄</a>`,
 
-  enablePWA: true,
+  enablePWA: false,
 
   // GitHub Graph
   githubGraph: true,
