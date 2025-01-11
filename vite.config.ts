@@ -15,7 +15,6 @@ export default defineConfig({
           metaTitle: CONFIG.seo.title,
           metaDescription: CONFIG.social.coreid ? CONFIG.seo.description + ' / Core ID: ' + CONFIG.social.coreid : CONFIG.seo.description,
           metaImageURL: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId : CONFIG.seo.imageURL,
-          metaThemeColor: ['dark', 'halloween', 'forest', 'black', 'luxury', 'dracula'].includes(CONFIG.themeConfig.defaultTheme) ? '#000000' : '#ffffff',
           metaPaytoProperty: CONFIG.seo.payto?.property || '',
           metaPaytoContent: CONFIG.seo.payto?.content || '',
           googleAnalytics: CONFIG.googleAnalytics.id ? `

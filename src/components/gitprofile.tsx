@@ -9,7 +9,7 @@ import {
   setTooManyRequestError,
 } from '../constants/errors';
 import '../assets/index.css';
-import { getInitialTheme, getSanitizedConfig, isDarkishTheme } from '../utils';
+import { getInitialTheme, getSanitizedConfig } from '../utils';
 import { SanitizedConfig, Config } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
 import { DEFAULT_THEMES } from '../constants/default-themes';
@@ -150,16 +150,6 @@ const GitProfile = ({ config }: { config: Config }) => {
 
   useEffect(() => {
     theme && document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.setAttribute(
-        'content',
-        isDarkishTheme(theme) ? '#000000' : '#ffffff'
-      );
-    }
   }, [theme]);
 
   const handleError = (error: AxiosError | Error): void => {
