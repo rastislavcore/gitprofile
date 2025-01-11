@@ -48,6 +48,11 @@ export default defineConfig({
             sizes: '32x32',
             type: 'image/png',
           },
+          {
+            src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=192' : CONFIG.seo.imageURL,
+            sizes: '192x192',
+            type: 'image/png',
+          },
         ],
       },
     }),
