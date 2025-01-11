@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import CONFIG from './gitprofile.config';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { isDarkishTheme } from './src/utils';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +15,7 @@ export default defineConfig({
           metaTitle: CONFIG.seo.title,
           metaDescription: CONFIG.social.coreid ? CONFIG.seo.description + ' / Core ID: ' + CONFIG.social.coreid : CONFIG.seo.description,
           metaImageURL: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId : CONFIG.seo.imageURL,
-          metaThemeColor: isDarkishTheme(CONFIG.themeConfig.defaultTheme) ? '#000000' : '#ffffff',
+          metaThemeColor: ['dark', 'halloween', 'forest', 'black', 'luxury', 'dracula'].includes(CONFIG.themeConfig.defaultTheme) ? '#000000' : '#ffffff',
           metaPaytoProperty: CONFIG.seo.payto?.property || '',
           metaPaytoContent: CONFIG.seo.payto?.content || '',
           googleAnalytics: CONFIG.googleAnalytics.id ? `
