@@ -43,41 +43,41 @@ const BlogCard = ({
             <div className="flex items-center flex-col md:flex-row">
               <div className="avatar mb-5 md:mb-0">
                 <div className="w-64 h-24">
-                  {skeleton({
+                  <>{skeleton({
                     widthCls: 'w-full',
                     heightCls: 'h-full',
                     shape: '',
-                  })}
+                  })}</>
                 </div>
               </div>
               <div className="w-full">
                 <div className="flex items-start px-4">
                   <div className="w-full">
                     <h2>
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-8',
                         className: 'mb-2 mx-auto md:mx-0',
-                      })}
+                      })}</>
                     </h2>
-                    {skeleton({
+                    <>{skeleton({
                       widthCls: 'w-24',
                       heightCls: 'h-3',
                       className: 'mx-auto md:mx-0',
-                    })}
+                    })}</>
                     <div className="mt-3">
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-4',
                         className: 'mx-auto md:mx-0',
-                      })}
+                      })}</>
                     </div>
                     <div className="mt-4 flex items-center flex-wrap justify-center md:justify-start">
-                      {skeleton({
+                      <>{skeleton({
                         widthCls: 'w-32',
                         heightCls: 'h-4',
                         className: 'md:mr-2 mx-auto md:mx-0',
-                      })}
+                      })}</>
                     </div>
                   </div>
                 </div>
@@ -120,11 +120,11 @@ const BlogCard = ({
                     <LazyImage
                       src={article.thumbnail}
                       alt={'thumbnail'}
-                      placeholder={skeleton({
+                      placeholder={<>{skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-full',
                         shape: '',
-                      })}
+                      })}</>}
                       className='rounded-lg'
                     />
                   </a>

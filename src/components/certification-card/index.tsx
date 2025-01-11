@@ -2,12 +2,7 @@ import React from 'react';
 import { SanitizedCertification } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 
-const ListItem = ({
-  year,
-  name,
-  body,
-  link,
-}: {
+const ListItem = (props: {
   year?: React.ReactNode;
   name?: React.ReactNode;
   body?: React.ReactNode;
@@ -18,13 +13,13 @@ const ListItem = ({
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
-    <div className="my-0.5 text-xs">{year}</div>
+    <div className="my-0.5 text-xs">{props.year}</div>
     <div className="font-medium">
-      <a href={link} target="_blank" rel="noreferrer">
-        {name}
+      <a href={props.link} target="_blank" rel="noreferrer">
+        {props.name}
       </a>
     </div>
-    <h3 className="mb-4 font-normal">{body}</h3>
+    <h3 className="mb-4 font-normal">{props.body}</h3>
   </li>
 );
 
@@ -41,16 +36,16 @@ const CertificationCard = ({
       array.push(
         <ListItem
           key={index}
-          year={skeleton({
+          year={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          name={skeleton({
+          })}</>}
+          name={<>{skeleton({
             widthCls: 'w-6/12',
             heightCls: 'h-4',
             className: 'my-1.5',
-          })}
-          body={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+          })}</>}
+          body={<>{skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}</>}
         />,
       );
     }
@@ -64,7 +59,7 @@ const CertificationCard = ({
         <div className="mx-3">
           <h5 className="card-title">
             {loading ? (
-              skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
+              <>{skeleton({ widthCls: 'w-32', heightCls: 'h-8' })}</>
             ) : (
               <span className="text-base-content opacity-70">
                 Certification

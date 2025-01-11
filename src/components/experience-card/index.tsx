@@ -1,6 +1,14 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { SanitizedExperience } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
+
+interface ListItemProps {
+  timeFrom: React.ReactNode;
+  timeTo: React.ReactNode;
+  position?: React.ReactNode;
+  company?: React.ReactNode;
+  companyLink?: string;
+}
 
 const ListItem = ({
   timeFrom,
@@ -8,24 +16,17 @@ const ListItem = ({
   position,
   company,
   companyLink,
-}: {
-  timeFrom: React.ReactNode;
-  timeTo: React.ReactNode;
-  position?: React.ReactNode;
-  company?: React.ReactNode;
-  companyLink?: string;
-}) => (
+}: ListItemProps) => (
   <li className="mb-5 ml-4">
     <div
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
-    {timeFrom && timeTo ?
+    {timeFrom && timeTo ? (
       <div className="my-0.5 text-xs">{timeFrom} — {timeTo}</div>
-    : (
-      timeFrom &&
-        <div className="my-0.5 text-xs">{timeFrom}</div>
-    )}
+    ) : timeFrom ? (
+      <div className="my-0.5 text-xs">{timeFrom}</div>
+    ) : null}
     <h3 className="font-semibold">{position}</h3>
     <div className="mb-4 font-normal">
       <a href={companyLink} target="_blank" rel="noreferrer">
@@ -48,20 +49,20 @@ const ExperienceCard = ({
       array.push(
         <ListItem
           key={index}
-          timeFrom={skeleton({
+          timeFrom={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          timeTo={skeleton({
+          })}</>}
+          timeTo={<>{skeleton({
             widthCls: 'w-5/12',
             heightCls: 'h-4',
-          })}
-          position={skeleton({
+          })}</>}
+          position={<>{skeleton({
             widthCls: 'w-6/12',
             heightCls: 'h-4',
             className: 'my-1.5',
-          })}
-          company={skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}
+          })}</>}
+          company={<>{skeleton({ widthCls: 'w-6/12', heightCls: 'h-3' })}</>}
         />,
       );
     }
@@ -74,7 +75,7 @@ const ExperienceCard = ({
         <div className="mx-3">
           <h5 className="card-title">
             {loading ? (
-              skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
+              <>{skeleton({ widthCls: 'w-32', heightCls: 'h-8' })}</>
             ) : (
               <span className="text-base-content opacity-70">Career</span>
             )}
@@ -85,7 +86,7 @@ const ExperienceCard = ({
             {loading ? (
               renderSkeleton()
             ) : (
-              <Fragment>
+              <>
                 {experiences.map((experience, index) => (
                   <ListItem
                     key={index}
@@ -100,7 +101,7 @@ const ExperienceCard = ({
                     }
                   />
                 ))}
-              </Fragment>
+              </>
             )}
           </ol>
         </div>

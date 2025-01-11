@@ -1,5 +1,4 @@
 import { skeleton } from '../../utils';
-import DonateButton from '../donate-button';
 
 const DonateCard = ({
   username,
@@ -17,7 +16,9 @@ const DonateCard = ({
           skeleton({ widthCls: 'w-full', heightCls: 'h-40' })
         ) : (
           <>
-            <div className="text-sm mb-4">Enjoy those green squares 🟩 on the GitHub graph? Help me fill in more by sponsorship.</div>
+            <div className="text-sm mb-4">
+              Enjoy those green squares 🟩 on your GitHub graph? Help me fill in more through sponsorship.
+            </div>
             <iframe
               src={`https://github.com/sponsors/${username}/card`}
               title={`Sponsor ${username}`}
@@ -25,14 +26,40 @@ const DonateCard = ({
               style={{ border: 0, backgroundColor: 'inherit', color: 'inherit' }}
               allowTransparency={true}
             ></iframe>
-            {payto && (
-              <div className="text-sm mt-6">
-                <span>
-                  <DonateButton address={payto} />
-                </span>
-                <span className="ml-2">Sponsor monthly using PayTo and cancel anytime.</span>
+            <div className="mt-6 flex items-center gap-2">
+              <div>Sponsors:</div>
+              <div className="flex items-center gap-4">
+                <a href={`https://github.com/sponsors/${username}`} target="_blank" rel="noopener noreferrer"
+                   style={{ transform: 'scale(1.2)', transformOrigin: 'left center' }}>
+                  <img src={`https://img.shields.io/github/sponsors/${username}?label=GitHub%20Sponsors&logo=githubsponsors&color=EA4AAA`} alt={`Sponsors of ${username}`} />
+                </a>
+                {payto && (
+                  <a href={payto} target="_blank" rel="noopener noreferrer" className="ml-4"
+                     style={{ transform: 'scale(1.2)', transformOrigin: 'left center' }}>
+                    <img src={`https://img.shields.io/badge/💠%20Sponsor%20via%20PayTo-${payto.split('/').pop()?.slice(0, 4).toUpperCase()}…${payto.split('/').pop()?.slice(-4).toUpperCase()}-EA4AAA`} alt={`Sponsor via PayTo`} />
+                  </a>
+                )}
               </div>
-            )}
+            </div>
+            <div className="text-sm text-gray-500 mt-2">
+              <div>
+                All Sponsors are eligible for{' '}
+                <a
+                  href={`https://github.com/sponsors/${username}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-700"
+                >
+                  GitHub Sponsorship Tiers
+                </a>
+                .
+              </div>
+              {payto && (
+                <div>
+                  Please, paste your CORE ID into your GitHub profile.
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>

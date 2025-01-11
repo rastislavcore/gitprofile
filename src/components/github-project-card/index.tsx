@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { AiOutlineCode, AiOutlineComment, AiOutlineFork, AiOutlineStar } from 'react-icons/ai';
 import { MdInsertLink } from 'react-icons/md';
 import { ga, getLanguageColor, skeleton } from '../../utils';
@@ -37,35 +36,35 @@ const GithubProjectCard = ({
               <div className="flex items-center">
                 <span>
                   <h5 className="card-title text-lg">
-                    {skeleton({
+                    <>{skeleton({
                       widthCls: 'w-32',
                       heightCls: 'h-8',
                       className: 'mb-1',
-                    })}
+                    })}</>
                   </h5>
                 </span>
               </div>
               <div className="mb-5 mt-1">
-                {skeleton({
+                <>{skeleton({
                   widthCls: 'w-full',
                   heightCls: 'h-4',
                   className: 'mb-2',
-                })}
-                {skeleton({ widthCls: 'w-full', heightCls: 'h-4' })}
+                })}</>
+                <>{skeleton({ widthCls: 'w-full', heightCls: 'h-4' })}</>
               </div>
             </div>
             <div className="flex justify-between">
               <div className="flex flex-grow">
                 <span className="mr-3 flex items-center">
-                  {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
+                  <>{skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}</>
                 </span>
                 <span className="flex items-center">
-                  {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
+                  <>{skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}</>
                 </span>
               </div>
               <div>
                 <span className="flex items-center">
-                  {skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}
+                  <>{skeleton({ widthCls: 'w-12', heightCls: 'h-4' })}</>
                 </span>
               </div>
             </div>
@@ -179,7 +178,7 @@ const GithubProjectCard = ({
   };
 
   return (
-    <Fragment>
+    <>
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
@@ -188,7 +187,7 @@ const GithubProjectCard = ({
                 <div className="mx-3 flex items-center justify-between mb-2">
                   <h5 className="card-title">
                     {loading ? (
-                      skeleton({ widthCls: 'w-40', heightCls: 'h-8' })
+                      <>{skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}</>
                     ) : (
                       <span className="text-base-content opacity-70">
                         {header}
@@ -196,7 +195,7 @@ const GithubProjectCard = ({
                     )}
                   </h5>
                   {loading ? (
-                    skeleton({ widthCls: 'w-10', heightCls: 'h-5' })
+                    <>{skeleton({ widthCls: 'w-10', heightCls: 'h-5' })}</>
                   ) : (
                     <a
                       href={type === 'commits' ?
@@ -220,7 +219,7 @@ const GithubProjectCard = ({
           </div>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 

@@ -69,8 +69,8 @@ const CONFIG = {
     website: 'https://github.com/rastislavcore',
     phone: '',
     email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
-    payto: 'payto://xcb/cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922', // visit https://payto.money/ to generate your payto link
-    coreid: '', // visit https://corepass.net/ to create your Core ID
+    payto: 'payto://xcb/cb098318229bae7bb08f3a31f90a8887342e2c47d0a1', // visit https://payto.money/ to generate your payto link
+    coreid: 'cb098318229bae7bb08f3a31f90a8887342e2c47d0a1', // visit https://corepass.net/ to create your Core ID
   },
   resume: {
     fileUrl:
@@ -121,11 +121,6 @@ const CONFIG = {
   },
   googleAnalytics: {
     id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
-  },
-  // Track visitor interaction and behavior. https://www.hotjar.com
-  hotjar: {
-    id: '',
-    snippetVersion: 6,
   },
   themeConfig: {
     defaultTheme: 'lofi',
