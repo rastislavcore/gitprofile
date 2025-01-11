@@ -8,7 +8,6 @@ import {
   SanitizedThemeConfig,
   Config,
 } from '../interfaces/sanitized-config';
-import { ReactElement } from 'react';
 
 export const isDarkishTheme = (appliedTheme: string): boolean => {
   return ['dark', 'halloween', 'forest', 'black', 'luxury', 'dracula'].includes(
@@ -30,8 +29,8 @@ export const getSanitizedConfig = (
   try {
     return {
       github: {
-        username: config.github.username,
-        sponsorship: config.github.sponsorship ?? false,
+        username: config.github?.username || '',
+        sponsorship: config.github?.sponsorship ?? false,
       },
       projects: {
         github: {

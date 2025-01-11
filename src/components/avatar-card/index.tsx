@@ -1,3 +1,4 @@
+import React from 'react';
 import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
@@ -12,14 +13,14 @@ interface AvatarCardProps {
   publicKey?: string;
 }
 
-const formatBio = (bio: string) => {
+const formatBio = (bio: string): React.ReactNode => {
   // CoreID regex (now with uppercase conversion)
-  const coreIDRegex = /(cb[0-9]{2}[a-fA-F0-9]{40})@coreid/;
+  const coreIDRegex = /(cb[0-9]{2}[a-f0-9]{40})@coreid/i;
   const match = bio.match(coreIDRegex);
 
   if (match) {
     const fullCoreID = match[1];
-    const formattedCoreID = `${fullCoreID.substring(0,4)}…${fullCoreID.slice(-4)}@coreid`.toUpperCase();
+    const formattedCoreID = `${fullCoreID.substring(0,4).toUpperCase()}…${fullCoreID.slice(-4).toUpperCase()}@coreid`;
     const parts = bio.split(match[0]);
 
     return (
@@ -156,7 +157,7 @@ const AvatarCard = ({
             {loading || !profile ? (
               <>{skeleton({ widthCls: 'w-48', heightCls: 'h-5' })}</>
             ) : (
-              formatBio(profile.bio)
+              formatBio(profile.bio || '')
             )}
           </div>
         </div>
