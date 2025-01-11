@@ -37,6 +37,18 @@ export default defineConfig({
         name: CONFIG.seo.title || 'Portfolio',
         short_name: 'Portfolio',
         description: CONFIG.seo.description || '',
+        icons: [
+          {
+            src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=16' : CONFIG.seo.imageURL,
+            sizes: '16x16',
+            type: 'image/png',
+          },
+          {
+            src: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId + '?s=32' : CONFIG.seo.imageURL,
+            sizes: '32x32',
+            type: 'image/png',
+          },
+        ],
       },
     }),
   ],
