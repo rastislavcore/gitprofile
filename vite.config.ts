@@ -9,26 +9,6 @@ export default defineConfig({
   base: CONFIG.base || '/',
   plugins: [
     react(),
-    createHtmlPlugin({
-      inject: {
-        data: {
-          metaTitle: CONFIG.seo.title,
-          metaDescription: CONFIG.social.coreid ? CONFIG.seo.description + ' / Core ID: ' + CONFIG.social.coreid : CONFIG.seo.description,
-          metaImageURL: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId : CONFIG.seo.imageURL,
-          metaPaytoProperty: CONFIG.seo.payto?.property || '',
-          metaPaytoContent: CONFIG.seo.payto?.content || '',
-          googleAnalytics: CONFIG.googleAnalytics.id ? `
-            <script async src="https://www.googletagmanager.com/gtag/js?id=${CONFIG.googleAnalytics.id}"></script>
-            <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag() { dataLayer.push(arguments); }
-              gtag('js', new Date());
-              gtag('config', '${CONFIG.googleAnalytics.id}');
-            </script>
-          ` : '',
-        },
-      },
-    }),
     ...(CONFIG.enablePWA
       ? [
           VitePWA({
