@@ -301,49 +301,7 @@ const CONFIG = {
     themes: [
       'light',
       'dark',
-      'cupcake',
-      'bumblebee',
-      'emerald',
-      'corporate',
-      'synthwave',
-      'retro',
-      'cyberpunk',
-      'valentine',
-      'halloween',
-      'garden',
-      'forest',
-      'aqua',
-      'lofi',
-      'pastel',
-      'fantasy',
-      'wireframe',
-      'black',
-      'luxury',
-      'dracula',
-      'cmyk',
-      'autumn',
-      'business',
-      'acid',
-      'lemonade',
-      'night',
-      'coffee',
-      'winter',
-      'dim',
-      'nord',
-      'sunset',
-      'procyon',
     ],
-
-    // Custom theme, applied to `procyon` theme
-    customTheme: {
-      primary: '#fc055b',
-      secondary: '#219aaf',
-      accent: '#e8d03a',
-      neutral: '#2A2730',
-      'base-100': '#E3E3ED',
-      '--rounded-box': '3rem',
-      '--rounded-btn': '3rem',
-    },
   },
 
   // Optional Footer. Supports plain text or HTML.
@@ -375,35 +333,7 @@ const CONFIG = {
 };
 ```
 
-You can create your own custom theme by modifying these values. Theme `procyon` will have the custom styles.
-
-```ts
-// gitprofile.config.ts
-const CONFIG = {
-  /**
-   * Defines the custom theme colors and styles for the application.
-   * The theme includes the following properties:
-   * - `primary`: The primary color used throughout the application.
-   * - `secondary`: The secondary color used for accents and highlights.
-   * - `accent`: The accent color used for special elements.
-   * - `neutral`: The neutral color used for backgrounds and text.
-   * - `base-100`: The base background color.
-   * - `--rounded-box`: The border radius for boxes and containers.
-   * - `--rounded-btn`: The border radius for buttons.
-   */
-  themeConfig: {
-    customTheme: {
-      primary: '#fc055b',
-      secondary: '#219aaf',
-      accent: '#e8d03a',
-      neutral: '#2A2730',
-      'base-100': '#E3E3ED',
-      '--rounded-box': '3rem',
-      '--rounded-btn': '3rem',
-    },
-  },
-};
-```
+You can create your own custom theme by modifying these values. Theme is set in css by using `@theme` directive. Look at `src/styles/index.css` for more details. We use Tailwind CSS 4 for the theme.
 
 ### Google Analytics
 

@@ -43,7 +43,7 @@ const CONFIG = {
     githubId: '537310', // GitHub user id. To get your id, visit https://api.github.com/users/<username>
     payto: {
       property: 'ican/xcb',
-      content: 'cb098318229bae7bb08f3a31f90a8887342e2c47d0a1',
+      content: 'cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922',
     },
   },
   social: {
@@ -69,8 +69,8 @@ const CONFIG = {
     website: 'https://github.com/rastislavcore',
     phone: '',
     email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
-    payto: 'payto://xcb/cb098318229bae7bb08f3a31f90a8887342e2c47d0a1', // visit https://payto.money/ to generate your payto link
-    coreid: 'cb098318229bae7bb08f3a31f90a8887342e2c47d0a1', // visit https://corepass.net/ to create your Core ID
+    payto: 'payto://xcb/cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922', // visit https://payto.money/ to generate your payto link
+    coreid: '', // visit https://corepass.net/ to create your Core ID
   },
   resume: {
     fileUrl:
@@ -140,49 +140,7 @@ const CONFIG = {
     themes: [
       'light',
       'dark',
-      'cupcake',
-      'bumblebee',
-      'emerald',
-      'corporate',
-      'synthwave',
-      'retro',
-      'cyberpunk',
-      'valentine',
-      'halloween',
-      'garden',
-      'forest',
-      'aqua',
-      'lofi',
-      'pastel',
-      'fantasy',
-      'wireframe',
-      'black',
-      'luxury',
-      'dracula',
-      'cmyk',
-      'autumn',
-      'business',
-      'acid',
-      'lemonade',
-      'night',
-      'coffee',
-      'winter',
-      'dim',
-      'nord',
-      'sunset',
-      'procyon',
     ],
-
-    // Custom theme, applied to `procyon` theme
-    customTheme: {
-      primary: '#fc055b',
-      secondary: '#219aaf',
-      accent: '#e8d03a',
-      neutral: '#2A2730',
-      'base-100': '#E3E3ED',
-      '--rounded-box': '3rem',
-      '--rounded-btn': '3rem',
-    },
   },
 
   // Optional Footer. Supports plain text or HTML.

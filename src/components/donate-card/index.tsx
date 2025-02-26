@@ -10,21 +10,22 @@ const DonateCard = ({
   loading: boolean;
 }) => {
   return (
-    <div className="card compact bg-base-100 shadow">
+    <div className="card compact bg-base-100 shadow-sm">
       <div className="p-4 bg-base-100 text-base-content">
         {loading ? (
           skeleton({ widthCls: 'w-full', heightCls: 'h-40' })
         ) : (
           <>
             <div className="text-sm mb-4">
-              Enjoy those green squares 🟩 on your GitHub graph? Help me fill in more through sponsorship.
+              Love seeing those green squares 🟩 on the GitHub graph? Help add even more by sponsoring me!
             </div>
             <iframe
               src={`https://github.com/sponsors/${username}/card`}
               title={`Sponsor ${username}`}
               className="w-full md:h-40 lg:h-48 rounded-lg"
               style={{ border: 0, backgroundColor: 'inherit', color: 'inherit' }}
-              allowTransparency={true}
+              // @ts-ignore
+              allowtransparency="true"
             ></iframe>
             <div className="mt-6 flex items-center gap-2">
               <div>Sponsors:</div>
@@ -34,7 +35,7 @@ const DonateCard = ({
                   <img src={`https://img.shields.io/github/sponsors/${username}?label=GitHub%20Sponsors&logo=githubsponsors&color=EA4AAA`} alt={`Sponsors of ${username}`} />
                 </a>
                 {payto && (
-                  <a href={payto} target="_blank" rel="noopener noreferrer" className="ml-4"
+                  <a href={`${payto}?donation=1`} target="_blank" rel="noopener noreferrer" className="ml-4"
                      style={{ transform: 'scale(1.2)', transformOrigin: 'left center' }}>
                     <img src={`https://img.shields.io/badge/💠%20Sponsor%20via%20PayTo-${payto.split('/').pop()?.slice(0, 4).toUpperCase()}…${payto.split('/').pop()?.slice(-4).toUpperCase()}-EA4AAA`} alt={`Sponsor via PayTo`} />
                   </a>

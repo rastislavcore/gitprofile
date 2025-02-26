@@ -105,11 +105,11 @@ const GithubProjectCard = ({
                 <span>{type === 'commits' ? item.repository.name : item.name}</span>
               </div>
             </div>
-            <p className="mb-5 mt-1 text-base-content text-opacity-60 text-sm">
+            <p className="mb-5 mt-1 text-base-content/60 text-sm">
               {type === 'commits' ? item.commit.message : item.description}
             </p>
           </a>
-          <div className="flex justify-between text-sm text-base-content text-opacity-60 truncate">
+          <div className="flex justify-between text-sm text-base-content/60 truncate">
             {type === 'commits' ?
               <div className="flex flex-grow gap-x-2">
                 <a
@@ -182,7 +182,7 @@ const GithubProjectCard = ({
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
-            <div className="card compact bg-base-100 shadow bg-opacity-40">
+            <div className="card compact bg-base-100/40 shadow-sm">
               <div className="card-body">
                 <div className="mx-3 flex items-center justify-between mb-2">
                   <h5 className="card-title">
@@ -203,7 +203,7 @@ const GithubProjectCard = ({
                         `https://github.com/${username}?tab=repositories`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-base-content opacity-50 hover:underline"
+                      className="text-base-content text-sm opacity-50 hover:underline"
                     >
                       {type === 'commits' ? 'Recent Commits' : 'See All'}
                     </a>

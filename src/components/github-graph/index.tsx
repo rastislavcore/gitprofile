@@ -27,7 +27,7 @@ const GithubGraphCard = ({
   username: string;
 }) => {
   return (
-    <div className="min-w-screen overflow-hidden flex justify-center mt-4">
+    <div className="overflow-hidden flex justify-center mt-4">
       {loading ? (
         skeleton({ widthCls: 'w-full', heightCls: 'h-4' })
       ) : (

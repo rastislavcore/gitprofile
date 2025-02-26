@@ -10,7 +10,7 @@ const Footer = ({
   if (!content) return null;
 
   return (
-    <div className="card-body">
+    <div className="text-center">
       {loading ? (
         skeleton({ widthCls: 'w-52', heightCls: 'h-6' })
       ) : (

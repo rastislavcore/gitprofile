@@ -129,29 +129,6 @@ export const getSanitizedConfig = (
           config?.themeConfig?.respectPrefersColorScheme || false,
         displayAvatarRing: config?.themeConfig?.displayAvatarRing ?? true,
         themes: config?.themeConfig?.themes || DEFAULT_THEMES,
-        customTheme: {
-          primary:
-            config?.themeConfig?.customTheme?.primary ||
-            DEFAULT_CUSTOM_THEME.primary,
-          secondary:
-            config?.themeConfig?.customTheme?.secondary ||
-            DEFAULT_CUSTOM_THEME.secondary,
-          accent:
-            config?.themeConfig?.customTheme?.accent ||
-            DEFAULT_CUSTOM_THEME.accent,
-          neutral:
-            config?.themeConfig?.customTheme?.neutral ||
-            DEFAULT_CUSTOM_THEME.neutral,
-          'base-100':
-            config?.themeConfig?.customTheme?.['base-100'] ||
-            DEFAULT_CUSTOM_THEME['base-100'],
-          '--rounded-box':
-            config?.themeConfig?.customTheme?.['--rounded-box'] ||
-            DEFAULT_CUSTOM_THEME['--rounded-box'],
-          '--rounded-btn':
-            config?.themeConfig?.customTheme?.['--rounded-btn'] ||
-            DEFAULT_CUSTOM_THEME['--rounded-btn'],
-        },
       },
       footer: config?.footer,
       enablePWA: config?.enablePWA ?? true,

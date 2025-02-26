@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+@theme {
+	/* Light theme variables */
+	--bg-base-100: oklch(0.98 0 0);  /* Light background */
+	--bg-base-200: oklch(0.95 0 0);
+	--bg-base-300: oklch(0.92 0 0);
+	--text-base-content: oklch(0.2 0 0);
+	--text-base-content-secondary: oklch(0.4 0 0);
+}
+
+@layer base {
+	button:not(:disabled),
+	[role="button"]:not(:disabled),
+	label:not(:disabled),
+	input[type="checkbox"]:not(:disabled),
+	input[type="radio"]:not(:disabled),
+	input[type="color"]:not(:disabled) {
+		cursor: pointer;
+	}
+
+	/* Dark theme styles */
+	[data-theme='dark'] {
+		/* Background colors */
+		--bg-base-100: oklch(0.2 0 0);  /* Dark background */
+		--bg-base-200: oklch(0.25 0 0);
+		--bg-base-300: oklch(0.3 0 0);
+		--text-base-content: oklch(0.9 0 0);
+		--text-base-content-secondary: oklch(0.7 0 0);
+
+		/* Component colors */
+		--card-bg: var(--bg-base-200);
+		--btn-bg: var(--bg-base-300);
+	}
+
+	/* Apply theme variables */
+	body[data-theme='dark'] {
+		@apply bg-base-100 text-base-content;
+	}
+
+	[data-theme='dark'] .card {
+		@apply bg-base-200 border-gray-700;
+	}
+
+	[data-theme='dark'] .btn {
+		@apply bg-base-300 text-base-content hover:bg-base-200;
+	}
+
+	/* Dark mode scrollbar */
+	[data-theme='dark'] {
+		* {
+			scrollbar-width: thin;
+			scrollbar-color: theme('colors.gray.600') theme('colors.gray.800');
+		}
+
+		::-webkit-scrollbar {
+			@apply w-2 h-2;
+		}
+
+		::-webkit-scrollbar-track {
+			@apply bg-base-200;
+		}
+
+		::-webkit-scrollbar-thumb {
+			@apply bg-base-300 rounded-lg hover:bg-base-content/50;
+		}
+	}
+
+	/* Dark mode specific overrides */
+	[data-theme='dark'] .z-hover:hover {
+		@apply bg-base-200/50;
+	}
+
+	[data-theme='dark'] code {
+		@apply bg-base-300 text-base-content-secondary;
+	}
+
+	[data-theme='dark'] .badge {
+		@apply bg-base-300 text-base-content;
+	}
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 966px) {
+  ::-webkit-scrollbar,
+  .scroller {
+    @apply w-2 h-2 bg-gray-100;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 rounded-lg;
+}
+
+body {
+  @apply m-0 font-sans antialiased;
+}
+
+code {
+  @apply font-mono;
+}
+
+svg {
+  @apply align-baseline;
+}
+
+.z-hover {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.z-hover:hover,
+.z-hover:focus,
+.z-hover:active {
+  @apply transform scale-[1.01] transition duration-300;
+}
+
+.pb-0-important {
+  @apply !pb-0;
+}
+
+.fade-in {
+  @apply opacity-100;
+  animation-name: fadeIn;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+}
+
+.btn {
+  @apply bg-gray-300/50 hover:bg-gray-300/70 active:bg-gray-300/90 focus:bg-gray-300/70 py-2 px-4 rounded-lg text-sm text-gray-800 border-none shadow-sm font-semibold;
+}
+
+.card {
+  @apply p-4 shadow-sm border border-gray-200/50;
+}
+
+.card-title {
+  @apply font-semibold text-lg;
+}
+
+.badge {
+  @apply text-xs inline-flex items-center font-semibold px-3 py-1 rounded-full bg-gray-300/50 hover:bg-gray-300/70 active:bg-gray-300/90 focus:bg-gray-300/70;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

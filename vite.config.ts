@@ -11,6 +11,7 @@ export default defineConfig({
   plugins: [
     react(),
     createHtmlPlugin({
+      minify: true,
       inject: {
         data: {
           metaTitle: CONFIG.seo.title,
@@ -57,18 +58,27 @@ export default defineConfig({
       },
     }),
   ],
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+    },
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
   define: {
     CONFIG: CONFIG,
   },
   build: {
+    cssMinify: 'lightningcss',
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            if (id.includes('react-router-dom') || id.includes('react') || id.includes('react-dom')) {
-              return 'vendor';
-            }
-          }
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          styles: ['./src/styles/index.css'],
         },
       },
     },

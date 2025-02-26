@@ -64,7 +64,7 @@ export const ListItem = ({
         }}
       >
         {isMailto ? (
-          <div className="inline-flex space-x-2">
+          <div className="inline-flex flex flex-row gap-2">
             <a
               href={link}
               target="_blank"
@@ -166,7 +166,7 @@ const OrganizationItem: React.FC<{
       <div
         className={`${
           skeleton ? 'flex-grow' : ''
-        } text-sm font-normal text-right mr-2 ml-3 space-x-2 ${link ? 'truncate' : ''}`}
+        } text-sm font-normal text-right mr-2 ml-3 flex flex-row gap-2 ${link ? 'truncate' : ''}`}
         style={{
           wordBreak: 'break-word',
         }}
@@ -229,7 +229,7 @@ const LocationItem: React.FC<{
       <div
         className={`${
           skeleton ? 'flex-grow' : ''
-        } text-sm font-normal text-right mr-2 ml-3 space-x-2 ${link ? 'truncate' : ''}`}
+        } text-sm font-normal text-right mr-2 ml-3 flex flex-row gap-2 ${link ? 'truncate' : ''}`}
         style={{
           wordBreak: 'break-word',
         }}

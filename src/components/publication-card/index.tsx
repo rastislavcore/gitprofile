@@ -103,7 +103,7 @@ const PublicationCard = ({
                     </p>
                   )}
                   {item.description && (
-                    <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
+                    <p className="mt-2 text-base-content/60 text-sm text-justify">
                       {item.description}
                     </p>
                   )}
@@ -121,7 +121,7 @@ const PublicationCard = ({
       <div className="col-span-1 lg:col-span-2">
         <div className="grid grid-cols-2 gap-6">
           <div className="col-span-2">
-            <div className="card compact bg-base-100 shadow bg-opacity-40">
+            <div className="card compact bg-base-100/40 shadow-sm">
               <div className="card-body">
                 <div className="mx-3 flex items-center justify-between mb-2">
                   <h5 className="card-title">

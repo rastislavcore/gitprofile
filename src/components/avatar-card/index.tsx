@@ -123,16 +123,13 @@ const AvatarCard = ({
         ) : (
           <div className="avatar opacity-90">
             <div
-              className={`mb-8 rounded-full w-32 h-32 ${
-                avatarRing
-                  ? 'ring ring-primary ring-offset-base-100 ring-offset-2'
-                  : ''
-              }`}
+              className="mb-8 w-32 h-32"
             >
               {
                 <LazyImage
                   src={profile.avatar ? profile.avatar : FALLBACK_IMAGE}
                   alt={profile.name}
+                  className={`rounded-full ${avatarRing ? 'ring-3 ring-primary ring-offset-base-100 ring-offset-2' : ''}`}
                   placeholder={<>{skeleton({
                     widthCls: 'w-full',
                     heightCls: 'h-full',
@@ -153,7 +150,7 @@ const AvatarCard = ({
               </span>
             )}
           </h5>
-          <div className="mt-3 text-base-content text-opacity-60 font-mono whitespace-pre-wrap text-sm">
+          <div className="mt-3 text-base-content/60 font-mono whitespace-pre-wrap text-sm">
             {loading || !profile ? (
               <>{skeleton({ widthCls: 'w-48', heightCls: 'h-5' })}</>
             ) : (
@@ -171,7 +168,7 @@ const AvatarCard = ({
               <a
                 href={resumeFileUrl}
                 target="_blank"
-                className="btn btn-outline btn-sm text-xs opacity-50 rounded-lg"
+                className="btn btn-outline btn-sm text-xs rounded-lg"
                 download
                 rel="noreferrer"
               >
@@ -187,7 +184,7 @@ const AvatarCard = ({
               <a
                 href={publicKey}
                 target="_blank"
-                className="btn btn-outline btn-sm text-xs opacity-50 rounded-lg"
+                className="btn btn-outline btn-sm text-xs rounded-lg"
                 download
                 rel="noreferrer"
               >
