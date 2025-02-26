@@ -159,7 +159,7 @@ const BlogCard = ({
                           addSuffix: true,
                         })}
                       </p>
-                      <p className="mt-3 text-base-content text-opacity-60 text-sm">
+                      <p className="mt-3 text-base-content/60 text-sm">
                         {article.description}
                       </p>
                     </a>
@@ -167,7 +167,7 @@ const BlogCard = ({
                       {article.categories.map((category, index2) => (
                         <a
                           href={blog.source === 'medium' ? `https://medium.com/tag/${category}` : `https://dev.to/t/${category}`}
-                          className="py-2 px-4 text-xs leading-3 rounded-full bg-base-300 mr-1 mb-1 opacity-50 text-base-content"
+                          className="py-2 px-4 text-xs leading-3 rounded-full bg-gray-300/50 mr-1 mb-1 opacity-50 text-base-content"
                           target="_blank"
                           rel="noreferrer"
                           key={index2}
@@ -200,7 +200,7 @@ const BlogCard = ({
           <div
             className={`card compact bg-base-100 ${
               loading || (articles && articles.length)
-                ? 'shadow bg-opacity-40'
+                ? 'shadow-sm bg-base-200/40'
                 : 'shadow-lg'
             }`}
           >
@@ -224,7 +224,7 @@ const BlogCard = ({
                         `https://dev.to/${blog.username}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-base-content opacity-50 hover:underline"
+                      className="text-base-content text-sm opacity-50 hover:underline"
                     >
                       All Articles
                     </a>

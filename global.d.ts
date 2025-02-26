@@ -305,43 +305,6 @@ interface Blog {
   limit?: number;
 }
 
-interface CustomTheme {
-  /**
-   * Primary color
-   */
-  primary?: string;
-
-  /**
-   * Secondary color
-   */
-  secondary?: string;
-
-  /**
-   * Accent color
-   */
-  accent?: string;
-
-  /**
-   * Neutral color
-   */
-  neutral?: string;
-
-  /**
-   * Base color of page
-   */
-  'base-100'?: string;
-
-  /**
-   * Border radius of rounded-box
-   */
-  '--rounded-box'?: string;
-
-  /**
-   * Border radius of rounded-btn
-   */
-  '--rounded-btn'?: string;
-}
-
 interface ThemeConfig {
   /**
    * Default theme
@@ -367,11 +330,6 @@ interface ThemeConfig {
    * Available themes
    */
   themes?: Array<string>;
-
-  /**
-   * Custom theme
-   */
-  customTheme?: CustomTheme;
 }
 
 interface Config {

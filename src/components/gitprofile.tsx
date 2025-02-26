@@ -8,7 +8,6 @@ import {
   INVALID_GITHUB_USERNAME_ERROR,
   setTooManyRequestError,
 } from '../constants/errors';
-import '../assets/index.css';
 import { getInitialTheme, getSanitizedConfig } from '../utils';
 import { SanitizedConfig, Config } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
@@ -304,11 +303,9 @@ const GitProfile = ({ config }: { config: Config }) => {
           </div>
           {sanitizedConfig.footer && (
             <footer
-              className={`p-4 footer ${BG_COLOR} text-base-content footer-center`}
+              className={`p-4 footer ${BG_COLOR} text-base-content`}
             >
-              <div className="card compact bg-base-100 shadow">
-                <Footer content={sanitizedConfig.footer} loading={loading} />
-              </div>
+              <Footer content={sanitizedConfig.footer} loading={loading} />
             </footer>
           )}
         </>
