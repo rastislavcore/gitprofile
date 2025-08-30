@@ -89,8 +89,8 @@ const CONFIG = {
     'Rust',
     'Golang',
     'TypeScript',
-    'goAML',
-    'Anti Money Laundering',
+    'Web4',
+    'CyberSec',
   ],
   experiences: [
     {
