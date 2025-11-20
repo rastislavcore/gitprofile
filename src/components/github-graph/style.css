@@ -7,3 +7,24 @@ table.ContributionCalendar-grid {
 a.Link--muted {
   display: none;
 }
+
+.react-activity-calendar {
+  margin-inline: auto;
+}
+
+.react-activity-calendar__calendar,
+.react-activity-calendar__footer {
+  margin-left: 0 !important;
+}
+
+.react-activity-calendar__scroll-container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex;
+  justify-content: center;
+}
+
+.react-activity-calendar__footer {
+  justify-content: center !important;
+  margin-left: 0 !important;
+}
