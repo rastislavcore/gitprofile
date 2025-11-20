@@ -1,5 +1,5 @@
 import { skeleton } from '../../utils';
-import GitHubCalendar from 'react-github-calendar';
+import { GitHubCalendar } from 'react-github-calendar';
 import './style.css';
 
 const selectLastHalfYear = (contributions: any[]) => {
@@ -35,7 +35,6 @@ const GithubGraphCard = ({
           username={username}
           colorScheme={'light'}
           transformData={selectLastHalfYear}
-          hideColorLegend
           weekStart={1}
           showWeekdayLabels={true}
           labels={{
