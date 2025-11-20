@@ -1,4 +1,5 @@
 import { skeleton } from '../../utils';
+import Payto from 'payto-rl';
 
 const DonateCard = ({
   username,
@@ -9,6 +10,9 @@ const DonateCard = ({
   payto: string | undefined;
   loading: boolean;
 }) => {
+  const paytoObj = payto ? new Payto(payto) : null;
+  const paytoNetwork = paytoObj?.network;
+  const paytoCurrency = paytoObj?.currency[0];
   return (
     <div className="card compact bg-base-100 shadow-sm">
       <div className="p-4 bg-base-100 text-base-content">
@@ -16,9 +20,6 @@ const DonateCard = ({
           skeleton({ widthCls: 'w-full', heightCls: 'h-40' })
         ) : (
           <>
-            <div className="text-sm mb-4">
-              Love seeing those green squares 🟩 on the GitHub graph? Help add even more by sponsoring me!
-            </div>
             <iframe
               src={`https://github.com/sponsors/${username}/card`}
               title={`Sponsor ${username}`}
@@ -27,39 +28,13 @@ const DonateCard = ({
               // @ts-ignore
               allowtransparency="true"
             ></iframe>
-            <div className="mt-6 flex items-center gap-2">
-              <div>Sponsors:</div>
-              <div className="flex items-center gap-4">
-                <a href={`https://github.com/sponsors/${username}`} target="_blank" rel="noopener noreferrer"
-                   style={{ transform: 'scale(1.2)', transformOrigin: 'left center' }}>
-                  <img src={`https://img.shields.io/github/sponsors/${username}?label=GitHub%20Sponsors&logo=githubsponsors&color=EA4AAA`} alt={`Sponsors of ${username}`} />
-                </a>
+            <div className="mt-6 flex items-center gap-4">
+              <div>
                 {payto && (
-                  <a href={`${payto}?donation=1`} target="_blank" rel="noopener noreferrer" className="ml-4"
-                     style={{ transform: 'scale(1.2)', transformOrigin: 'left center' }}>
-                    <img src={`https://img.shields.io/badge/💠%20Sponsor%20via%20PayTo-${payto.split('/').pop()?.slice(0, 4).toUpperCase()}…${payto.split('/').pop()?.slice(-4).toUpperCase()}-EA4AAA`} alt={`Sponsor via PayTo`} />
-                  </a>
+                  <a href={`https://payto.money/${payto.slice(5)}`} target="_blank" rel="noopener" className="inline-flex items-center cursor-pointer px-3 py-1.5 bg-[#849dfc20] hover:bg-[#849dfc38] !text-[#849dfc] font-sans leading-5 border border-[#878fc5] rounded-full !no-underline h-fit whitespace-nowrap transition-all duration-150 ease-in-out hover:border-[#b6c2f4] hover:text-[#b6c2f4] font-sans group"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4"/><path d="M12 14v-4"/><path d="M4 13a8 8 0 0 1 8-7 8 8 0 1 1-5.3 14L4 17.6"/><path d="M9 17H4v5"/></svg>&nbsp;<strong className="italic mr-1">Donate<span className="text-[#5675ff]">To:</span></strong> via {paytoNetwork?.toUpperCase()}{paytoCurrency ? ` with ${paytoCurrency.toUpperCase()}` : ''}</a>
                 )}
               </div>
-            </div>
-            <div className="text-sm text-gray-500 mt-2">
-              <div>
-                All Sponsors are eligible for{' '}
-                <a
-                  href={`https://github.com/sponsors/${username}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-gray-700"
-                >
-                  GitHub Sponsorship Tiers
-                </a>
-                .
-              </div>
-              {payto && (
-                <div>
-                  Please, paste your CORE ID into your GitHub profile.
-                </div>
-              )}
+              <div className="text-sm text-gray-500">Enjoy watching those green squares light up?<br />🟩 Support my work and let’s grow that grid together!</div>
             </div>
           </>
         )}

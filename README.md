@@ -19,7 +19,7 @@ GitProfile is a powerful portfolio builder that allows you to create a stunning 
 ✓ [Publication Section](#publications)
 ✓ [Blog Posts Section](#blog-posts)
 
-To view a live example, **[click here](https://vasicka.eu)**.
+To view a live example, **[open website](https://vasicka.eu)**.
 
 Open GitProfile code in **IDX**: [![Open in IDX](https://cdn.idx.dev/btn/open_purple_20.svg)](https://idx.google.com/import?url=https%3A%2F%2Fgithub.com%2Frastislavcore%2Fgitprofile)
 
@@ -32,9 +32,9 @@ There are two ways to use **GitProfile**:
 
 ### Forking this repo
 
-These instructions will get you a copy of the project and deploy your portfolio online using GitHub Pages!
+These instructions will help you get a copy of the project and deploy your portfolio online using GitHub Pages!
 
-- **Fork repo:** Click [here](https://github.com/rastislavcore/gitprofile/fork) to fork the repo so you have your own project to customize. A "fork" is a copy of a repository.
+- **Fork repo:** Click [to fork the repo](https://github.com/rastislavcore/gitprofile/fork) so you have your own project to customize. A "fork" is a copy of a repository.
 - **Rename repo:**
   - If you want to host your portfolio at `https://<USERNAME>.github.io`, rename your forked repository to `username.github.io` in GitHub, where `username` is your GitHub username (or organization name).
   - If you want to host your portfolio at `https://<USERNAME>.github.io/<REPO_NAME>` (e.g. `https://<USERNAME>.github.io/portfolio`), rename your forked repository to `<REPO_NAME>` (e.g. `portfolio`) in GitHub.
@@ -42,7 +42,7 @@ These instructions will get you a copy of the project and deploy your portfolio 
 
   ![Workflows](https://github.com/rastislavcore/gitprofile/assets/45073703/7e82f7d4-900c-4cb9-83f9-bcaa1ca2b910)
 
-- **Base Value:** Open `gitprofile.config.ts`, and change `base`'s value.
+- **Base Value:** Open `gitprofile.config.ts` and change the `base` value.
 
   - If you are deploying to `https://<USERNAME>.github.io`, set `base` to `'/'`.
 
@@ -56,13 +56,13 @@ These instructions will get you a copy of the project and deploy your portfolio 
   }
   ```
 
-- **Commit the changes:** Now commit to your **main** branch with your changes. Wait a few minutes so that the CI/CD pipeline can publish your website to GitHub Pages. You can check the progress in the [Actions](https://github.com/rastislavcore/gitprofile/actions) tab.
+- **Commit the changes:** Now commit your changes to the **main** branch. Wait a few minutes so that the CI/CD pipeline can publish your website to GitHub Pages. You can check the progress in the [Actions](https://github.com/rastislavcore/gitprofile/actions) tab.
 
-Your portfolio website will be live shortly. Any time you commit a change to the **main** branch, the website will be automatically updated. If you face any issue viewing the website, double-check the `base` value in the `gitprofile.config.ts` file. Also, check if **Source** is set to **GitHub Actions** in **Settings** ➜ **Pages** ➜ **Build and deployment**.
+Your portfolio website will be live shortly. Any time you commit a change to the **main** branch, the website will be automatically updated. If you face any issues viewing the website, double-check the `base` value in the `gitprofile.config.ts` file. Also, check if **Source** is set to **GitHub Actions** in **Settings** ➜ **Pages** ➜ **Build and deployment**.
 
 If you wish to add a custom domain, no CNAME file is required. Just add it to your repo's **Settings** ➜ **Pages** ➜ **Custom domain**.
 
-As this is a Vite project, you can also host your website to Netlify, Vercel, Heroku, or other popular services. Please refer to this [doc](https://vitejs.dev/guide/static-deploy.html) for a detailed deployment guide to other services.
+As this is a Vite project, you can also host your website on Netlify, Vercel, Heroku, or other popular services. Please refer to this [doc](https://vitejs.dev/guide/static-deploy.html) for a detailed deployment guide to other services.
 
 ### Setting up locally
 
@@ -87,7 +87,7 @@ As this is a Vite project, you can also host your website to Netlify, Vercel, He
 
 - Finally, visit `http://localhost:5173/` from your browser.
 
-> Alternatively, you can set up and run the project using Docker with **[Vail](https://github.com/rastislavcore/vail)**, a powerful tool for local development of JavaScript/TypeScript Apps.
+> Alternatively, you can set up and run the project using Docker with **[Vail](https://github.com/rastislavcore/vail)**, a powerful tool for local development of JavaScript/TypeScript applications.
 
 ### Dependencies
 
@@ -127,17 +127,17 @@ const CONFIG = {
       header: 'GitHub Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
-        type: 'projects', // 'commits' will display user's commit, 'projects' will display projects by user.
+        type: 'projects', // 'commits' will display the user's commits, 'projects' will display projects by the user.
         sortBy: 'stars', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
         exclude: {
           forks: false, // Forked projects will not be displayed if set to true.
-          projects: [], // These projects will not be displayed. example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
+          projects: [], // These projects will not be displayed. Example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
         },
       },
       manual: {
         // Properties for manually specifying projects
-        projects: ['rastislavcore/gitprofile', 'rastislavcore/pandora'], // List of repository names to display. example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
+        projects: ['rastislavcore/gitprofile', 'rastislavcore/pandora'], // List of repository names to display. Example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
       },
     },
     external: {
@@ -196,7 +196,7 @@ const CONFIG = {
     website: 'https://github.com/rastislavcore',
     phone: '',
     email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
-    payto: 'xcb/cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922', // visit https://payto.money/ to generate your payto link
+    payto: 'payto://xcb/cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922', // visit https://payto.money/ to generate your payto link
     coreid: '', // visit https://corepass.net/ to create your Core ID
   },
   resume: {
@@ -333,7 +333,7 @@ const CONFIG = {
 };
 ```
 
-You can create your own custom theme by modifying these values. Theme is set in css by using `@theme` directive. Look at `src/styles/index.css` for more details. We use Tailwind CSS 4 for the theme.
+You can create your own custom theme by modifying these values. The theme is set in CSS using the `@theme` directive. Look at `src/styles/index.css` for more details. We use Tailwind CSS 4 for the theme.
 
 ### Google Analytics
 
@@ -349,7 +349,7 @@ const CONFIG = {
 };
 ```
 
-Besides tracking visitors, it will track `click events` on projects and blog posts, and send them to Google Analytics.
+Besides tracking visitors, it will track click events on projects and blog posts and send them to Google Analytics.
 
 ### SEO
 
@@ -373,6 +373,20 @@ const CONFIG = {
 ```
 
 `githubId` is required to fetch your avatar as favicon image and SEO from GitHub. To get your id, visit `https://api.github.com/users/<username>`.
+
+### FinTag
+
+You can set up FinTag by creating a `.well-known/fintag.json` file in your repository's `public` directory. FinTag allows payment applications and wallets to discover your payment information automatically. For more information, visit [payto.onl/solutions/fintag](https://payto.onl/solutions/fintag).
+
+Create the file at `public/.well-known/fintag.json` with the following format:
+
+```json
+{
+  "ican:xcb": "your-payment-address-here"
+}
+```
+
+Replace `ican:xcb` with your payment network identifier (e.g., `ican:xcb`, `ican:eth`, etc.) and provide your corresponding payment address. The file will be served at `https://yourdomain.com/.well-known/fintag.json`, allowing payment applications to discover your payment information automatically.
 
 ### PWA
 
@@ -421,7 +435,7 @@ const CONFIG = {
 
 ### Skills
 
-To showcase your skills provide them here.
+To showcase your skills, provide them here.
 
 ```ts
 // gitprofile.config.ts
@@ -527,17 +541,17 @@ const CONFIG = {
       header: 'GitHub Projects',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
-        type: 'projects', // 'commits' will display user's commit, 'projects' will display projects by user.
+        type: 'projects', // 'commits' will display the user's commits, 'projects' will display projects by the user.
         sortBy: 'stars', // Sort projects by 'stars' or 'updated'
         limit: 8, // How many projects to display.
         exclude: {
           forks: false, // Forked projects will not be displayed if set to true.
-          projects: [], // These projects will not be displayed. example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
+          projects: [], // These projects will not be displayed. Example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
         },
       },
       manual: {
         // Properties for manually specifying projects
-        projects: ['rastislavcore/gitprofile', 'rastislavcore/pandora'], // List of repository names to display. example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
+        projects: ['rastislavcore/gitprofile', 'rastislavcore/pandora'], // List of repository names to display. Example: ['rastislavcore/my-project1', 'rastislavcore/my-project2']
       },
     },
   },
@@ -582,7 +596,7 @@ const CONFIG = {
 
 ### Publications
 
-Provide your academic publishing in `publications`.
+Provide your academic publications in `publications`.
 
 ```ts
 // gitprofile.config.ts
@@ -606,7 +620,7 @@ Empty array will hide the publications section.
 
 ### Blog Posts
 
-If you have [medium](https://medium.com) or [dev](https://dev.to) account, you can show your recent blog posts in here just by providing your medium/dev username. You can limit how many posts to display (Max is `10`).
+If you have a [medium](https://medium.com) or [dev](https://dev.to) account, you can show your recent blog posts here by providing your medium/dev username. You can limit how many posts to display (Max is `10`).
 
 ```ts
 // gitprofile.config.ts

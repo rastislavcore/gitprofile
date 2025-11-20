@@ -1,5 +1,6 @@
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
+import Payto from 'payto-rl';
 import {
   AiFillGithub,
   AiFillInstagram,
@@ -242,6 +243,9 @@ const LocationItem: React.FC<{
 
 
 const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => {
+  const paytoObj = social?.payto ? new Payto(social?.payto) : null;
+  const paytoNetwork = paytoObj?.network;
+  const paytoAddress = paytoObj?.address;
   const renderSkeleton = () => {
     const array = [];
     for (let index = 0; index < 4; index++) {
@@ -492,8 +496,8 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                 <ListItem
                   icon={<FaWallet />}
                   title="PayTo"
-                  value={social.payto.substring(social.payto.indexOf('payto://') + 8, social.payto.indexOf('payto://') + 16).toUpperCase() + '…' + social.payto.substring((social.payto.indexOf('?') > -1 ? social.payto.indexOf('?') : social.payto.length) - 4).toUpperCase()}
-                  link={`${social.payto}`}
+                  value={`${paytoNetwork?.toUpperCase()}/${(paytoAddress?.substring(0,4)+'…'+paytoAddress?.slice(-4)).toUpperCase()}`}
+                  link={`https://payto.money/${social?.payto?.slice(5)}`}
                 />
               )}
             </>
