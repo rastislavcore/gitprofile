@@ -376,9 +376,9 @@ const CONFIG = {
 
 ### FinTag
 
-You can set up FinTag by creating a `.well-known/fintag.json` file in your repository's `public` directory. FinTag allows payment applications and wallets to discover your payment information automatically. For more information, visit [payto.onl/solutions/fintag](https://payto.onl/solutions/fintag).
+You can set up FinTag by creating a `.well-known` directory inside your `public` folder and placing a `fintag.json` file inside it. FinTag allows payment applications and wallets to discover your payment information automatically. For more information, visit [payto.onl/solutions/fintag](https://payto.onl/solutions/fintag).
 
-Create the file at `public/.well-known/fintag.json` with the following format:
+**Important:** The `.well-known` directory must be located inside the `public` folder (i.e., `public/.well-known/fintag.json`). Create the file with the following format:
 
 ```json
 {

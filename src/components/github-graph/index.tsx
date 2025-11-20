@@ -5,7 +5,7 @@ import './style.css';
 const selectLastHalfYear = (contributions: any[]) => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
-  const shownMonths = 6;
+  const shownMonths = 9;
 
   return contributions.filter(activity => {
     const date = new Date(activity.date);
@@ -27,7 +27,7 @@ const GithubGraphCard = ({
   username: string;
 }) => {
   return (
-    <div className="overflow-hidden flex justify-center mt-4">
+    <div className="overflow-x-auto flex justify-center mt-4">
       {loading ? (
         skeleton({ widthCls: 'w-full', heightCls: 'h-4' })
       ) : (
@@ -38,8 +38,9 @@ const GithubGraphCard = ({
           weekStart={1}
           showWeekdayLabels={true}
           labels={{
-            totalCount: `{{count}} GitHub contributions by @${username} in the last half year.`,
+            totalCount: `{{count}} GitHub contributions by @${username}`,
           }}
+          blockRadius={10}
         />
       )}
     </div>
