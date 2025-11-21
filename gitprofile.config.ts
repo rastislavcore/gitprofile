@@ -63,7 +63,7 @@ const CONFIG = {
     medium: '',
     dev: 'rastislavcore',
     stackoverflow: '', // example: '1/jeff-atwood'
-    wiki: '',
+    wiki: 'https://en.everybodywiki.com/Rastislav_Va%C5%A1i%C4%8Dka',
     skype: '',
     telegram: '',
     website: 'https://github.com/rastislavcore',
