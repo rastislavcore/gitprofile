@@ -5,7 +5,7 @@ import './style.css';
 const selectLastHalfYear = (contributions: any[]) => {
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
-  const shownMonths = 9;
+  const shownMonths = 6;
 
   return contributions.filter(activity => {
     const date = new Date(activity.date);
