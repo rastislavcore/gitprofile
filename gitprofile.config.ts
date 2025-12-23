@@ -91,7 +91,7 @@ const CONFIG = {
     'TypeScript',
     'Web4',
     'CyberSec',
-    'NATO'
+    'ZTA'
   ],
   experiences: [
     {
