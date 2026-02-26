@@ -43,7 +43,7 @@ const CONFIG = {
     githubId: '537310', // GitHub user id. To get your id, visit https://api.github.com/users/<username>
     payto: {
       property: 'ican/xcb',
-      content: 'cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922',
+      content: 'cb25ee54be855c78b1bb0068ff650b8be8fb4339d3ff',
     },
   },
   social: {
@@ -69,7 +69,7 @@ const CONFIG = {
     website: 'https://github.com/rastislavcore',
     phone: '',
     email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
-    payto: 'payto://xcb/cb2266fec7f127e2f884f0fbbcbf45dfd6fad5401922?rc=m&donate=1&org=vasicka.eu&item=green+circles+%F0%9F%9F%A2&color-b=37c848', // visit https://payto.money/ to generate your payto link
+    payto: 'payto://xcb/cb25ee54be855c78b1bb0068ff650b8be8fb4339d3ff?rc=m&donate=1&org=vasicka.eu&item=green+circles+%F0%9F%9F%A2&color-b=37c848', // visit https://payto.money/ to generate your payto link
     coreid: '', // visit https://corepass.net/ to create your Core ID
   },
   resume: {
@@ -104,11 +104,15 @@ const CONFIG = {
     },
     {
       company: 'CORE FOUNDATION',
-      position: 'Founder',
+      position: 'Co-Founder',
     },
     {
       company: 'Blockchain Hub',
-      position: 'Founder',
+      position: 'Co-Founder',
+    },
+    {
+      company: 'PayTo Alliance',
+      position: 'Co-Founder',
     },
   ],
   certifications: [],
