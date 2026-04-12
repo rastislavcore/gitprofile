@@ -8,6 +8,8 @@ import {
   INVALID_GITHUB_USERNAME_ERROR,
   setTooManyRequestError,
 } from '../constants/errors';
+import { fetchFediverseAvatarUrl } from '../utils/fediverse-avatar';
+import { setFaviconHref } from '../utils/favicon';
 import {
   getFediverseServer,
   getInitialTheme,
@@ -117,8 +119,19 @@ const GitProfile = ({ config }: { config: Config }) => {
       );
       const data = response.data;
 
+      let avatarUrl = data.avatar_url as string;
+      if (sanitizedConfig.social?.fediverse) {
+        const fediverseAvatar = await fetchFediverseAvatarUrl(
+          sanitizedConfig.social.fediverse,
+        );
+        if (fediverseAvatar) {
+          avatarUrl = fediverseAvatar;
+          setFaviconHref(fediverseAvatar);
+        }
+      }
+
       setProfile({
-        avatar: data.avatar_url,
+        avatar: avatarUrl,
         name: data.name || ' ',
         bio: data.bio || '',
         location: data.location || '',
@@ -138,6 +151,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   }, [
     sanitizedConfig.github.username,
     sanitizedConfig.projects.github.display,
+    sanitizedConfig.social?.fediverse,
     getGithubProjects,
   ]);
 
