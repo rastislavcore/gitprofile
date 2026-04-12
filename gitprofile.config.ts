@@ -3,7 +3,15 @@
 const CONFIG = {
   github: {
     username: 'rastislavcore', // Your GitHub org/user name. (This is the only required config)
-    sponsorship: true, // Set to true to enable GitHub Sponsors link
+    sponsorship: true, // Legacy: if `donation.embed` is omitted, true maps to GitHub embed
+  },
+  donation: {
+    /** `github` | `fediverse` (Misskey) | `none` — hide the donation card */
+    embed: 'fediverse' as const,
+    /** Misskey user id (from your instance settings/API), not @handle. Host from `social.fediverse`. */
+    misskeyUserId: '9ram8rq2axwj0001',
+    /** Misskey iframe only: `light`, `dark`, or `auto` (browser may pick). */
+    embedColorScheme: 'light' as const,
   },
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/arifszn/arifszn.github.io, set base to '/'.
@@ -14,7 +22,7 @@ const CONFIG = {
   projects: {
     github: {
       display: true, // Display GitHub projects?
-      header: 'GitHub Commits',
+      header: 'GitHub Public Commits',
       mode: 'automatic', // Mode can be: 'automatic' or 'manual'
       automatic: {
         type: 'commits', // 'commits' will display user's commit, 'projects' will display projects by user.
@@ -56,13 +64,13 @@ const CONFIG = {
     instagram: '',
     reddit: '',
     threads: '',
-    youtube: '', // example: 'pewdiepie'
+    youtube: '',
     udemy: '',
     dribbble: '',
     behance: '',
     medium: '',
     dev: 'rastislavcore',
-    stackoverflow: '', // example: '1/jeff-atwood'
+    stackoverflow: '',
     wiki: 'https://en.everybodywiki.com/Rastislav_Va%C5%A1i%C4%8Dka',
     skype: '',
     telegram: '',
@@ -82,6 +90,7 @@ const CONFIG = {
   },
   skills: [
     'Blockchain',
+    'OWASP',
     'DeFi',
     'DePIN',
     'Smart Contracts',
@@ -97,22 +106,36 @@ const CONFIG = {
     {
       company: 'ARAX',
       position: 'CTO',
+      link: 'https://arax.cc',
     },
     {
       company: 'CoDeTech',
       position: 'CIO',
+      link: 'https://codetech.cc',
     },
     {
       company: 'CORE FOUNDATION',
       position: 'Co-Founder',
     },
     {
-      company: 'Blockchain Hub',
-      position: 'Co-Founder',
+      company: 'Blockchain Hub CA',
+      position: 'Co-Founder & Dev maintainer',
+      link: 'https://github.com/bchainhub',
     },
     {
       company: 'PayTo Alliance',
       position: 'Co-Founder',
+      link: 'https://payto.onl',
+    },
+    {
+      company: 'Core Labs',
+      position: 'Co-Founder',
+      link: 'https://github.com/core-laboratories',
+    },
+    {
+      company: 'Core ◆ Talk',
+      position: 'Co-Founder & Admin',
+      link: 'https://coretalk.space',
     },
   ],
   certifications: [],

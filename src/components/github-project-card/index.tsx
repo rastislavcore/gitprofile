@@ -81,7 +81,7 @@ const GithubProjectCard = ({
       <div className="card shadow-lg compact bg-base-100" key={index}>
         <div className="flex justify-between flex-col p-8 h-full w-full">
           <a
-            className="cursor-pointer"
+            className="cursor-pointer block-link"
             href={item.html_url}
             onClick={(e) => {
               e.preventDefault();

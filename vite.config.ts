@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { isDarkishTheme } from './src/utils';
+import { getFediverseProfileUrl, isDarkishTheme } from './src/utils';
 import CONFIG from './gitprofile.config';
 
 // https://vitejs.dev/config/
@@ -20,6 +20,12 @@ export default defineConfig({
           metaPaytoProperty: CONFIG.seo.payto?.property || '',
           metaPaytoContent: CONFIG.seo.payto?.content || '',
           metaThemeColor: isDarkishTheme(CONFIG.themeConfig.defaultTheme) ? '#000000' : '#ffffff',
+          fediverseRelMe: (() => {
+            const href = getFediverseProfileUrl(CONFIG.social?.fediverse);
+            return href
+              ? `<link rel="me" href="${href.replace(/"/g, '&quot;')}" />`
+              : '';
+          })(),
           googleAnalytics: CONFIG.googleAnalytics.id ? `
             <script async src="https://www.googletagmanager.com/gtag/js?id=${CONFIG.googleAnalytics.id}"></script>
             <script>
@@ -76,9 +82,13 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          styles: ['./src/styles/index.css'],
+        manualChunks(id) {
+          if (
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/react/')
+          ) {
+            return 'vendor';
+          }
         },
       },
     },

@@ -8,7 +8,11 @@ import {
   INVALID_GITHUB_USERNAME_ERROR,
   setTooManyRequestError,
 } from '../constants/errors';
-import { getInitialTheme, getSanitizedConfig } from '../utils';
+import {
+  getFediverseServer,
+  getInitialTheme,
+  getSanitizedConfig,
+} from '../utils';
 import { SanitizedConfig, Config } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
 import { DEFAULT_THEMES } from '../constants/default-themes';
@@ -250,13 +254,28 @@ const GitProfile = ({ config }: { config: Config }) => {
                       username={sanitizedConfig.github.username}
                     />
                   )}
-                  {sanitizedConfig.github.sponsorship && (
-                    <DonateCard
-                      loading={loading}
-                      username={sanitizedConfig.github.username}
-                      payto={sanitizedConfig.social.payto}
-                    />
-                  )}
+                  {sanitizedConfig.donation.embed !== 'none' &&
+                    (sanitizedConfig.donation.embed !== 'fediverse' ||
+                      (getFediverseServer(sanitizedConfig.social.fediverse) &&
+                        sanitizedConfig.donation.misskeyUserId)) && (
+                      <DonateCard
+                        embed={
+                          sanitizedConfig.donation.embed === 'fediverse'
+                            ? 'fediverse'
+                            : 'github'
+                        }
+                        loading={loading}
+                        username={sanitizedConfig.github.username}
+                        payto={sanitizedConfig.social.payto}
+                        fediverseHost={getFediverseServer(
+                          sanitizedConfig.social.fediverse,
+                        )}
+                        misskeyUserId={sanitizedConfig.donation.misskeyUserId}
+                        embedColorScheme={
+                          sanitizedConfig.donation.embedColorScheme
+                        }
+                      />
+                    )}
                 </div>
               </div>
               <div className="lg:col-span-2 col-span-1">

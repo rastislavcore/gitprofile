@@ -18,6 +18,7 @@ GitProfile is a powerful portfolio builder that allows you to create a stunning 
 ✓ [Projects Section](#projects)
 ✓ [Publication Section](#publications)
 ✓ [Blog Posts Section](#blog-posts)
+✓ [Donation card (GitHub or Misskey)](#donation-card)
 
 To view a live example, **[open website](https://vasicka.eu)**.
 
@@ -113,7 +114,12 @@ You can leave most of the sections empty if you don't want to display them on yo
 const CONFIG = {
   github: {
     username: 'rastislavcore', // Your GitHub org/user name. (This is the only required config)
-    sponsorship: false, // Show GitHub Sponsorship tab?
+    sponsorship: false, // Legacy default for donation embed when `donation` is omitted
+  },
+  donation: {
+    embed: 'github', // 'github' | 'fediverse' | 'none'
+    misskeyUserId: '', // Required for 'fediverse': your Misskey user id (not @handle)
+    embedColorScheme: 'auto', // 'light' | 'dark' | 'auto' — Misskey iframe only
   },
   /**
    * If you are deploying to https://<USERNAME>.github.io/, for example your repository is at https://github.com/rastislavcore/arifszn.github.io, set base to '/'.
@@ -314,6 +320,32 @@ const CONFIG = {
 };
 
 export default CONFIG;
+```
+
+### Donation card
+
+The donation block can show a **GitHub Sponsors** embed, a **Misskey** (Fediverse) user timeline embed, or be hidden.
+
+Set `donation.embed` to `'github'`, `'fediverse'`, or `'none'`. If you omit `donation`, the older `github.sponsorship` flag still applies: `true` means GitHub embed, `false` means no donation card.
+
+- **GitHub:** uses `github.username` for the sponsors card iframe.
+- **Fediverse (Misskey):** set `social.fediverse` to your handle (`@user@instance`) so the **hostname** is parsed for the embed. Set `donation.misskeyUserId` to your **numeric user id** from that Misskey instance (not your username). The page loads `https://<host>/embed.js` once and renders the timeline iframe with a unique `data-misskey-embed-id` (generated at runtime).
+- **Misskey iframe theme:** set `donation.embedColorScheme` to `'light'` or `'dark'` to force that color scheme on the iframe, or `'auto'` so the browser may choose (maps to the CSS `color-scheme` property).
+
+```ts
+// gitprofile.config.ts
+const CONFIG = {
+  // ...
+  social: {
+    fediverse: '@you@misskey.example',
+    // ...
+  },
+  donation: {
+    embed: 'fediverse',
+    misskeyUserId: 'xxxxxxxx',
+    embedColorScheme: 'dark', // 'light' | 'dark' | 'auto'
+  },
+};
 ```
 
 ### Themes

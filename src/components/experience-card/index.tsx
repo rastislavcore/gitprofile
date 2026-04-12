@@ -29,9 +29,18 @@ const ListItem = ({
     ) : null}
     <h3 className="font-semibold">{position}</h3>
     <div className="mb-4 font-normal">
-      <a href={companyLink} target="_blank" rel="noreferrer">
-        {company}
-      </a>
+      {companyLink ? (
+        <a
+          className="new"
+          href={companyLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {company}
+        </a>
+      ) : (
+        company
+      )}
     </div>
   </li>
 );

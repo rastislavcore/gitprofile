@@ -100,6 +100,7 @@ const BlogCard = ({
               <div className="mb-5 md:mb-0">
                 <div className="w-64 h-auto">
                   <a
+                    className="block-link"
                     href={article.link}
                     onClick={(e) => {
                       e.preventDefault();
@@ -134,6 +135,7 @@ const BlogCard = ({
                 <div className="flex items-start px-4">
                   <div className="text-center md:text-left w-full">
                     <a
+                      className="noHover cursor-pointer"
                       href={article.link}
                       onClick={(e) => {
                         e.preventDefault();
@@ -167,7 +169,7 @@ const BlogCard = ({
                       {article.categories.map((category, index2) => (
                         <a
                           href={blog.source === 'medium' ? `https://medium.com/tag/${category}` : `https://dev.to/t/${category}`}
-                          className="py-2 px-4 text-xs leading-3 rounded-full bg-gray-300/50 mr-1 mb-1 opacity-50 text-base-content"
+                          className="noHover py-2 px-4 text-xs leading-3 rounded-full bg-gray-300/50 hover:bg-gray-400/65 mr-1 mb-1 opacity-50 text-base-content transition-colors duration-150"
                           target="_blank"
                           rel="noreferrer"
                           key={index2}

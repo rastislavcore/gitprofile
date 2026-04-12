@@ -22,6 +22,41 @@ export const isDarkishTheme = (appliedTheme: string): boolean => {
   );
 };
 
+/** Parses `@user@host` (ActivityPub handle). Returns undefined if invalid. */
+const parseFediverseHandle = (
+  handle: string | undefined,
+): { username: string; server: string } | undefined => {
+  if (!handle?.trim()) return undefined;
+  const value = handle.trim();
+  const indexOfAt = value.lastIndexOf('@');
+  if (indexOfAt <= 0) return undefined;
+  const username = value.substring(1, indexOfAt);
+  const server = value.substring(indexOfAt + 1);
+  if (!username || !server) return undefined;
+  return { username, server };
+};
+
+/** HTTPS profile URL for rel="me" / Mastodon verification (same as Fediverse link in UI). */
+export const getFediverseProfileUrl = (
+  handle: string | undefined,
+): string | undefined => {
+  const parsed = parseFediverseHandle(handle);
+  if (!parsed) return undefined;
+  return `https://${parsed.server}/@${parsed.username}`;
+};
+
+/** Display form `@user@host` for the details card. */
+export const getFediverseDisplayHandle = (handle: string): string => {
+  const parsed = parseFediverseHandle(handle);
+  if (!parsed) return handle;
+  return `@${parsed.username}@${parsed.server}`;
+};
+
+/** Fediverse server hostname from `@user@host` (e.g. for Misskey embed host). */
+export const getFediverseServer = (
+  handle: string | undefined,
+): string | undefined => parseFediverseHandle(handle)?.server;
+
 export const getSanitizedConfig = (
   config: Config,
 ): SanitizedConfig | Record<string, never> => {
@@ -95,13 +130,29 @@ export const getSanitizedConfig = (
       },
       skills: config?.skills || [],
       experiences:
-        config?.experiences?.filter(
-          (experience) =>
-            experience.company ||
-            experience.position ||
-            experience.from ||
-            experience.to,
-        ) || [],
+        config?.experiences
+          ?.filter(
+            (experience) =>
+              experience.company ||
+              experience.position ||
+              experience.from ||
+              experience.to ||
+              experience.link ||
+              experience.companyLink,
+          )
+          .map((experience) => {
+            const companyLink =
+              experience.companyLink?.trim() ||
+              experience.link?.trim() ||
+              undefined;
+            return {
+              company: experience.company,
+              position: experience.position,
+              from: experience.from,
+              to: experience.to,
+              ...(companyLink ? { companyLink } : {}),
+            };
+          }) || [],
       certifications:
         config?.certifications?.filter(
           (certification) =>
@@ -132,6 +183,25 @@ export const getSanitizedConfig = (
       footer: config?.footer,
       enablePWA: config?.enablePWA ?? true,
       githubGraph: config?.githubGraph ?? false,
+      donation: {
+        embed: (() => {
+          const explicit = config.donation?.embed;
+          if (
+            explicit === 'github' ||
+            explicit === 'fediverse' ||
+            explicit === 'none'
+          ) {
+            return explicit;
+          }
+          return config.github?.sponsorship ? 'github' : 'none';
+        })(),
+        misskeyUserId: config.donation?.misskeyUserId?.trim() ?? '',
+        embedColorScheme: (() => {
+          const v = config.donation?.embedColorScheme;
+          if (v === 'light' || v === 'dark' || v === 'auto') return v;
+          return 'auto';
+        })(),
+      },
     };
   } catch (error) {
     return {};
