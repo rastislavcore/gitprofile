@@ -7,7 +7,8 @@
 	--color-base-300: oklch(0.92 0 0);
 	--color-text-primary: oklch(0.2 0 0);       /* Primary text color */
 	--color-text-secondary: oklch(0.4 0 0);     /* Secondary text color */
-	--color-text-accent: oklch(0.6 0.2 0);      /* Accent text color */
+	/* Green accent (links, highlights) — was magenta/pink at hue ~0 */
+	--color-text-accent: oklch(0.42 0.14 152);
 
 }
 
@@ -31,7 +32,7 @@
 		/* Dark theme text colors */
 		--color-text-primary: oklch(0.9 0 0);  /* Dark mode primary text */
 		--color-text-secondary: oklch(0.7 0 0); /* Dark mode secondary text */
-		--color-text-accent: oklch(0.6 0.2 0); /* Dark mode accent text */
+		--color-text-accent: oklch(0.72 0.11 152); /* Dark mode: lighter green on dark bg */
 
 		/* Component colors */
 		--card-bg: var(--color-base-200);
@@ -82,6 +83,57 @@
 
 	[data-theme='dark'] .badge {
 		@apply bg-base-300;
+	}
+
+	:root {
+		/* Lucide square-arrow-up-right; black stroke for mask + currentColor on ::after */
+		--gitprofile-external-link-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20x%3D%223%22%20y%3D%223%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M8%208h8v8%22%2F%3E%3Cpath%20d%3D%22m8%2016%208-8%22%2F%3E%3C%2Fsvg%3E");
+	}
+
+	/* Text links: accent + underline on hover */
+	a[href]:where(:not(.btn):not(.block-link):not(.noHover)) {
+		color: var(--color-text-accent);
+		text-decoration: none;
+		text-underline-offset: 0.2em;
+		text-decoration-thickness: max(1px, 0.07em);
+		transition: text-decoration-color 0.15s ease, color 0.15s ease;
+	}
+
+	a[href]:where(:not(.btn):not(.block-link):not(.noHover)):hover {
+		text-decoration: underline;
+		text-decoration-color: color-mix(in oklch, var(--color-text-accent) 80%, transparent);
+	}
+
+	/* Full-card / block links: keep inherited look, no global underline */
+	a[href].block-link,
+	a[href].block-link:hover {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* Opt out of global link color + hover underline (e.g. blog article blocks) */
+	a[href].noHover,
+	a[href].noHover:hover {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* “Open in new tab” icon: only on e.g. Career links — use class `new` */
+	a[href].new[target="_blank"]::after {
+		content: "";
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		margin-inline-start: 0.3em;
+		vertical-align: -0.12em;
+		opacity: 0.85;
+		background-color: currentColor;
+		-webkit-mask-image: var(--gitprofile-external-link-icon);
+		mask-image: var(--gitprofile-external-link-icon);
+		mask-repeat: no-repeat;
+		mask-position: center;
+		-webkit-mask-size: contain;
+		mask-size: contain;
 	}
 }
 

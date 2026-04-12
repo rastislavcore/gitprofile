@@ -75,7 +75,7 @@ const PublicationCard = ({
   const renderPublications = () => {
     return publications.map((item, index) => (
       <a
-        className="card shadow-lg compact bg-base-100 cursor-pointer"
+        className="card shadow-lg compact bg-base-100 cursor-pointer block-link"
         key={index}
         href={item.link}
         target="_blank"

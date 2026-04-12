@@ -1,5 +1,9 @@
 import { Profile } from '../../interfaces/profile';
-import { skeleton } from '../../utils';
+import {
+  getFediverseDisplayHandle,
+  getFediverseProfileUrl,
+  skeleton,
+} from '../../utils';
 import Payto from 'payto-rl';
 import {
   AiFillGithub,
@@ -111,21 +115,6 @@ const isFlagEmoji = (emoji: string): boolean => {
 
 const companyLink = (company: string): string => {
   return `https://github.com/${company.substring(1)}`;
-};
-
-const getFormattedFediverseValue = (
-  fediverseValue: string,
-  isLink: boolean,
-): string => {
-  const indexOfAt = fediverseValue.lastIndexOf('@');
-  const username = fediverseValue.substring(1, indexOfAt);
-  const server = fediverseValue.substring(indexOfAt + 1);
-
-  if (isLink) {
-    return `https://${server}/@${username}`;
-  } else {
-    return `@${username}@${server}`;
-  }
 };
 
 const OrganizationItem: React.FC<{
@@ -330,8 +319,8 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                 <ListItem
                   icon={<PiFediverseLogoFill />}
                   title="Fediverse"
-                  value={getFormattedFediverseValue(social.fediverse, false)}
-                  link={getFormattedFediverseValue(social.fediverse, true)}
+                  value={getFediverseDisplayHandle(social.fediverse)}
+                  link={getFediverseProfileUrl(social.fediverse)}
                 />
               )}
               {social?.linkedin && (

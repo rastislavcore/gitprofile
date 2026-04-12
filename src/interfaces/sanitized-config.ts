@@ -119,6 +119,13 @@ export interface SanitizedGoogleAnalytics {
   id?: string;
 }
 
+export interface SanitizedDonation {
+  embed: 'none' | 'github' | 'fediverse';
+  misskeyUserId: string;
+  /** Misskey iframe: force light/dark or follow browser (`auto`). */
+  embedColorScheme: 'auto' | 'light' | 'dark';
+}
+
 export interface SanitizedBlog {
   display: boolean;
   source: string;
@@ -152,6 +159,7 @@ export interface SanitizedConfig {
   footer?: string;
   enablePWA: boolean;
   githubGraph: boolean;
+  donation: SanitizedDonation;
 }
 
 export interface Config {
@@ -162,7 +170,7 @@ export interface Config {
   resume?: Partial<SanitizedResume>;
   publicKey?: Partial<SanitizedPublicKey>;
   skills?: Array<string>;
-  experiences?: Array<Partial<SanitizedExperience>>;
+  experiences?: Array<Partial<SanitizedExperience> & { link?: string }>;
   educations?: Array<Partial<SanitizedEducation>>;
   certifications?: Array<Partial<SanitizedCertification>>;
   publications?: Array<Partial<SanitizedPublication>>;
@@ -172,4 +180,5 @@ export interface Config {
   footer?: string;
   enablePWA?: boolean;
   githubGraph?: boolean;
+  donation?: Partial<SanitizedDonation>;
 }

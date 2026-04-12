@@ -251,8 +251,10 @@ interface PublicKey {
 interface Experience {
   company?: string;
   position?: string;
-  from: string;
-  to: string;
+  from?: string;
+  to?: string;
+  /** Opens in a new tab on the company name (alias of companyLink) */
+  link?: string;
   companyLink?: string;
 }
 
@@ -284,6 +286,23 @@ interface GoogleAnalytics {
    * GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
    */
   id?: string;
+}
+
+interface Donation {
+  /**
+   * Donation card embed: GitHub Sponsors, Misskey timeline (host from `social.fediverse`), or hidden
+   */
+  embed?: 'none' | 'github' | 'fediverse';
+
+  /**
+   * Misskey user ID for `embed: 'fediverse'` (numeric id from your instance, not @handle)
+   */
+  misskeyUserId?: string;
+
+  /**
+   * Fediverse (Misskey) iframe color scheme: `light`, `dark`, or `auto` (browser may choose)
+   */
+  embedColorScheme?: 'auto' | 'light' | 'dark';
 }
 
 interface Blog {
@@ -422,6 +441,11 @@ interface Config {
    * GitHub graph
    */
   githubGraph?: boolean;
+
+  /**
+   * Donation / sponsors card (GitHub iframe or Misskey Fediverse embed)
+   */
+  donation?: Donation;
 }
 
 declare const CONFIG: Config;
