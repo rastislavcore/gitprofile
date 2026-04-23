@@ -8,8 +8,9 @@ import {
   INVALID_GITHUB_USERNAME_ERROR,
   setTooManyRequestError,
 } from '../constants/errors';
-import { fetchFediverseAvatarUrl } from '../utils/fediverse-avatar';
+import { fetchFediverseProfile } from '../utils/fediverse-avatar';
 import { setFaviconHref } from '../utils/favicon';
+import { updateDocumentSocialMeta } from '../utils/social-meta';
 import {
   getFediverseServer,
   getInitialTheme,
@@ -121,12 +122,31 @@ const GitProfile = ({ config }: { config: Config }) => {
 
       let avatarUrl = data.avatar_url as string;
       if (sanitizedConfig.social?.fediverse) {
-        const fediverseAvatar = await fetchFediverseAvatarUrl(
-          sanitizedConfig.social.fediverse,
-        );
-        if (fediverseAvatar) {
-          avatarUrl = fediverseAvatar;
-          setFaviconHref(fediverseAvatar);
+        const fed = await fetchFediverseProfile(sanitizedConfig.social.fediverse);
+        if (fed.avatarUrl) {
+          avatarUrl = fed.avatarUrl;
+          setFaviconHref(fed.avatarUrl);
+        }
+
+        const siteTitle = sanitizedConfig.seo?.title?.trim() || '';
+        const meta: {
+          imageUrl?: string;
+          title?: string;
+          description?: string;
+        } = {};
+        if (fed.avatarUrl) {
+          meta.imageUrl = fed.avatarUrl;
+        }
+        if (fed.displayName) {
+          meta.title = siteTitle
+            ? `${fed.displayName} | ${siteTitle}`
+            : fed.displayName;
+        }
+        if (fed.description) {
+          meta.description = fed.description.slice(0, 500);
+        }
+        if (meta.imageUrl || meta.title || meta.description) {
+          updateDocumentSocialMeta(meta);
         }
       }
 
