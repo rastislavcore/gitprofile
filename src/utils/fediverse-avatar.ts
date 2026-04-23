@@ -13,15 +13,28 @@ function parseFediverseHandle(
   return { username, server };
 }
 
+function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export interface FediverseProfileResult {
+  avatarUrl?: string;
+  displayName?: string;
+  description?: string;
+}
+
 /**
- * Resolve profile image URL from a Fediverse handle (`@user@instance`).
+ * Profile fields from a Fediverse handle (`@user@instance`).
  * Tries Mastodon-compatible API first, then Misskey `users/show`.
  */
-export async function fetchFediverseAvatarUrl(
+export async function fetchFediverseProfile(
   handle: string | undefined,
-): Promise<string | undefined> {
+): Promise<FediverseProfileResult> {
   const parsed = parseFediverseHandle(handle);
-  if (!parsed) return undefined;
+  if (!parsed) return {};
 
   const { username, server } = parsed;
   const base = `https://${server}`;
@@ -31,19 +44,30 @@ export async function fetchFediverseAvatarUrl(
     const { data } = await axios.get<{
       avatar?: string;
       avatar_static?: string;
+      display_name?: string;
+      note?: string;
     }>(`${base}/api/v1/accounts/lookup`, {
       params: { acct },
       timeout: 15000,
     });
-    if (data?.avatar_static || data?.avatar) {
-      return data.avatar_static || data.avatar;
+    if (data) {
+      const notePlain = data.note ? stripHtml(data.note) : undefined;
+      return {
+        avatarUrl: data.avatar_static || data.avatar,
+        displayName: data.display_name?.trim() || undefined,
+        description: notePlain || undefined,
+      };
     }
   } catch {
     /* not Mastodon-compatible or unreachable */
   }
 
   try {
-    const { data } = await axios.post<{ avatarUrl?: string | null }>(
+    const { data } = await axios.post<{
+      avatarUrl?: string | null;
+      name?: string | null;
+      description?: string | null;
+    }>(
       `${base}/api/users/show`,
       { username },
       {
@@ -51,12 +75,16 @@ export async function fetchFediverseAvatarUrl(
         timeout: 15000,
       },
     );
-    if (data?.avatarUrl) {
-      return data.avatarUrl;
+    if (data) {
+      return {
+        avatarUrl: data.avatarUrl || undefined,
+        displayName: data.name?.trim() || undefined,
+        description: data.description?.trim() || undefined,
+      };
     }
   } catch {
-    return undefined;
+    return {};
   }
 
-  return undefined;
+  return {};
 }
