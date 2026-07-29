@@ -40,6 +40,9 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        navigateFallbackDenylist: [/^\/\.well-known\//],
+      },
       manifest: {
         name: CONFIG.seo.title || 'Portfolio',
         short_name: 'Portfolio',
