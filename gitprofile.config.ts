@@ -51,7 +51,7 @@ const CONFIG = {
     githubId: '537310', // GitHub user id. To get your id, visit https://api.github.com/users/<username>
     payto: {
       property: 'ican/xcb',
-      content: 'cb25ee54be855c78b1bb0068ff650b8be8fb4339d3ff',
+      content: 'CB69082B2C09F1835583DE35AADEEF70C4E1350AB04B',
     },
   },
   social: {
