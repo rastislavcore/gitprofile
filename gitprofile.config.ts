@@ -74,7 +74,7 @@ const CONFIG = {
     wiki: 'https://en.everybodywiki.com/Rastislav_Va%C5%A1i%C4%8Dka',
     skype: '',
     telegram: '',
-    website: 'https://github.com/rastislavcore',
+    website: 'https://nest.owasp.org/members/rastislavcore',
     phone: '',
     email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
     payto: 'payto://xcb/CB69082B2C09F1835583DE35AADEEF70C4E1350AB04B?rc=m&donate=1&org=vasicka.eu&item=green+circles+%F0%9F%9F%A2&color-b=37c848', // visit https://payto.money/ to generate your payto link
