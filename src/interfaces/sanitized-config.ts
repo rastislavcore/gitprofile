@@ -50,6 +50,9 @@ export interface SanitizedSEO {
 }
 
 export interface SanitizedSocial {
+	chatgpt?: string;
+	gitlab?: string;
+	huggingface?: string;
   linkedin?: string;
   twitter?: string;
   fediverse?: string;

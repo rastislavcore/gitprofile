@@ -56,13 +56,13 @@ const CONFIG = {
   },
 	social: {
 		// Profile details
-		email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
-		phone: '',
 		coreid: '', // visit https://corepass.net/ to create your Core ID
 		payto: 'payto://xcb/CB69082B2C09F1835583DE35AADEEF70C4E1350AB04B?rc=m&donate=1&org=vasicka.eu&item=green+circles+%F0%9F%9F%A2&color-b=37c848', // visit https://payto.money/ to generate your payto link
 		website: 'https://nest.owasp.org/members/rastislavcore',
 
 		// Contacts
+		email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
+		phone: '',
 		telegram: '',
 		tone: '', // https://tone.onl/user#@username or tone://group/@weekend
 		whatsapp: '', // International phone number or WhatsApp deep link
@@ -75,9 +75,12 @@ const CONFIG = {
 
 		// Socials
 		behance: '',
+		chatgpt: '',
 		dribbble: '',
 		facebook: '',
 		fediverse: '@rastislav@coretalk.space',
+		gitlab: '', // GitLab username
+		huggingface: '',
 		instagram: '',
 		linkedin: 'rastislavcore',
 		reddit: '',

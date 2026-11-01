@@ -1,12 +1,12 @@
 import React from 'react';
-import { LOCAL_STORAGE_KEY_NAME } from '../constants';
-import { DEFAULT_THEMES } from '../constants/default-themes';
-import colors from '../data/colors.json';
-import {
+import { LOCAL_STORAGE_KEY_NAME } from '../constants/index.tsx';
+import { DEFAULT_THEMES } from '../constants/default-themes.tsx';
+import colors from '../data/colors.json' with { type: 'json' };
+import type {
   SanitizedConfig,
   SanitizedThemeConfig,
   Config,
-} from '../interfaces/sanitized-config';
+} from '../interfaces/sanitized-config.ts';
 
 type EventParams = {
   [key: string]: string;
@@ -97,6 +97,9 @@ export const getSanitizedConfig = (
         imageURL: config?.seo?.imageURL,
       },
       social: {
+				chatgpt: config?.social?.chatgpt,
+				gitlab: config?.social?.gitlab,
+				huggingface: config?.social?.huggingface,
         linkedin: config?.social?.linkedin,
         twitter: config?.social?.twitter,
         fediverse: config?.social?.fediverse,
