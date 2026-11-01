@@ -1,3 +1,4 @@
+import { ToneIcon } from './tone-icon';
 import { Profile } from '../../interfaces/profile';
 import {
   getFediverseDisplayHandle,
@@ -24,7 +25,6 @@ import {
   FaLinkedin,
   FaReddit,
 	FaWhatsapp,
-	FaCommentDots,
   FaStackOverflow,
   FaTelegram,
   FaTiktok,
@@ -34,8 +34,8 @@ import {
 } from 'react-icons/fa';
 import { FaSquareThreads } from 'react-icons/fa6';
 import { PiFediverseLogoFill } from "react-icons/pi";
-import { RiMailFill, RiPhoneFill } from 'react-icons/ri';
-import { SiResearchgate, SiUdemy, SiWikipedia, SiX } from 'react-icons/si';
+import { RiMailFill, RiPhoneFill, RiOpenaiFill } from 'react-icons/ri';
+import { SiGitlab, SiHuggingface, SiResearchgate, SiUdemy, SiWikipedia, SiX } from 'react-icons/si';
 import { flagToCountry } from 'emoji-flags-to-country';
 import { findByAlpha2 } from 'iso-3166-1-ts';
 import slugify from 'react-slugify';
@@ -269,22 +269,18 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   value={profile.location}
                 />
               )}
-              {social?.email && (
-                <ListItem
-                  icon={<RiMailFill />}
-                  title="Email"
-                  value={social.email && social.email.includes("?") ? social.email.split("?")[0] : social.email}
-                  link={`mailto:${social.email}`}
-                />
-              )}
-              {social?.phone && (
-                <ListItem
-                  icon={<RiPhoneFill />}
-                  title="Phone"
-                  value={social.phone}
-                  link={`tel:${social.phone}`}
-                />
-              )}
+							{profile.company && (
+								<OrganizationItem
+									icon={<FaBuilding />}
+									title="Organization"
+									value={profile.company}
+									link={
+										isCompanyMention(profile.company.trim())
+											? companyLink(profile.company.trim())
+											: undefined
+									}
+								/>
+							)}
               {social?.coreid && (
                 <ListItem
                   icon={<FaIdBadge />}
@@ -311,7 +307,23 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
 							{social?.website && (
 								<ListItem icon={<FaGlobe />} title="Website" value={getWebsiteContact(social.website).label} link={getWebsiteContact(social.website).href} />
 							)}
-							{(social?.telegram || tone || social?.whatsapp) && <h3 className="mt-4 mb-2 font-semibold">Contacts</h3>}
+							{(social?.email || social?.phone || social?.telegram || tone || social?.whatsapp) && <h3 className="mt-4 mb-2 font-semibold">Contacts</h3>}
+							{social?.email && (
+								<ListItem
+									icon={<RiMailFill />}
+									title="Email"
+									value={social.email && social.email.includes("?") ? social.email.split("?")[0] : social.email}
+									link={`mailto:${social.email}`}
+								/>
+							)}
+							{social?.phone && (
+								<ListItem
+									icon={<RiPhoneFill />}
+									title="Phone"
+									value={social.phone}
+									link={`tel:${social.phone}`}
+								/>
+							)}
               {social?.telegram && (
                 <ListItem
                   icon={<FaTelegram />}
@@ -321,7 +333,7 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                 />
               )}
 							{social?.tone && tone && (
-								<ListItem icon={<FaCommentDots />} title="Tone" value={tone.label} link={tone.href} />
+								<ListItem icon={<ToneIcon />} title="Tone" value={tone.label} link={tone.href} />
 							)}
 							{social?.whatsapp && (
 								<ListItem icon={<FaWhatsapp />} title="WhatsApp" value={getWhatsappContact(social.whatsapp).label} link={getWhatsappContact(social.whatsapp).href} />
@@ -359,8 +371,8 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   link={`https://www.udemy.com/user/${social.udemy}`}
                 />
               )}
-							{(github.username || profile.company || [
-								'behance', 'dribbble', 'facebook', 'fediverse', 'instagram',
+							{(github.username || [
+								'behance', 'chatgpt', 'dribbble', 'facebook', 'fediverse', 'gitlab', 'huggingface', 'instagram',
 								'linkedin', 'reddit', 'stackoverflow', 'threads', 'tiktok',
 								'wiki', 'twitter', 'youtube',
 							].some((key) => social?.[key])) && (
@@ -374,6 +386,14 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   link={`https://www.behance.net/${social.behance}`}
                 />
               )}
+							{social?.chatgpt && (
+								<ListItem
+									icon={<RiOpenaiFill />}
+									title="ChatGPT"
+									value={social.chatgpt}
+									link={`https://chatgpt.com/u/${social.chatgpt}`}
+								/>
+							)}
               {social?.dribbble && (
                 <ListItem
                   icon={<CgDribbble />}
@@ -406,6 +426,22 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                 link={`https://github.com/${github.username}`}
               />
 							)}
+							{social?.gitlab && (
+								<ListItem
+									icon={<SiGitlab />}
+									title="GitLab"
+									value={social.gitlab}
+									link={`https://gitlab.com/${social.gitlab}`}
+								/>
+							)}
+							{social?.huggingface && (
+								<ListItem
+									icon={<SiHuggingface />}
+									title="Hugging Face"
+									value={social.huggingface}
+									link={`https://huggingface.co/${social.huggingface}`}
+								/>
+							)}
               {social?.instagram && (
                 <ListItem
                   icon={<AiFillInstagram />}
@@ -420,18 +456,6 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   title="LinkedIn"
                   value={social.linkedin}
                   link={`https://www.linkedin.com/in/${social.linkedin}`}
-                />
-              )}
-              {profile.company && (
-                <OrganizationItem
-                  icon={<FaBuilding />}
-                  title="Organization"
-                  value={profile.company}
-                  link={
-                    isCompanyMention(profile.company.trim())
-                      ? companyLink(profile.company.trim())
-                      : undefined
-                  }
                 />
               )}
               {social?.reddit && (

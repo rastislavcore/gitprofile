@@ -2,8 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { getFediverseProfileUrl } from './src/utils';
-import CONFIG from './gitprofile.config';
+import { getFediverseProfileUrl } from './src/utils/index.ts';
+import CONFIG from './gitprofile.config.ts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
