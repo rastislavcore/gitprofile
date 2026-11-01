@@ -116,8 +116,9 @@ export const getSanitizedConfig = (
         website: config?.social?.website,
         phone: config?.social?.phone,
         email: config?.social?.email,
-        skype: config?.social?.skype,
         telegram: config?.social?.telegram,
+				tone: config?.social?.tone,
+				whatsapp: config?.social?.whatsapp,
         researchGate: config?.social?.researchGate,
         coreid: config?.social?.coreid,
         payto: config?.social?.payto,
@@ -173,6 +174,10 @@ export const getSanitizedConfig = (
         display: !!config?.blog?.username && !!config?.blog?.source,
       },
       themeConfig: {
+				themeColor: {
+					light: config?.themeConfig?.themeColor?.light || '#FFFFFF',
+					dark: config?.themeConfig?.themeColor?.dark || '#121212',
+				},
         defaultTheme: config?.themeConfig?.defaultTheme || DEFAULT_THEMES[0],
         disableSwitch: config?.themeConfig?.disableSwitch || false,
         respectPrefersColorScheme:

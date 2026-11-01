@@ -197,8 +197,9 @@ const CONFIG = {
     dev: 'rastislavcore',
     stackoverflow: '', // example: '1/jeff-atwood'
     wiki: '',
-    skype: '',
     telegram: '',
+		tone: '', // https://tone.onl/user#@username or tone://group/@weekend
+		whatsapp: '', // International phone number or WhatsApp deep link
     website: 'https://github.com/rastislavcore',
     phone: '',
     email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
@@ -290,6 +291,11 @@ const CONFIG = {
     id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
   },
   themeConfig: {
+		// Outputs both theme-color meta tags with prefers-color-scheme media queries.
+		themeColor: {
+			light: '#FFFFFF',
+			dark: '#121212',
+		},
     defaultTheme: 'nord',
 
     // Hides the switch in the navbar
@@ -456,8 +462,9 @@ const CONFIG = {
     dev: '',
     stackoverflow: '',
     wiki: '',
-    skype: '',
     telegram: '',
+		tone: '', // https://tone.onl/user#@username or tone://group/@weekend
+		whatsapp: '', // International phone number or WhatsApp deep link
     website: '',
     phone: '',
     email: '',
@@ -675,3 +682,10 @@ To contribute, see the [Contributing guide](CONTRIBUTING.md).
 ## 📄 License
 
 [MIT](LICENSE)
+
+Tone supports `https://tone.onl/user#@username`, `https://tone.onl/group#<id>`,
+`https://tone.onl/channel#<id>`, and `tone://user/@alice` (also `group` and
+`channel`). Deep-link handles can omit `@`. IDs display as the first four and
+last four characters, for example `Group: ABCD-1234`. Set `social.whatsapp`
+to an international phone number, a `https://wa.me/…` link, or a
+`whatsapp://send?phone=…` deep link. Empty values hide the corresponding rows.

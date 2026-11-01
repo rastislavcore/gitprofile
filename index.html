@@ -9,7 +9,8 @@
 
     <meta property="title" content="<%- metaTitle %>" />
     <meta name="description" content="<%- metaDescription %>" />
-    <meta name="theme-color" content="<%- metaThemeColor %>" />
+		<meta name="theme-color" content="<%= metaThemeColorLight %>" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="<%= metaThemeColorDark %>" media="(prefers-color-scheme: dark)" />
 
     <meta itemprop="name" content="<%- metaTitle %>" />
     <meta itemprop="description" content="<%- metaDescription %>" />

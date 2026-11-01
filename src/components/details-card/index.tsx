@@ -5,6 +5,7 @@ import {
   skeleton,
 } from '../../utils';
 import Payto from 'payto-rl';
+import { getToneContact, getWebsiteContact, getWhatsappContact } from '../../utils/contact-links';
 import {
   AiFillGithub,
   AiFillInstagram,
@@ -22,7 +23,8 @@ import {
   FaMapMarkerAlt,
   FaLinkedin,
   FaReddit,
-  FaSkype,
+	FaWhatsapp,
+	FaCommentDots,
   FaStackOverflow,
   FaTelegram,
   FaTiktok,
@@ -232,6 +234,7 @@ const LocationItem: React.FC<{
 
 
 const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => {
+	const tone = social?.tone ? getToneContact(social.tone) : null;
   const paytoObj = social?.payto ? new Payto(social?.payto) : null;
   const paytoNetwork = paytoObj?.network;
   const paytoAddress = paytoObj?.address;
@@ -266,6 +269,159 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   value={profile.location}
                 />
               )}
+              {social?.email && (
+                <ListItem
+                  icon={<RiMailFill />}
+                  title="Email"
+                  value={social.email && social.email.includes("?") ? social.email.split("?")[0] : social.email}
+                  link={`mailto:${social.email}`}
+                />
+              )}
+              {social?.phone && (
+                <ListItem
+                  icon={<RiPhoneFill />}
+                  title="Phone"
+                  value={social.phone}
+                  link={`tel:${social.phone}`}
+                />
+              )}
+              {social?.coreid && (
+                <ListItem
+                  icon={<FaIdBadge />}
+                  title="CORE ID"
+                  value={
+                    <>
+                      {profile?.bio?.toLowerCase().includes(`${social.coreid}@coreid`.toLowerCase()) && (
+                        <FaCheckCircle className="text-primary inline-block relative -top-[1px] mr-1" size={12} />
+                      )}
+                      {(social.coreid.substring(0,4)+'…'+social.coreid.slice(-4)).toUpperCase()}
+                    </>
+                  }
+                  link={`https://coreid.link/${social.coreid}`}
+                />
+              )}
+              {social?.payto && (
+                <ListItem
+                  icon={<FaWallet />}
+                  title="PayTo"
+                  value={`${paytoNetwork?.toUpperCase()}/${(paytoAddress?.substring(0,4)+'…'+paytoAddress?.slice(-4)).toUpperCase()}`}
+                  link={`https://payto.money/${social?.payto?.slice(5)}`}
+                />
+              )}
+							{social?.website && (
+								<ListItem icon={<FaGlobe />} title="Website" value={getWebsiteContact(social.website).label} link={getWebsiteContact(social.website).href} />
+							)}
+							{(social?.telegram || tone || social?.whatsapp) && <h3 className="mt-4 mb-2 font-semibold">Contacts</h3>}
+              {social?.telegram && (
+                <ListItem
+                  icon={<FaTelegram />}
+                  title="Telegram"
+                  value={social.telegram}
+                  link={`https://t.me/${social.telegram}`}
+                />
+              )}
+							{social?.tone && tone && (
+								<ListItem icon={<FaCommentDots />} title="Tone" value={tone.label} link={tone.href} />
+							)}
+							{social?.whatsapp && (
+								<ListItem icon={<FaWhatsapp />} title="WhatsApp" value={getWhatsappContact(social.whatsapp).label} link={getWhatsappContact(social.whatsapp).href} />
+							)}
+							{(social?.dev || social?.medium || social?.researchGate || social?.udemy) && <h3 className="mt-4 mb-2 font-semibold">Publishing</h3>}
+              {social?.dev && (
+                <ListItem
+                  icon={<FaDev />}
+                  title="Dev"
+                  value={social.dev}
+                  link={`https://dev.to/${social.dev}`}
+                />
+              )}
+              {social?.medium && (
+                <ListItem
+                  icon={<AiFillMediumSquare />}
+                  title="Medium"
+                  value={social.medium}
+                  link={`https://medium.com/@${social.medium}`}
+                />
+              )}
+              {social?.researchGate && (
+                <ListItem
+                  icon={<SiResearchgate />}
+                  title="ResearchGate"
+                  value={social.researchGate}
+                  link={`https://www.researchgate.net/profile/${social.researchGate}`}
+                />
+              )}
+              {social?.udemy && (
+                <ListItem
+                  icon={<SiUdemy />}
+                  title="Udemy"
+                  value={social.udemy}
+                  link={`https://www.udemy.com/user/${social.udemy}`}
+                />
+              )}
+							{(github.username || profile.company || [
+								'behance', 'dribbble', 'facebook', 'fediverse', 'instagram',
+								'linkedin', 'reddit', 'stackoverflow', 'threads', 'tiktok',
+								'wiki', 'twitter', 'youtube',
+							].some((key) => social?.[key])) && (
+								<h3 className="mt-4 mb-2 font-semibold">Socials</h3>
+							)}
+              {social?.behance && (
+                <ListItem
+                  icon={<FaBehanceSquare />}
+                  title="Behance"
+                  value={social.behance}
+                  link={`https://www.behance.net/${social.behance}`}
+                />
+              )}
+              {social?.dribbble && (
+                <ListItem
+                  icon={<CgDribbble />}
+                  title="Dribbble"
+                  value={social.dribbble}
+                  link={`https://dribbble.com/${social.dribbble}`}
+                />
+              )}
+              {social?.facebook && (
+                <ListItem
+                  icon={<FaFacebook />}
+                  title="Facebook"
+                  value={social.facebook}
+                  link={`https://www.facebook.com/${social.facebook}`}
+                />
+              )}
+              {social?.fediverse && (
+                <ListItem
+                  icon={<PiFediverseLogoFill />}
+                  title="Fediverse"
+                  value={getFediverseDisplayHandle(social.fediverse)}
+                  link={getFediverseProfileUrl(social.fediverse)}
+                />
+              )}
+							{github.username && (
+              <ListItem
+                icon={<AiFillGithub />}
+                title="GitHub"
+                value={github.username}
+                link={`https://github.com/${github.username}`}
+              />
+							)}
+              {social?.instagram && (
+                <ListItem
+                  icon={<AiFillInstagram />}
+                  title="Instagram"
+                  value={social.instagram}
+                  link={`https://www.instagram.com/${social.instagram}`}
+                />
+              )}
+              {social?.linkedin && (
+                <ListItem
+                  icon={<FaLinkedin />}
+                  title="LinkedIn"
+                  value={social.linkedin}
+                  link={`https://www.linkedin.com/in/${social.linkedin}`}
+                />
+              )}
               {profile.company && (
                 <OrganizationItem
                   icon={<FaBuilding />}
@@ -278,145 +434,12 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   }
                 />
               )}
-              <ListItem
-                icon={<AiFillGithub />}
-                title="GitHub"
-                value={github.username}
-                link={`https://github.com/${github.username}`}
-              />
-              {social?.researchGate && (
-                <ListItem
-                  icon={<SiResearchgate />}
-                  title="ResearchGate"
-                  value={social.researchGate}
-                  link={`https://www.researchgate.net/profile/${social.researchGate}`}
-                />
-              )}
-              {social?.coreid && (
-                <ListItem
-                  icon={<FaIdBadge />}
-                  title="Core ID"
-                  value={
-                    <>
-                      {profile?.bio?.toLowerCase().includes(`${social.coreid}@coreid`.toLowerCase()) && (
-                        <FaCheckCircle className="text-primary inline-block relative -top-[1px] mr-1" size={12} />
-                      )}
-                      {(social.coreid.substring(0,4)+'…'+social.coreid.slice(-4)).toUpperCase()}
-                    </>
-                  }
-                  link={`https://coreid.link/${social.coreid}`}
-                />
-              )}
-              {social?.twitter && (
-                <ListItem
-                  icon={<SiX />}
-                  title="X"
-                  value={`@${social.twitter}`}
-                  link={`https://x.com/${social.twitter}`}
-                />
-              )}
-              {social?.fediverse && (
-                <ListItem
-                  icon={<PiFediverseLogoFill />}
-                  title="Fediverse"
-                  value={getFediverseDisplayHandle(social.fediverse)}
-                  link={getFediverseProfileUrl(social.fediverse)}
-                />
-              )}
-              {social?.linkedin && (
-                <ListItem
-                  icon={<FaLinkedin />}
-                  title="LinkedIn"
-                  value={social.linkedin}
-                  link={`https://www.linkedin.com/in/${social.linkedin}`}
-                />
-              )}
-              {social?.dribbble && (
-                <ListItem
-                  icon={<CgDribbble />}
-                  title="Dribbble"
-                  value={social.dribbble}
-                  link={`https://dribbble.com/${social.dribbble}`}
-                />
-              )}
-              {social?.behance && (
-                <ListItem
-                  icon={<FaBehanceSquare />}
-                  title="Behance"
-                  value={social.behance}
-                  link={`https://www.behance.net/${social.behance}`}
-                />
-              )}
-              {social?.facebook && (
-                <ListItem
-                  icon={<FaFacebook />}
-                  title="Facebook"
-                  value={social.facebook}
-                  link={`https://www.facebook.com/${social.facebook}`}
-                />
-              )}
-              {social?.tiktok && (
-                <ListItem
-                  icon={<FaTiktok />}
-                  title="TikTok"
-                  value={social.facebook}
-                  link={`https://www.tiktok.com/@${social.tiktok}`}
-                />
-              )}
-              {social?.instagram && (
-                <ListItem
-                  icon={<AiFillInstagram />}
-                  title="Instagram"
-                  value={social.instagram}
-                  link={`https://www.instagram.com/${social.instagram}`}
-                />
-              )}
               {social?.reddit && (
                 <ListItem
                   icon={<FaReddit />}
                   title="Reddit"
                   value={social.reddit}
                   link={`https://www.reddit.com/user/${social.reddit}`}
-                />
-              )}
-              {social?.threads && (
-                <ListItem
-                  icon={<FaSquareThreads />}
-                  title="Threads"
-                  value={social.threads}
-                  link={`https://www.threads.net/@${social.threads.replace('@', '')}`}
-                />
-              )}
-              {social?.youtube && (
-                <ListItem
-                  icon={<FaYoutube />}
-                  title="YouTube"
-                  value={`@${social.youtube}`}
-                  link={`https://www.youtube.com/@${social.youtube}`}
-                />
-              )}
-              {social?.udemy && (
-                <ListItem
-                  icon={<SiUdemy />}
-                  title="Udemy"
-                  value={social.udemy}
-                  link={`https://www.udemy.com/user/${social.udemy}`}
-                />
-              )}
-              {social?.medium && (
-                <ListItem
-                  icon={<AiFillMediumSquare />}
-                  title="Medium"
-                  value={social.medium}
-                  link={`https://medium.com/@${social.medium}`}
-                />
-              )}
-              {social?.dev && (
-                <ListItem
-                  icon={<FaDev />}
-                  title="Dev"
-                  value={social.dev}
-                  link={`https://dev.to/${social.dev}`}
                 />
               )}
               {social?.stackoverflow && (
@@ -427,6 +450,22 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   link={`https://stackoverflow.com/users/${social.stackoverflow}`}
                 />
               )}
+              {social?.threads && (
+                <ListItem
+                  icon={<FaSquareThreads />}
+                  title="Threads"
+                  value={social.threads}
+                  link={`https://www.threads.net/@${social.threads.replace('@', '')}`}
+                />
+              )}
+              {social?.tiktok && (
+                <ListItem
+                  icon={<FaTiktok />}
+                  title="TikTok"
+                  value={social.tiktok}
+                  link={`https://www.tiktok.com/@${social.tiktok}`}
+                />
+              )}
               {social?.wiki && (
                 <ListItem
                   icon={<SiWikipedia />}
@@ -435,58 +474,20 @@ const DetailsCard = ({ profile, loading, social, github }: DetailsCardProps) => 
                   link={social.wiki}
                 />
               )}
-              {social?.website && (
+              {social?.twitter && (
                 <ListItem
-                  icon={<FaGlobe />}
-                  title="Website"
-                  value={social.website
-                    .replace('https://', '')
-                    .replace('http://', '')}
-                  link={
-                    !social.website.startsWith('http')
-                      ? `http://${social.website}`
-                      : social.website
-                  }
+                  icon={<SiX />}
+                  title="X"
+                  value={`@${social.twitter}`}
+                  link={`https://x.com/${social.twitter}`}
                 />
               )}
-              {social?.skype && (
+              {social?.youtube && (
                 <ListItem
-                  icon={<FaSkype />}
-                  title="Skype"
-                  value={social.skype}
-                  link={`skype:${social.skype}?chat`}
-                />
-              )}
-              {social?.telegram && (
-                <ListItem
-                  icon={<FaTelegram />}
-                  title="Telegram"
-                  value={social.telegram}
-                  link={`https://t.me/${social.telegram}`}
-                />
-              )}
-              {social?.phone && (
-                <ListItem
-                  icon={<RiPhoneFill />}
-                  title="Phone"
-                  value={social.phone}
-                  link={`tel:${social.phone}`}
-                />
-              )}
-              {social?.email && (
-                <ListItem
-                  icon={<RiMailFill />}
-                  title="Email"
-                  value={social.email && social.email.includes("?") ? social.email.split("?")[0] : social.email}
-                  link={`mailto:${social.email}`}
-                />
-              )}
-              {social?.payto && (
-                <ListItem
-                  icon={<FaWallet />}
-                  title="PayTo"
-                  value={`${paytoNetwork?.toUpperCase()}/${(paytoAddress?.substring(0,4)+'…'+paytoAddress?.slice(-4)).toUpperCase()}`}
-                  link={`https://payto.money/${social?.payto?.slice(5)}`}
+                  icon={<FaYoutube />}
+                  title="YouTube"
+                  value={`@${social.youtube}`}
+                  link={`https://www.youtube.com/@${social.youtube}`}
                 />
               )}
             </>
