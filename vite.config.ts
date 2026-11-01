@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { getFediverseProfileUrl, isDarkishTheme } from './src/utils';
+import { getFediverseProfileUrl } from './src/utils';
 import CONFIG from './gitprofile.config';
 
 // https://vitejs.dev/config/
@@ -19,7 +19,8 @@ export default defineConfig({
           metaImageURL: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId : CONFIG.seo.imageURL,
           metaPaytoProperty: CONFIG.seo.payto?.property || '',
           metaPaytoContent: CONFIG.seo.payto?.content || '',
-          metaThemeColor: isDarkishTheme(CONFIG.themeConfig.defaultTheme) ? '#000000' : '#ffffff',
+					metaThemeColorLight: CONFIG.themeConfig.themeColor?.light || '#FFFFFF',
+					metaThemeColorDark: CONFIG.themeConfig.themeColor?.dark || '#121212',
           fediverseRelMe: (() => {
             const href = getFediverseProfileUrl(CONFIG.social?.fediverse);
             return href

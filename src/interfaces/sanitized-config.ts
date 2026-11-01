@@ -68,8 +68,9 @@ export interface SanitizedSocial {
   stackoverflow?: string;
   wiki?: string;
   website?: string;
-  skype?: string;
   telegram?: string;
+	tone?: string;
+	whatsapp?: string;
   phone?: string;
   email?: string;
   coreid?: string;
@@ -134,6 +135,10 @@ export interface SanitizedBlog {
 }
 
 export interface SanitizedThemeConfig {
+	themeColor?: {
+		light?: string;
+		dark?: string;
+	};
   defaultTheme: string;
   disableSwitch: boolean;
   respectPrefersColorScheme: boolean;

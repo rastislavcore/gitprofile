@@ -54,32 +54,40 @@ const CONFIG = {
       content: 'CB69082B2C09F1835583DE35AADEEF70C4E1350AB04B',
     },
   },
-  social: {
-    linkedin: 'rastislavcore',
-    twitter: 'rastislavcore',
-    fediverse: '@rastislav@coretalk.space',
-    researchGate: '',
-    facebook: '',
-    tiktok: '',
-    instagram: '',
-    reddit: '',
-    threads: '',
-    youtube: '',
-    udemy: '',
-    dribbble: '',
-    behance: '',
-    medium: '',
-    dev: 'rastislavcore',
-    stackoverflow: '',
-    wiki: 'https://en.everybodywiki.com/Rastislav_Va%C5%A1i%C4%8Dka',
-    skype: '',
-    telegram: '',
-    website: 'https://nest.owasp.org/members/rastislavcore',
-    phone: '',
-    email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
-    payto: 'payto://xcb/CB69082B2C09F1835583DE35AADEEF70C4E1350AB04B?rc=m&donate=1&org=vasicka.eu&item=green+circles+%F0%9F%9F%A2&color-b=37c848', // visit https://payto.money/ to generate your payto link
-    coreid: '', // visit https://corepass.net/ to create your Core ID
-  },
+	social: {
+		// Profile details
+		email: 'rastislav@onion.email?subject=Contact%20from%20portfolio&key=https%3A%2F%2Fkeys.openpgp.org%2Fvks%2Fv1%2Fby-fingerprint%2FF670A2D3626AB878A46D7AA8879FF4E05B438A11',
+		phone: '',
+		coreid: '', // visit https://corepass.net/ to create your Core ID
+		payto: 'payto://xcb/CB69082B2C09F1835583DE35AADEEF70C4E1350AB04B?rc=m&donate=1&org=vasicka.eu&item=green+circles+%F0%9F%9F%A2&color-b=37c848', // visit https://payto.money/ to generate your payto link
+		website: 'https://nest.owasp.org/members/rastislavcore',
+
+		// Contacts
+		telegram: '',
+		tone: '', // https://tone.onl/user#@username or tone://group/@weekend
+		whatsapp: '', // International phone number or WhatsApp deep link
+
+		// Publishing
+		dev: 'rastislavcore',
+		medium: '',
+		researchGate: '',
+		udemy: '',
+
+		// Socials
+		behance: '',
+		dribbble: '',
+		facebook: '',
+		fediverse: '@rastislav@coretalk.space',
+		instagram: '',
+		linkedin: 'rastislavcore',
+		reddit: '',
+		stackoverflow: '',
+		threads: '',
+		tiktok: '',
+		wiki: 'https://en.everybodywiki.com/Rastislav_Va%C5%A1i%C4%8Dka',
+		twitter: 'rastislavcore',
+		youtube: '',
+	},
   resume: {
     fileUrl:
       '', // Empty fileUrl will hide the `Download Resume` button.
@@ -151,6 +159,11 @@ const CONFIG = {
     id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
   },
   themeConfig: {
+		// Browser theme colors for the user's preferred color scheme.
+		themeColor: {
+			light: '#d2e2c0',
+			dark: '#11180b',
+		},
     defaultTheme: 'light',
 
     // Hides the switch in the navbar

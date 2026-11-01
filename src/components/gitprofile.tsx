@@ -77,7 +77,7 @@ const GitProfile = ({ config }: { config: Config }) => {
           url += `search/repositories?q=${query}&sort=${sanitizedConfig.projects.github.automatic.sortBy}&per_page=${sanitizedConfig.projects.github.automatic.limit}&type=Repositories`;
         }
         const repoResponse = await axios.get(url, {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
+          headers: { Accept: 'application/vnd.github+json' },
         });
         const repoData = repoResponse.data;
 
@@ -93,7 +93,7 @@ const GitProfile = ({ config }: { config: Config }) => {
         const url = `https://api.github.com/search/repositories?q=${repos}&type=Repositories`;
 
         const repoResponse = await axios.get(url, {
-          headers: { 'Content-Type': 'application/vnd.github.v3+json' },
+          headers: { Accept: 'application/vnd.github+json' },
         });
         const repoData = repoResponse.data;
 
@@ -192,35 +192,27 @@ const GitProfile = ({ config }: { config: Config }) => {
   const handleError = (error: AxiosError | Error): void => {
     console.error('Error:', error);
 
-    if (error instanceof AxiosError) {
-      try {
-        const reset = formatDistance(
-          new Date(error.response?.headers?.['x-ratelimit-reset'] * 1000),
-          new Date(),
-          { addSuffix: true },
-        );
-
-        if (typeof error.response?.status === 'number') {
-          switch (error.response.status) {
-            case 403:
-              setError(setTooManyRequestError(reset));
-              break;
-            case 404:
-              setError(INVALID_GITHUB_USERNAME_ERROR);
-              break;
-            default:
-              setError(GENERIC_ERROR);
-              break;
-          }
-        } else {
-          setError(GENERIC_ERROR);
-        }
-      } catch (innerError) {
-        setError(GENERIC_ERROR);
-      }
-    } else {
-      setError(GENERIC_ERROR);
-    }
+		if (error instanceof AxiosError) {
+			switch (error.response?.status) {
+				case 403:
+				case 429: {
+					const resetSeconds = Number(error.response?.headers?.['x-ratelimit-reset']);
+					const resetDate = new Date(resetSeconds * 1000);
+					const reset = Number.isFinite(resetSeconds) && !Number.isNaN(resetDate.getTime())
+						? formatDistance(resetDate, new Date(), { addSuffix: true })
+						: '';
+					setError(setTooManyRequestError(reset));
+					break;
+				}
+				case 404:
+					setError(INVALID_GITHUB_USERNAME_ERROR);
+					break;
+				default:
+					setError(GENERIC_ERROR);
+			}
+		} else {
+			setError(GENERIC_ERROR);
+		}
   };
 
   return (
