@@ -46,6 +46,7 @@ const CONFIG = {
   },
   seo: {
     title: 'Rastislav ₡ore — Contacts, Portfolio & Blog',
+    rssURL: 'https://vasicka.eu/rss.xml',
     description: 'Portfolio of Rastislav ₡ore. Blockchain Engineer, Software Developer, and Open Source Contributor.',
     imageURL: '',
     githubId: '537310', // GitHub user id. To get your id, visit https://api.github.com/users/<username>

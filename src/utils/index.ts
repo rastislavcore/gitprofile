@@ -93,6 +93,7 @@ export const getSanitizedConfig = (
       },
       seo: {
         title: config?.seo?.title,
+        rssURL: config?.seo?.rssURL,
         description: config?.seo?.description,
         imageURL: config?.seo?.imageURL,
       },
