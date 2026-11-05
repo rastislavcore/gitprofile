@@ -6,6 +6,9 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%- metaTitle %></title>
+    <% if (rssURL) { %>
+    <link rel="alternate" type="application/rss+xml" title="<%= metaTitle %> RSS Feed" href="<%= rssURL %>" />
+    <% } %>
 
     <meta property="title" content="<%- metaTitle %>" />
     <meta name="description" content="<%- metaDescription %>" />

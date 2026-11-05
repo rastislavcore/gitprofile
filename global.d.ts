@@ -102,6 +102,11 @@ interface SEO {
   title?: string;
 
   /**
+   * RSS feed URL for the alternate link in the page head
+   */
+  rssURL?: string;
+
+  /**
    * Meta description
    */
   description?: string;

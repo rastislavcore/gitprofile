@@ -399,6 +399,7 @@ const CONFIG = {
   // ...
   seo: {
     title: 'Rastislav₡ore — Contacts, Portfolio & Blog',
+    rssURL: 'https://vasicka.eu/rss.xml', // Leave empty to omit the RSS link in <head>.
     description: '',
     imageURL: '',
     githubId: '537310', // GitHub user id. To get your id, visit https://api.github.com/users/<username>

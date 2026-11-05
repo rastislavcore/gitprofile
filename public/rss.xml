@@ -1,0 +1,75 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vasicka.eu - Test RSS Feed</title>
+    <link>https://vasicka.eu/</link>
+    <description>
+      Test RSS feed for development and integration.
+    </description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <ttl>15</ttl>
+
+    <atom:link
+      href="https://vasicka.eu/rss.xml"
+      rel="self"
+      type="application/rss+xml"/>
+
+    <item>
+      <title>Welcome to Vasicka.eu RSS</title>
+      <link>https://vasicka.eu/?article=1</link>
+      <guid isPermaLink="false">vasicka-test-001</guid>
+      <pubDate>Thu, 05 Nov 2026 12:00:00 GMT</pubDate>
+      <description>
+        First test article to verify RSS functionality.
+      </description>
+      <category>Announcements</category>
+    </item>
+
+    <item>
+      <title>Technology and Development Update</title>
+      <link>https://vasicka.eu/?article=2</link>
+      <guid isPermaLink="false">vasicka-test-002</guid>
+      <pubDate>Wed, 04 Nov 2026 10:30:00 GMT</pubDate>
+      <description>
+        Testing technology news distribution via RSS.
+      </description>
+      <category>Technology</category>
+    </item>
+
+    <item>
+      <title>RSS Integration Testing</title>
+      <link>https://vasicka.eu/?article=3</link>
+      <guid isPermaLink="false">vasicka-test-003</guid>
+      <pubDate>Tue, 03 Nov 2026 09:00:00 GMT</pubDate>
+      <description>
+        Testing RSS parsing, timestamps, and unique IDs.
+      </description>
+      <category>Development</category>
+    </item>
+
+    <item>
+      <title>New Website Features</title>
+      <link>https://vasicka.eu/?article=4</link>
+      <guid isPermaLink="false">vasicka-test-004</guid>
+      <pubDate>Mon, 02 Nov 2026 14:00:00 GMT</pubDate>
+      <description>
+        Sample update announcing new website features.
+      </description>
+      <category>Updates</category>
+    </item>
+
+    <item>
+      <title>RSS Feed Initial Test</title>
+      <link>https://vasicka.eu/?article=5</link>
+      <guid isPermaLink="false">vasicka-test-005</guid>
+      <pubDate>Sun, 01 Nov 2026 08:00:00 GMT</pubDate>
+      <description>
+        Initial RSS item for testing feed discovery.
+      </description>
+      <category>Testing</category>
+    </item>
+  </channel>
+</rss>

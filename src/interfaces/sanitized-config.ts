@@ -40,6 +40,7 @@ export interface SanitizedProjects {
 
 export interface SanitizedSEO {
   title?: string;
+  rssURL?: string;
   description?: string;
   imageURL?: string;
   githubId?: string;
