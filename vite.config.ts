@@ -16,6 +16,7 @@ export default defineConfig({
         data: {
           metaTitle: CONFIG.seo.title,
           rssURL: CONFIG.seo.rssURL,
+					publicKeyURL: CONFIG.publicKey?.fileUrl,
           metaDescription: CONFIG.social.coreid ? CONFIG.seo.description + ' / Core ID: ' + CONFIG.social.coreid : CONFIG.seo.description,
           metaImageURL: CONFIG.seo.githubId ? 'https://avatars.githubusercontent.com/u/' + CONFIG.seo.githubId : CONFIG.seo.imageURL,
           metaPaytoProperty: CONFIG.seo.payto?.property || '',

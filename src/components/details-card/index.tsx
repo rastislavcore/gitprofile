@@ -80,7 +80,7 @@ export const ListItem = ({
               {value}
             </a>
             {keyLink &&
-              <a href={keyLink} target="_blank" rel="noreferrer" download>
+              <a href={keyLink} type="application/pgp-keys" target="_blank" rel="noreferrer" download>
                 <FaKey />
               </a>
             }
