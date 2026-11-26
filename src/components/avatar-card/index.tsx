@@ -183,6 +183,7 @@ const AvatarCard = ({
             ) : (
               <a
                 href={publicKey}
+					type="application/pgp-keys"
                 target="_blank"
                 className="btn btn-outline btn-sm text-xs rounded-lg"
                 download
